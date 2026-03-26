@@ -56,10 +56,10 @@ const successStories = [
 
 // Annual reports
 const annualReports = [
-  { year: 2025, label: "2025 Annual Report" },
-  { year: 2024, label: "2024 Annual Report" },
-  { year: 2023, label: "2023 Annual Report" },
-  { year: 2022, label: "2022 Annual Report" },
+  { year: 2025, label: "2025 Annual Report", url: "/reports/annual-report-2025.pdf" }, //Add reports to this
+  { year: 2024, label: "2024 Annual Report", url: "/reports/annual-report-2024.pdf" },
+  { year: 2023, label: "2023 Annual Report", url: "/reports/annual-report-2023.pdf" },
+  { year: 2022, label: "2022 Annual Report", url: "/reports/annual-report-2022.pdf" },
 ];
 
 // Custom tooltip for bar chart
@@ -259,15 +259,18 @@ const Transparency = () => {
                     <div className="w-16 h-16 mx-auto mb-3 relative">
                       {/* Book icon */}
                       <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                        <rect x="8" y="8" width="48" height="48" rx="4" fill="#f0fdf4" stroke="#1B3022" strokeWidth="2"/>
-                        <path d="M20 20h24M20 28h24M20 36h16" stroke="#1B3022" strokeWidth="2" strokeLinecap="round"/>
-                        <circle cx="42" cy="42" r="10" fill="#9CFC5C"/>
-                        <path d="M38 42 l3 3 5-5" stroke="#1B3022" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <rect x="8" y="8" width="48" height="48" rx="4" fill="#f0fdf4" stroke="#1B3022" strokeWidth="2" />
+                        <path d="M20 20h24M20 28h24M20 36h16" stroke="#1B3022" strokeWidth="2" strokeLinecap="round" />
+                        <circle cx="42" cy="42" r="10" fill="#9CFC5C" />
+                        <path d="M38 42 l3 3 5-5" stroke="#1B3022" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
                     <p className="font-display font-bold text-forest text-xs mb-1">{report.year}</p>
                     <p className="text-gray-400 text-xs mb-3">Annual Report</p>
-                    <button className="w-full text-xs bg-lime text-forest font-semibold py-1.5 rounded-lg hover:bg-lime-dark transition-colors">
+                    <button
+                      onClick={() => window.open(report.url, "_blank", "noopener,noreferrer")}
+                      className="w-full text-xs bg-lime text-forest font-semibold py-1.5 rounded-lg hover:bg-lime-dark transition-colors"
+                    >
                       Read more
                     </button>
                   </div>
@@ -277,7 +280,7 @@ const Transparency = () => {
 
             {/* CTA Box */}
             <div className="bg-forest rounded-2xl p-8 text-center relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-lime/10 rounded-full -translate-y-1/2 translate-x-1/4"/>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-lime/10 rounded-full -translate-y-1/2 translate-x-1/4" />
               <h3 className="font-display font-bold text-white text-2xl mb-3">
                 Be a Catalyst for Change.{" "}
                 <span className="text-lime">Together, we can make a difference.</span>
