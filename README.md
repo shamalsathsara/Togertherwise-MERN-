@@ -82,6 +82,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the branching strategy and PR workflo
 
 ## 📞 Contact
 
-**Email:** shamalsathsara4@gmail.com
-**Phone:** +94 72 357 7818 
+**Email:** shamalsathsara4@gmail.com <br>
+**Phone:** +94 72 357 7818 <br>
 **Address:** No 349/07/A Palanwatta, Pannipitiya, Sri Lanka
