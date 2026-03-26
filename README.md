@@ -10,7 +10,7 @@ A full-stack community empowerment platform built with the **MERN stack** (Mongo
 - **Recharts** data visualizations (Donation Allocation, Financial Overview)
 - **Tailwind CSS** with custom Deep Forest Green + Vibrant Lime palette
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js v18+
@@ -82,6 +82,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the branching strategy and PR workflo
 
 ## 📞 Contact
 
-**Email:** donation23@gmail.com  
-**Phone:** +94 77 258 1698  
-**Address:** No/258/02/Colombo, Sri Lanka
+**Email:** shamalsathsara4@gmail.com
+**Phone:** +94 72 357 7818 
+**Address:** No 349/07/A Palanwatta, Pannipitiya, Sri Lanka
