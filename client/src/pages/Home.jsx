@@ -27,7 +27,7 @@ const campaigns = [
     category: "Water Projects",
     goal: 74000,
     raised: 42000,
-    image: "https://images.unsplash.com/photo-1594398901394-4e34939a4fd0?w=400&q=80",
+    image: "https://unsplash.com/photos/pouring-water-on-persons-hands-YpZ2cj4s0oo",
     color: "bg-blue-50",
   },
   {
@@ -86,8 +86,8 @@ const stories = [
 
 // ─── News Data ────────────────────────────────────────────────────────────────
 const newsItems = [
-  { id: 1, tag: "COMPLETE", image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&q=80", label: "Clean Water Project in Village 1 — A new solar pump is providing clean, safe water to 500+ families.", color: "bg-lime text-forest" },
-  { id: 2, tag: "IN PROGRESS", image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&q=80", label: "School Refurbishment In Community — Teachers tasked and curriculum up.", color: "bg-blue-100 text-blue-700" },
+  { id: 1, tag: "COMPLETE", label: "Clean Water Project in Village 1 — A new solar pump is providing clean, safe water to 500+ families.", color: "bg-lime text-forest" },
+  { id: 2, tag: "IN PROGRESS", label: "School Refurbishment In Community — Teachers tasked and curriculum up.", color: "bg-blue-100 text-blue-700" },
 ];
 
 // ─── Projects & Campaigns Data ────────────────────────────────────────────────
