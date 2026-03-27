@@ -263,7 +263,7 @@ const Home = ({ lang }) => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-lime/20 border border-lime/40 rounded-full px-4 py-1.5 mb-6">
               <span className="w-2 h-2 bg-lime rounded-full animate-pulse" />
-              <span className="text-lime text-sm font-medium">Over 5,000 Active Volunteers</span>
+              <span className="text-lime text-sm font-medium">Over 0 Active Volunteers</span>
             </div>
 
             <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-6xl leading-[1.1] mb-6 animate-slide-up">
