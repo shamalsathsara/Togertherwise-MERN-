@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ALL_CAMPAIGNS = [
-  { id: 1, title: "Clean Water for Rural Schools", category: "Water Projects", description: "Providing clean, safe water to 500+ families in rural communities across Sri Lanka.", goal: 74000, raised: 42000, image: "https://images.unsplash.com/photo-1538300342682-cf57afb97285?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", status: "active" },
+  { id: 1, title: "Clean Water for Rural Schools", category: "Water Projects", description: "Providing clean, safe water to 500+ families in rural communities across Sri Lanka.", goal: 74000, raised: 42000, image: "https://images.unsplash.com/photo-1590318719961-6e74a0cccfcb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", status: "active" },
   { id: 2, title: "Solar Panels for Schools", category: "Education", description: "Bringing renewable energy and electricity to off-grid rural schools.", goal: 50000, raised: 31000, image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&q=80", status: "active" },
   { id: 3, title: "Changes for Community Centers", category: "Community Development", description: "Building safe, modern community gathering spaces for local programs.", goal: 37000, raised: 28500, image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&q=80", status: "active" },
   { id: 4, title: "Renewing Opportunities", category: "Education", description: "Vocational training and micro-finance programs for women entrepreneurs.", goal: 25000, raised: 18750, image: "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=500&q=80", status: "active" },
@@ -57,8 +57,8 @@ const Campaigns = () => {
                 key={cat}
                 onClick={() => setActiveFilter(cat)}
                 className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${activeFilter === cat
-                    ? "bg-forest text-white"
-                    : "bg-white text-gray-600 border border-gray-200 hover:border-forest"
+                  ? "bg-forest text-white"
+                  : "bg-white text-gray-600 border border-gray-200 hover:border-forest"
                   }`}
               >
                 {cat}
