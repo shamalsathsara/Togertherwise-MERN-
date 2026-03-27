@@ -149,7 +149,7 @@ const Footer = () => {
               {/* Contact Info */}
               <div className="space-y-2.5">
                 <a
-                  href="https://maps.google.com/?q=No/258/02,+Colombo,+Sri+Lanka"
+                  href="https://maps.app.goo.gl/ZoyftZRjV1BuHpMf8"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-3 text-white/70 hover:text-lime transition-colors group"
@@ -161,7 +161,7 @@ const Footer = () => {
                   href="mailto:donation23@gmail.com"
                   className="flex items-center gap-3 text-white/70 hover:text-lime transition-colors"
                 >
-                  <span>✉️</span>
+                  <span>📩</span>
                   <span className="text-sm">thilan9109@gmail.com</span>
                 </a>
                 <a
