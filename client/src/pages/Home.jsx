@@ -12,10 +12,10 @@ import axiosInstance from "../api/axiosInstance";
 
 // ─── Impact Counter Data ─────────────────────────────────────────────────────
 const impactStats = [
-  { value: 500, suffix: "+", label: "Families Helped", icon: "🏠" },
-  { value: 200, suffix: "+", label: "Projects Completed", icon: "✅" },
-  { value: 5000, suffix: "+", label: "Active Volunteers", icon: "🌟" },
-  { value: 1000, suffix: "+", label: "Project Supporting", icon: "🤝" },
+  { value: 0, suffix: "+", label: "Families Helped", icon: "🏠" },
+  { value: 0, suffix: "+", label: "Projects Completed", icon: "✅" },
+  { value: 0, suffix: "+", label: "Active Volunteers", icon: "🌟" },
+  { value: 0, suffix: "+", label: "Project Supporting", icon: "🤝" },
 ];
 
 // ─── Campaign Data ────────────────────────────────────────────────────────────
@@ -218,7 +218,7 @@ const ProjectCard = ({ project }) => {
 const Home = ({ lang }) => {
   const navigate = useNavigate();
   const [liveStories, setLiveStories] = useState([]);
-  
+
   const { ref: counterRef, inView: counterInView } = useInView({
     threshold: 0.3,
     triggerOnce: true,
