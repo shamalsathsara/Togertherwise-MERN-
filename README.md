@@ -34,7 +34,7 @@ npm run dev                # Starts on http://localhost:5000
 ```bash
 cd server
 npm run seed
-# Default: admin@togetherwise.org / Admin@123  ← CHANGE THIS AFTER LOGIN
+# Default: *********  ← CHANGE THIS AFTER LOGIN
 ```
 
 ### 4. Set up the Frontend
