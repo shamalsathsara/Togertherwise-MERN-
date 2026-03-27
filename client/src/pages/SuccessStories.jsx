@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 
 const STORIES = [
-  { id: 1, title: "Clean Water Changes Everything", location: "Sri Lanka", tag: "Water Projects", image: "https://images.unsplash.com/photo-1594398901394-4e34939a4fd0?w=600&q=80", quote: "Before Togetherwise came, we walked 3 miles each day for water. Now our children drink clean water at school and our mothers spend their time on building businesses.", person: "Kumari Navaratne", role: "Village Elder, Hambantota" },
+  { id: 1, title: "Clean Water Changes Everything", location: "Sri Lanka", tag: "Water Projects", image: "https://images.unsplash.com/photo-1538300342682-cf57afb97285?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", quote: "Before Togetherwise came, we walked 3 miles each day for water. Now our children drink clean water at school and our mothers spend their time on building businesses.", person: "Kumari Navaratne", role: "Village Elder, Hambantota" },
   { id: 2, title: "Solar Power Lights Up Learning", location: "India", tag: "Education", image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80", quote: "Our students now study after dark. The solar panels didn't just bring electricity — they brought hope for a different future for our children.", person: "Rajesh Kumar", role: "School Principal, Tamil Nadu" },
   { id: 3, title: "Women Rising Through Micro-Finance", location: "Bangladesh", tag: "Community Development", image: "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=600&q=80", quote: "The loan was small but the impact is enormous. My weaving business now supports my whole family and I teach five other women my skills.", person: "Fatima Begum", role: "Entrepreneur, Dhaka" },
   { id: 4, title: "Trees Reclaim the Land", location: "Southeast Asia", tag: "Reforestation", image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&q=80", quote: "We planted over 15,000 trees this year. The forest is coming back and so is the rain that our farmers depend on.", person: "Thiri Zaw", role: "Environmental Officer, Myanmar" },
@@ -71,7 +71,7 @@ const SuccessStories = () => {
             {featuredStory && (
               <div className="card overflow-hidden mb-10 grid grid-cols-1 lg:grid-cols-2">
                 <div className="relative h-80 lg:h-auto overflow-hidden">
-                  <img src={getImageUrl(featuredStory.image)} alt={featuredStory.title} className="w-full h-full object-cover"/>
+                  <img src={getImageUrl(featuredStory.image)} alt={featuredStory.title} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-forest/60 to-transparent" />
                   <span className="absolute bottom-4 left-4 badge-lime">{featuredStory.tag}</span>
                 </div>
@@ -99,8 +99,8 @@ const SuccessStories = () => {
               {gridStories.map((story) => (
                 <div key={story._id || story.id} className="card group overflow-hidden">
                   <div className="relative h-52 overflow-hidden">
-                    <img src={getImageUrl(story.image)} alt={story.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
-                    <div className="absolute inset-0 bg-gradient-to-t from-forest/70 to-transparent"/>
+                    <img src={getImageUrl(story.image)} alt={story.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-forest/70 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
                       <span className="badge-lime text-xs">{story.tag}</span>
                       <span className="text-white/70 text-xs line-clamp-1 max-w-[120px]">📍 {story.location}</span>
