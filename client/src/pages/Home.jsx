@@ -8,6 +8,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import axiosInstance from "../api/axiosInstance";
 
 // ─── Impact Counter Data ─────────────────────────────────────────────────────
 const impactStats = [
@@ -216,10 +217,28 @@ const ProjectCard = ({ project }) => {
 // ─── Main Home Component ──────────────────────────────────────────────────────
 const Home = ({ lang }) => {
   const navigate = useNavigate();
+  const [liveStories, setLiveStories] = useState([]);
+  
   const { ref: counterRef, inView: counterInView } = useInView({
     threshold: 0.3,
     triggerOnce: true,
   });
+
+  useEffect(() => {
+    const fetchStories = async () => {
+      try {
+        const response = await axiosInstance.get("/success-stories/featured");
+        if (response.data.success && response.data.data.length > 0) {
+          setLiveStories(response.data.data);
+        } else {
+          setLiveStories(stories); // fallback to demo array
+        }
+      } catch (err) {
+        setLiveStories(stories);
+      }
+    };
+    fetchStories();
+  }, []);
 
   return (
     <div className="bg-white">
@@ -387,11 +406,11 @@ const Home = ({ lang }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {stories.map((story) => (
-              <div key={story.id} className="card group overflow-hidden">
+            {liveStories.map((story) => (
+              <div key={story._id || story.id} className="card group overflow-hidden">
                 <div className="relative h-56 overflow-hidden">
                   <img
-                    src={story.image}
+                    src={story.image.startsWith("http") ? story.image : `${import.meta.env.VITE_API_URL || "http://localhost:5000"}${story.image}`}
                     alt={`Success story from ${story.location}`}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />

@@ -119,4 +119,27 @@ const getDonationStats = asyncHandler(async (req, res) => {
   });
 });
 
-module.exports = { createDonation, getAllDonations, getDonationStats };
+// ─── DELETE /api/donations/:id ────────────────────────────────────────────────
+/**
+ * deleteDonation — Removes a donation from the database (admin only).
+ */
+const deleteDonation = asyncHandler(async (req, res) => {
+  const donation = await Donation.findById(req.params.id);
+
+  if (!donation) {
+    res.status(404);
+    throw new Error("Donation not found");
+  }
+
+  // If the donation was linked to a project and completed, deduct the funds from the project (optional depending on business logic, but good practice for data integrity)
+  if (donation.projectId && donation.paymentStatus === "completed") {
+    await Project.findByIdAndUpdate(donation.projectId, {
+      $inc: { currentFunds: -Number(donation.amount) },
+    });
+  }
+
+  await donation.deleteOne();
+  res.json({ success: true, message: "Donation removed successfully" });
+});
+
+module.exports = { createDonation, getAllDonations, getDonationStats, deleteDonation };

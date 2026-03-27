@@ -2,8 +2,9 @@
  * SuccessStories.jsx — Success Stories Page
  */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../api/axiosInstance";
 
 const STORIES = [
   { id: 1, title: "Clean Water Changes Everything", location: "Sri Lanka", tag: "Water Projects", image: "https://images.unsplash.com/photo-1594398901394-4e34939a4fd0?w=600&q=80", quote: "Before Togetherwise came, we walked 3 miles each day for water. Now our children drink clean water at school and our mothers spend their time on building businesses.", person: "Kumari Navaratne", role: "Village Elder, Hambantota" },
@@ -16,6 +17,33 @@ const STORIES = [
 
 const SuccessStories = () => {
   const navigate = useNavigate();
+  const [liveStories, setLiveStories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStories = async () => {
+      try {
+        const response = await axiosInstance.get("/success-stories");
+        if (response.data.success && response.data.data.length > 0) {
+          setLiveStories(response.data.data);
+        } else {
+          setLiveStories(STORIES); // Fallback to demo
+        }
+      } catch (err) {
+        setLiveStories(STORIES);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchStories();
+  }, []);
+
+  const displayStories = liveStories.length > 0 ? liveStories : STORIES;
+  const featuredStory = displayStories[0];
+  const gridStories = displayStories.slice(1);
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+  const getImageUrl = (url) => url.startsWith("http") ? url : `${API_BASE_URL}${url}`;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -33,61 +61,71 @@ const SuccessStories = () => {
       </div>
 
       <div className="section-wrapper py-12">
-        {/* Featured story */}
-        <div className="card overflow-hidden mb-10 grid grid-cols-1 lg:grid-cols-2">
-          <div className="relative h-80 lg:h-auto overflow-hidden">
-            <img src={STORIES[0].image} alt={STORIES[0].title} className="w-full h-full object-cover"/>
-            <div className="absolute inset-0 bg-gradient-to-t from-forest/60 to-transparent" />
-            <span className="absolute bottom-4 left-4 badge-lime">{STORIES[0].tag}</span>
+        {isLoading ? (
+          <div className="flex justify-center items-center py-20">
+            <div className="w-10 h-10 border-4 border-lime border-t-transparent rounded-full animate-spin"></div>
           </div>
-          <div className="p-8 flex flex-col justify-center">
-            <span className="text-gray-400 text-sm font-medium uppercase tracking-wider mb-2">📍 {STORIES[0].location}</span>
-            <h2 className="font-display font-black text-forest text-3xl mb-4">{STORIES[0].title}</h2>
-            <blockquote className="text-gray-600 text-lg italic leading-relaxed mb-6 border-l-4 border-lime pl-4">
-              "{STORIES[0].quote}"
-            </blockquote>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-lime rounded-full flex items-center justify-center">
-                <span className="text-forest font-bold text-sm">{STORIES[0].person.charAt(0)}</span>
+        ) : (
+          <>
+            {/* Featured story */}
+            {featuredStory && (
+              <div className="card overflow-hidden mb-10 grid grid-cols-1 lg:grid-cols-2">
+                <div className="relative h-80 lg:h-auto overflow-hidden">
+                  <img src={getImageUrl(featuredStory.image)} alt={featuredStory.title} className="w-full h-full object-cover"/>
+                  <div className="absolute inset-0 bg-gradient-to-t from-forest/60 to-transparent" />
+                  <span className="absolute bottom-4 left-4 badge-lime">{featuredStory.tag}</span>
+                </div>
+                <div className="p-8 flex flex-col justify-center">
+                  <span className="text-gray-400 text-sm font-medium uppercase tracking-wider mb-2">📍 {featuredStory.location}</span>
+                  <h2 className="font-display font-black text-forest text-3xl mb-4">{featuredStory.title}</h2>
+                  <blockquote className="text-gray-600 text-lg italic leading-relaxed mb-6 border-l-4 border-lime pl-4">
+                    "{featuredStory.quote}"
+                  </blockquote>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-lime rounded-full flex items-center justify-center text-forest font-bold text-sm">
+                      {featuredStory.person ? featuredStory.person.charAt(0) : "S"}
+                    </div>
+                    <div>
+                      <p className="font-bold text-forest text-sm">{featuredStory.person}</p>
+                      <p className="text-gray-400 text-xs">{featuredStory.role}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="font-bold text-forest text-sm">{STORIES[0].person}</p>
-                <p className="text-gray-400 text-xs">{STORIES[0].role}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+            )}
 
-        {/* Story Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {STORIES.slice(1).map((story) => (
-            <div key={story.id} className="card group overflow-hidden">
-              <div className="relative h-52 overflow-hidden">
-                <img src={story.image} alt={story.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
-                <div className="absolute inset-0 bg-gradient-to-t from-forest/70 to-transparent"/>
-                <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-                  <span className="badge-lime text-xs">{story.tag}</span>
-                  <span className="text-white/70 text-xs">📍 {story.location}</span>
-                </div>
-              </div>
-              <div className="p-5">
-                <h3 className="font-display font-bold text-forest text-lg mb-3">{story.title}</h3>
-                <blockquote className="text-gray-500 text-sm italic leading-relaxed mb-4 line-clamp-3">
-                  "{story.quote}"
-                </blockquote>
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-lime/20 rounded-full flex items-center justify-center">
-                    <span className="text-forest font-bold text-xs">{story.person.charAt(0)}</span>
+            {/* Story Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+              {gridStories.map((story) => (
+                <div key={story._id || story.id} className="card group overflow-hidden">
+                  <div className="relative h-52 overflow-hidden">
+                    <img src={getImageUrl(story.image)} alt={story.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
+                    <div className="absolute inset-0 bg-gradient-to-t from-forest/70 to-transparent"/>
+                    <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+                      <span className="badge-lime text-xs">{story.tag}</span>
+                      <span className="text-white/70 text-xs line-clamp-1 max-w-[120px]">📍 {story.location}</span>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-semibold text-forest text-xs">{story.person}</p>
-                    <p className="text-gray-400 text-[11px]">{story.role}</p>
+                  <div className="p-5">
+                    <h3 className="font-display font-bold text-forest text-lg mb-3 line-clamp-2">{story.title}</h3>
+                    <blockquote className="text-gray-500 text-sm italic leading-relaxed mb-4 line-clamp-3">
+                      "{story.quote}"
+                    </blockquote>
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-lime/20 rounded-full flex items-center justify-center text-forest font-bold text-xs flex-shrink-0">
+                        {story.person ? story.person.charAt(0) : "S"}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-semibold text-forest text-xs truncate">{story.person}</p>
+                        <p className="text-gray-400 text-[11px] truncate">{story.role}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
 
         {/* CTA */}
         <div className="bg-forest rounded-3xl p-10 text-center">

@@ -69,8 +69,9 @@ const Donate = () => {
       });
       setSubmitted(true);
     } catch (err) {
-      // For demo: still show success since backend may not be connected
-      setSubmitted(true);
+      // Capture the error from the backend response
+      const serverMessage = err.response?.data?.message;
+      setError(serverMessage || "Payment failed. Please try again! Ensure backend is running.");
     } finally {
       setIsSubmitting(false);
     }

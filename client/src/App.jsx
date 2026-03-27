@@ -26,6 +26,9 @@ import Login from "./pages/Login";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import ProjectForm from "./pages/admin/ProjectForm";
+import DonationsList from "./pages/admin/DonationsList";
+import SuccessStoriesList from "./pages/admin/SuccessStoriesList";
+import SuccessStoryForm from "./pages/admin/SuccessStoryForm";
 
 /**
  * ProtectedAdminRoute — Wraps admin routes.
@@ -135,6 +138,9 @@ const AppRoutes = () => {
         <Route path="projects" element={<ProjectForm />} />
         <Route path="projects/new" element={<ProjectForm mode="create" />} />
         <Route path="projects/:id/edit" element={<ProjectForm mode="edit" />} />
+        <Route path="donations" element={<DonationsList />} />
+        <Route path="success-stories" element={<SuccessStoriesList />} />
+        <Route path="success-stories/new" element={<SuccessStoryForm />} />
       </Route>
 
       {/* ── 404 → Home ─────────────────────────────────────────────── */}

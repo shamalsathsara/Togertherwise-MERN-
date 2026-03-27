@@ -4,7 +4,7 @@
  * Uses Recharts for the donut and bar charts.
  */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   PieChart,
   Pie,
@@ -19,6 +19,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../api/axiosInstance";
 
 // ─── Chart Data ───────────────────────────────────────────────────────────────
 
@@ -79,6 +80,23 @@ const CustomBarTooltip = ({ active, payload }) => {
 
 const Transparency = () => {
   const navigate = useNavigate();
+  const [stats, setStats] = useState({
+    totalAmount: 0, // Fallback demo data
+  });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await axiosInstance.get("/donations/stats");
+        if (res.data.success && res.data.stats.totalAmount > 0) {
+          setStats(res.data.stats);
+        }
+      } catch (err) {
+        console.error("Failed to fetch donation stats:", err);
+      }
+    };
+    fetchStats();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -150,15 +168,15 @@ const Transparency = () => {
                 <div className="bg-gray-50 rounded-xl p-4 space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600 font-medium">Total Income</span>
-                    <span className="font-bold text-forest">$150,000.00</span>
+                    <span className="font-bold text-forest">${stats.totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600 font-medium">Total Expense</span>
-                    <span className="font-bold text-red-500">$130,000.00</span>
+                    <span className="font-bold text-red-500">${(stats.totalAmount * 0.85).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                   <div className="border-t border-gray-200 pt-2 flex justify-between text-sm">
                     <span className="text-gray-600 font-medium">Net</span>
-                    <span className="font-bold text-lime-dark">+$20,000.00</span>
+                    <span className="font-bold text-lime-dark">+${(stats.totalAmount * 0.15).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                 </div>
               </div>

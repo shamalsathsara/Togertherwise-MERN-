@@ -12,6 +12,8 @@ const NAV_ITEMS = [
   { to: "/admin/dashboard", label: "Dashboard", icon: "▦" },
   { to: "/admin/projects", label: "Projects", icon: "📁" },
   { to: "/admin/projects/new", label: "New Project", icon: "➕" },
+  { to: "/admin/donations", label: "Donations", icon: "💸" },
+  { to: "/admin/success-stories", label: "Stories", icon: "🌟" },
 ];
 
 const AdminLayout = () => {
