@@ -27,7 +27,7 @@ const campaigns = [
     category: "Water Projects",
     goal: 74000,
     raised: 42000,
-    image: "https://unsplash.com/photos/pouring-water-on-persons-hands-YpZ2cj4s0oo",
+    image: "https://images.unsplash.com/photo-1538300342682-cf57afb97285?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     color: "bg-blue-50",
   },
   {
