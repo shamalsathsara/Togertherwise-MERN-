@@ -6,7 +6,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const TEAM = [
-  { name: "Amal Nimal", role: "Executive Director", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&q=80" },
+  { name: "chamika Chandeera", role: "Executive Director", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&q=80" },
   { name: "Arun Wickramasinghe", role: "Programs Director", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80" },
   { name: "Fatima Al-Rashid", role: "Community Engagement", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&q=80" },
   { name: "James Okonkwo", role: "Field Operations Lead", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" },
