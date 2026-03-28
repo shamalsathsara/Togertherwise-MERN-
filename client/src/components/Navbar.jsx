@@ -62,16 +62,12 @@ const Navbar = ({ lang, setLang }) => {
         <Link to="/" className="flex items-center gap-2 group">
           {/* SVG Logo — Hands reaching up with leaf motif */}
           <div className="w-10 h-10 relative">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Hands */}
-              <path d="M12 28 C8 22, 6 16, 10 10 C12 7, 15 8, 16 11 L17 16" stroke="#1B3022" strokeWidth="2" strokeLinecap="round" />
-              <path d="M28 28 C32 22, 34 16, 30 10 C28 7, 25 8, 24 11 L23 16" stroke="#1B3022" strokeWidth="2" strokeLinecap="round" />
-              <path d="M16 11 L20 6 L24 11" stroke="#9CFC5C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              {/* Leaf */}
-              <ellipse cx="20" cy="5" rx="3" ry="4" fill="#9CFC5C" opacity="0.8" />
-              {/* Base */}
-              <path d="M10 30 Q20 35 30 30" stroke="#1B3022" strokeWidth="2" strokeLinecap="round" />
-            </svg>
+            {/* Replace this src with your actual logo path, e.g., src="/logo.png" */}
+            <img 
+              src="https://placehold.co/100x100?text=Logo" 
+              alt="Togetherwise Logo" 
+              className="w-full h-full object-contain pt-1"
+            />
           </div>
           <div>
             <span className="font-display font-bold text-forest text-lg leading-none block">
