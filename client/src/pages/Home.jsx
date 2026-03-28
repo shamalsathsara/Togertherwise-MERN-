@@ -419,7 +419,7 @@ const Home = ({ lang }) => {
                 </div>
                 <div className="p-5">
                   <p className="text-gray-600 text-sm italic leading-relaxed mb-4">
-                    "{story.quote}"
+                    "empowering people with skills and resources to become self-sufficient and build a better future"
                   </p>
                   <Link
                     to="/success-stories"
