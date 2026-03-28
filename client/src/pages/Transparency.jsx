@@ -21,23 +21,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 
-// ─── Chart Data ───────────────────────────────────────────────────────────────
 
-// Annual Financial Overview — donut chart
-const financialBreakdownData = [
-  { name: "Donations", value: 0, color: "#9CFC5C" },
-  { name: "Grants", value: 0, color: "#D97706" },
-  { name: "Corporate Partnerships", value: 0, color: "#F59E0B" },
-  { name: "Other", value: 0, color: "#D1D5DB" },
-];
-
-// Donation allocation by program — bar chart
-const allocationData = [
-  { program: "Water\nProjects", amount: 0, percent: "0%" },
-  { program: "Reforestation", amount: 0, percent: "0%" },
-  { program: "Medical Aid", amount: 0, percent: "0%" },
-  { program: "Education", amount: 0, percent: "0%" },
-];
 
 // Success stories
 const successStories = [
