@@ -7,6 +7,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
+import logoImg from "../image/logo.png";
 
 const ROLES = [
   {
@@ -133,11 +134,10 @@ const Volunteer = () => {
                       key={role.id}
                       type="button"
                       onClick={() => setSelectedRole(role.id)}
-                      className={`relative p-4 rounded-2xl border-2 text-left transition-all duration-200 ${
-                        selectedRole === role.id
+                      className={`relative p-4 rounded-2xl border-2 text-left transition-all duration-200 ${selectedRole === role.id
                           ? "border-lime bg-lime/10 shadow-md"
                           : "border-gray-200 hover:border-lime/50"
-                      }`}
+                        }`}
                     >
                       {selectedRole === role.id && (
                         <span className="absolute top-2 right-2 w-5 h-5 bg-lime rounded-full flex items-center justify-center">
@@ -158,22 +158,22 @@ const Volunteer = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="form-label" htmlFor="firstName">First Name *</label>
-                      <input id="firstName" name="firstName" type="text" value={formData.firstName} onChange={handleChange} className="form-input" placeholder="First Name" required/>
+                      <input id="firstName" name="firstName" type="text" value={formData.firstName} onChange={handleChange} className="form-input" placeholder="First Name" required />
                     </div>
                     <div>
                       <label className="form-label" htmlFor="lastName">Last Name *</label>
-                      <input id="lastName" name="lastName" type="text" value={formData.lastName} onChange={handleChange} className="form-input" placeholder="Last Name" required/>
+                      <input id="lastName" name="lastName" type="text" value={formData.lastName} onChange={handleChange} className="form-input" placeholder="Last Name" required />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="form-label" htmlFor="email">Email Address *</label>
-                      <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} className="form-input" placeholder="Email" required/>
+                      <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} className="form-input" placeholder="Email" required />
                     </div>
                     <div>
                       <label className="form-label" htmlFor="phone">Phone Number *</label>
-                      <input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} className="form-input" placeholder="+94 77..." required/>
+                      <input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} className="form-input" placeholder="+94 77..." required />
                     </div>
                   </div>
 
@@ -203,13 +203,13 @@ const Volunteer = () => {
                   {/* Address */}
                   <div>
                     <label className="form-label" htmlFor="streetAddress">Address *</label>
-                    <input id="streetAddress" name="streetAddress" type="text" value={formData.streetAddress} onChange={handleChange} className="form-input" placeholder="Street Address" required/>
+                    <input id="streetAddress" name="streetAddress" type="text" value={formData.streetAddress} onChange={handleChange} className="form-input" placeholder="Street Address" required />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="form-label" htmlFor="city">City *</label>
-                      <input id="city" name="city" type="text" value={formData.city} onChange={handleChange} className="form-input" placeholder="City" required/>
+                      <input id="city" name="city" type="text" value={formData.city} onChange={handleChange} className="form-input" placeholder="City" required />
                     </div>
                     <div>
                       <label className="form-label" htmlFor="country">Country *</label>
@@ -224,7 +224,7 @@ const Volunteer = () => {
                   {/* Date of Birth */}
                   <div>
                     <label className="form-label" htmlFor="dateOfBirth">Date of Birth *</label>
-                    <input id="dateOfBirth" name="dateOfBirth" type="date" value={formData.dateOfBirth} onChange={handleChange} className="form-input" required/>
+                    <input id="dateOfBirth" name="dateOfBirth" type="date" value={formData.dateOfBirth} onChange={handleChange} className="form-input" required />
                   </div>
 
                   {/* About */}
@@ -255,7 +255,7 @@ const Volunteer = () => {
                   >
                     {isSubmitting ? (
                       <span className="flex items-center justify-center gap-2">
-                        <span className="w-4 h-4 border-2 border-forest border-t-transparent rounded-full animate-spin"/>
+                        <span className="w-4 h-4 border-2 border-forest border-t-transparent rounded-full animate-spin" />
                         Submitting...
                       </span>
                     ) : "Submit"}
@@ -269,13 +269,11 @@ const Volunteer = () => {
               {/* Logo + tagline */}
               <div className="text-center">
                 <div className="w-16 h-16 mx-auto mb-4">
-                  <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                    <path d="M12 28 C8 22, 6 16, 10 10 C12 7, 15 8, 16 11 L17 16" stroke="#1B3022" strokeWidth="2" strokeLinecap="round"/>
-                    <path d="M28 28 C32 22, 34 16, 30 10 C28 7, 25 8, 24 11 L23 16" stroke="#1B3022" strokeWidth="2" strokeLinecap="round"/>
-                    <path d="M16 11 L20 6 L24 11" stroke="#9CFC5C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <ellipse cx="20" cy="5" rx="3" ry="4" fill="#9CFC5C" opacity="0.8"/>
-                    <path d="M10 30 Q20 35 30 30" stroke="#1B3022" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
+                  <img
+                    src={logoImg}
+                    alt="Togetherwise Logo"
+                    className="w-full h-full object-contain pt-1"
+                  />
                 </div>
                 <p className="text-gray-400 font-medium text-sm uppercase tracking-wider">Build with us</p>
                 <h2 className="font-display font-black text-forest text-3xl">Join The Movement</h2>
@@ -304,10 +302,10 @@ const Volunteer = () => {
               {/* Stats */}
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { value: "5,000+", label: "Active Volunteers" },
-                  { value: "50+", label: "Countries Reached" },
-                  { value: "200+", label: "Projects Completed" },
-                  { value: "98%", label: "Satisfaction Rate" },
+                  { value: "0+", label: "Active Volunteers" },
+                  { value: "0+", label: "Countries Reached" },
+                  { value: "0+", label: "Projects Completed" },
+                  { value: "0%", label: "Satisfaction Rate" },
                 ].map((stat, i) => (
                   <div key={i} className="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100">
                     <p className="font-display font-black text-forest text-xl">{stat.value}</p>
