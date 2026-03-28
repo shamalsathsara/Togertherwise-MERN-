@@ -33,10 +33,10 @@ const financialBreakdownData = [
 
 // Donation allocation by program — bar chart
 const allocationData = [
-  { program: "Water\nProjects", amount: 30000000, percent: "66.5%" },
-  { program: "Reforestation", amount: 2000000, percent: "28.5%" },
-  { program: "Medical Aid", amount: 1000000, percent: "15.5%" },
-  { program: "Education", amount: 200000, percent: "5.5%" },
+  { program: "Water\nProjects", amount: 0, percent: "0%" },
+  { program: "Reforestation", amount: 0, percent: "0%" },
+  { program: "Medical Aid", amount: 0, percent: "0%" },
+  { program: "Education", amount: 0, percent: "0%" },
 ];
 
 // Success stories
