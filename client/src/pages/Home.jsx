@@ -12,10 +12,10 @@ import axiosInstance from "../api/axiosInstance";
 
 // ─── Impact Counter Data ─────────────────────────────────────────────────────
 const impactStats = [
-  { value: 500, suffix: "+", label: "Families Helped", icon: "🏠" },
-  { value: 200, suffix: "+", label: "Projects Completed", icon: "✅" },
-  { value: 5000, suffix: "+", label: "Active Volunteers", icon: "🌟" },
-  { value: 1000, suffix: "+", label: "Project Supporting", icon: "🤝" },
+  { value: 0, suffix: "+", label: "Families Helped", icon: "🏠" },
+  { value: 0, suffix: "+", label: "Projects Completed", icon: "✅" },
+  { value: 0, suffix: "+", label: "Active Volunteers", icon: "🌟" },
+  { value: 0, suffix: "+", label: "Project Supporting", icon: "🤝" },
 ];
 
 // ─── Campaign Data ────────────────────────────────────────────────────────────
@@ -25,9 +25,9 @@ const campaigns = [
     title: "Clean Water for Rural Schools",
     description: "Providing clean, safe water to 500+ families in rural communities.",
     category: "Water Projects",
-    goal: 74000,
-    raised: 42000,
-    image: "https://images.unsplash.com/photo-1594398901394-4e34939a4fd0?w=400&q=80",
+    goal: 0,
+    raised: 0,
+    image: "https://images.unsplash.com/photo-1590318719961-6e74a0cccfcb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     color: "bg-blue-50",
   },
   {
@@ -35,8 +35,8 @@ const campaigns = [
     title: "Solar Panels for Schools",
     description: "Bringing renewable energy and electricity to off-grid rural schools.",
     category: "Education",
-    goal: 50000,
-    raised: 31000,
+    goal: 0,
+    raised: 0,
     image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&q=80",
     color: "bg-yellow-50",
   },
@@ -45,8 +45,8 @@ const campaigns = [
     title: "Changes for Community Centers",
     description: "Building safe, modern community gathering spaces for local programs.",
     category: "Community Development",
-    goal: 37000,
-    raised: 28500,
+    goal: 0,
+    raised: 0,
     image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80",
     color: "bg-green-50",
   },
@@ -55,8 +55,8 @@ const campaigns = [
     title: "Renewing Opportunities",
     description: "Vocational training and micro-finance programs for women entrepreneurs.",
     category: "Education",
-    goal: 25000,
-    raised: 18750,
+    goal: 0,
+    raised: 0,
     image: "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&q=80",
     color: "bg-purple-50",
   },
@@ -96,32 +96,32 @@ const featuredProjects = [
     id: 1,
     title: "Global Charity Project: Solar Power for Schools",
     problem: "Improving health and providing clean, reliable lighting to rural communities.",
-    goal: 170000,
-    raised: 34000,
+    goal: 0,
+    raised: 0,
     image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&q=80",
   },
   {
     id: 2,
     title: "Village Development: Micro-finance for Women",
     problem: "Group loans, savings programs, and skill development through economic opportunity.",
-    goal: 275000,
-    raised: 185000,
+    goal: 0,
+    raised: 0,
     image: "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=500&q=80",
   },
   {
     id: 3,
     title: "Featured Village Development Project: Himachal Partnership",
     problem: "Improving health, Flood Recovery, and improvement to Southeast Asia.",
-    goal: 100000,
-    raised: 72000,
+    goal: 0,
+    raised: 0,
     image: "https://images.unsplash.com/photo-1542884748-2b87b36c6b90?w=500&q=80",
   },
   {
     id: 4,
     title: "Featured Education Campaign: Remote Clinics in Africa",
     problem: "Providing medicine, remote clinics to Africa.",
-    goal: 85000,
-    raised: 56000,
+    goal: 0,
+    raised: 0,
     image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=500&q=80",
   },
 ];
@@ -218,7 +218,7 @@ const ProjectCard = ({ project }) => {
 const Home = ({ lang }) => {
   const navigate = useNavigate();
   const [liveStories, setLiveStories] = useState([]);
-  
+
   const { ref: counterRef, inView: counterInView } = useInView({
     threshold: 0.3,
     triggerOnce: true,
@@ -263,7 +263,7 @@ const Home = ({ lang }) => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-lime/20 border border-lime/40 rounded-full px-4 py-1.5 mb-6">
               <span className="w-2 h-2 bg-lime rounded-full animate-pulse" />
-              <span className="text-lime text-sm font-medium">Over 5,000 Active Volunteers</span>
+              <span className="text-lime text-sm font-medium">Over 0 Active Volunteers</span>
             </div>
 
             <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-6xl leading-[1.1] mb-6 animate-slide-up">
