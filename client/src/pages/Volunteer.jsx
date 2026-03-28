@@ -135,8 +135,8 @@ const Volunteer = () => {
                       type="button"
                       onClick={() => setSelectedRole(role.id)}
                       className={`relative p-4 rounded-2xl border-2 text-left transition-all duration-200 ${selectedRole === role.id
-                          ? "border-lime bg-lime/10 shadow-md"
-                          : "border-gray-200 hover:border-lime/50"
+                        ? "border-lime bg-lime/10 shadow-md"
+                        : "border-gray-200 hover:border-lime/50"
                         }`}
                     >
                       {selectedRole === role.id && (
@@ -145,7 +145,7 @@ const Volunteer = () => {
                         </span>
                       )}
                       <div className="text-2xl mb-2">{role.emoji}</div>
-                      <p className="font-display font-bold text-forest text-xs leading-tight mb-1">
+                      <p className="font-display font-bold text-forest text-sm leading-tight mb-1">
                         {role.title}
                       </p>
                       <p className="text-gray-400 text-[10px] leading-tight">{role.subtitle}</p>
