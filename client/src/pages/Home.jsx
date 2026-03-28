@@ -86,8 +86,8 @@ const stories = [
 
 // ─── News Data ────────────────────────────────────────────────────────────────
 const newsItems = [
-  { id: 1, tag: "COMPLETE", label: "Clean Water Project in Village 1 — A new solar pump is providing clean, safe water to 500+ families.", color: "bg-lime text-forest" },
-  { id: 2, tag: "IN PROGRESS", label: "School Refurbishment In Community — Teachers tasked and curriculum up.", color: "bg-blue-100 text-blue-700" },
+  { id: 1, tag: "COMPLETE", label: "Clean Water Project in Village 1 — A new solar pump is providing clean, safe water to 500+ families.", color: "bg-lime text-forest", image: "https://images.unsplash.com/photo-1590318719961-6e74a0cccfcb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { id: 2, tag: "IN PROGRESS", label: "School Refurbishment In Community — Teachers tasked and curriculum up.", color: "bg-blue-100 text-blue-700", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh0d-xiYqb1w9-xTqC5P-DTuG-qkZ0jAQe5A&s" },
 ];
 
 // ─── Projects & Campaigns Data ────────────────────────────────────────────────
@@ -465,13 +465,23 @@ const Home = ({ lang }) => {
             {newsItems.map((item) => (
               <div
                 key={item.id}
-                className="flex items-start gap-3 p-4 bg-white rounded-xl border border-gray-100
+                className="flex items-start gap-4 p-4 bg-white rounded-xl border border-gray-100
                            hover:border-lime transition-all duration-200 hover:shadow-sm cursor-pointer"
               >
-                <span className={`flex-shrink-0 px-2.5 py-1 rounded-md text-xs font-bold ${item.color}`}>
-                  {item.tag}
-                </span>
-                <p className="text-gray-600 text-sm leading-relaxed">{item.label}</p>
+                {/* Replace src string below with actual image imports or paths if needed */}
+                {item.image && (
+                  <img
+                    src={item.image}
+                    alt="News Update"
+                    className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
+                  />
+                )}
+                <div className="flex flex-col items-start gap-2">
+                  <span className={`px-2.5 py-1 rounded-md text-xs font-bold ${item.color}`}>
+                    {item.tag}
+                  </span>
+                  <p className="text-gray-600 text-sm leading-relaxed">{item.label}</p>
+                </div>
               </div>
             ))}
           </div>
