@@ -112,8 +112,8 @@ const PrivacyPolicyModal = ({ isOpen, onClose }) => {
             <p className="text-gray-600 text-sm leading-relaxed">
               You have the right to access, correct, or delete your personal information. To exercise these
               rights or if you have any privacy concerns, please contact us at{" "}
-              <a href="mailto:donation23@gmail.com" className="text-forest font-medium hover:underline">
-                donation23@gmail.com
+              <a href="mailto:thilan9109@gmail.com" className="text-forest font-medium hover:underline">
+                thilan9109@gmail.com
               </a>.
             </p>
           </section>
@@ -123,9 +123,9 @@ const PrivacyPolicyModal = ({ isOpen, onClose }) => {
             <p className="text-gray-600 text-sm leading-relaxed">
               If you have any questions about this Privacy Policy, please contact:<br />
               <strong>Togetherwise</strong><br />
-              No/258/02/Colombo, Sri Lanka<br />
-              Email: donation23@gmail.com<br />
-              Phone: +94 77 258 1698
+              No 1/C Singhapura Hokandara South<br />
+              Email: thilan9109@gmail.com<br />
+              Phone: +94 778821632
             </p>
           </section>
         </div>
