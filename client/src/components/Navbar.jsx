@@ -52,11 +52,10 @@ const Navbar = ({ lang, setLang }) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
           ? "bg-white shadow-md py-2"
           : "bg-white/95 backdrop-blur-sm py-3"
-      }`}
+        }`}
     >
       <nav className="section-wrapper flex items-center justify-between">
         {/* ── Logo ───────────────────────────────────────────────────────── */}
@@ -65,13 +64,13 @@ const Navbar = ({ lang, setLang }) => {
           <div className="w-10 h-10 relative">
             <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
               {/* Hands */}
-              <path d="M12 28 C8 22, 6 16, 10 10 C12 7, 15 8, 16 11 L17 16" stroke="#1B3022" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M28 28 C32 22, 34 16, 30 10 C28 7, 25 8, 24 11 L23 16" stroke="#1B3022" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M16 11 L20 6 L24 11" stroke="#9CFC5C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 28 C8 22, 6 16, 10 10 C12 7, 15 8, 16 11 L17 16" stroke="#1B3022" strokeWidth="2" strokeLinecap="round" />
+              <path d="M28 28 C32 22, 34 16, 30 10 C28 7, 25 8, 24 11 L23 16" stroke="#1B3022" strokeWidth="2" strokeLinecap="round" />
+              <path d="M16 11 L20 6 L24 11" stroke="#9CFC5C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
               {/* Leaf */}
-              <ellipse cx="20" cy="5" rx="3" ry="4" fill="#9CFC5C" opacity="0.8"/>
+              <ellipse cx="20" cy="5" rx="3" ry="4" fill="#9CFC5C" opacity="0.8" />
               {/* Base */}
-              <path d="M10 30 Q20 35 30 30" stroke="#1B3022" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M10 30 Q20 35 30 30" stroke="#1B3022" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </div>
           <div>
@@ -113,7 +112,7 @@ const Navbar = ({ lang, setLang }) => {
           >
             <span className={lang === "en" ? "text-forest font-bold" : "text-gray-400"}>En</span>
             <span className="text-gray-300">|</span>
-            <span className={lang === "sn" ? "text-forest font-bold" : "text-gray-400"}>Sn</span>
+            <span className={lang === "sn" ? "text-forest font-bold" : "text-gray-400"}>සිං</span>
           </button>
 
           {/* Donate Now CTA */}
@@ -142,9 +141,8 @@ const Navbar = ({ lang, setLang }) => {
 
       {/* ── Mobile Menu ──────────────────────────────────────────────────── */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ${
-          isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        }`}
+        className={`lg:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
       >
         <div className="bg-white border-t border-gray-100 px-4 py-4 space-y-1">
           {navLinks.map(({ to, label }) => (
@@ -154,8 +152,7 @@ const Navbar = ({ lang, setLang }) => {
               end={to === "/"}
               onClick={() => setIsMobileMenuOpen(false)}
               className={({ isActive }) =>
-                `block py-2.5 px-4 rounded-xl text-sm font-medium transition-colors ${
-                  isActive ? "bg-forest text-white" : "text-gray-700 hover:bg-gray-50"
+                `block py-2.5 px-4 rounded-xl text-sm font-medium transition-colors ${isActive ? "bg-forest text-white" : "text-gray-700 hover:bg-gray-50"
                 }`
               }
             >
@@ -166,17 +163,15 @@ const Navbar = ({ lang, setLang }) => {
           <div className="pt-2 flex items-center gap-2">
             <button
               onClick={() => setLang("en")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                lang === "en" ? "bg-forest text-white" : "bg-gray-100 text-gray-500"
-              }`}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${lang === "en" ? "bg-forest text-white" : "bg-gray-100 text-gray-500"
+                }`}
             >
               English
             </button>
             <button
               onClick={() => setLang("sn")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                lang === "sn" ? "bg-forest text-white" : "bg-gray-100 text-gray-500"
-              }`}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${lang === "sn" ? "bg-forest text-white" : "bg-gray-100 text-gray-500"
+                }`}
             >
               සිංහල
             </button>
