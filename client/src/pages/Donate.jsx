@@ -305,7 +305,7 @@ const Donate = () => {
             <p className="text-gray-400 text-sm mb-3">Coming soon: Online payment options</p>
             <div className="flex justify-center items-center gap-4 opacity-50">
               <span className="font-bold text-gray-500 text-sm">VISA</span>
-              <span className="font-bold text-gray-500 text-sm">Mastercard</span>
+              <span className="font-bold text-yellow-500 text-sm">Mastercard</span>
               <span className="font-bold text-blue-500 text-sm">PayPal</span>
               <span className="font-bold text-purple-500 text-sm">Stripe</span>
             </div>
