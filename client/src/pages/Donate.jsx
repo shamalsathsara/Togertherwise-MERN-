@@ -132,8 +132,8 @@ const Donate = () => {
                 type="button"
                 onClick={() => setFrequency("one-time")}
                 className={`flex-1 py-3 rounded-xl font-display font-semibold text-sm transition-all ${frequency === "one-time"
-                    ? "bg-forest text-white shadow-md"
-                    : "text-gray-500 hover:text-forest"
+                  ? "bg-forest text-white shadow-md"
+                  : "text-gray-500 hover:text-forest"
                   }`}
                 id="one-time-btn"
               >
@@ -143,8 +143,8 @@ const Donate = () => {
                 type="button"
                 onClick={() => setFrequency("monthly")}
                 className={`flex-1 py-3 rounded-xl font-display font-semibold text-sm transition-all ${frequency === "monthly"
-                    ? "bg-forest text-white shadow-md"
-                    : "text-gray-500 hover:text-forest"
+                  ? "bg-forest text-white shadow-md"
+                  : "text-gray-500 hover:text-forest"
                   }`}
                 id="monthly-btn"
               >
@@ -162,8 +162,8 @@ const Donate = () => {
                     type="button"
                     onClick={() => handleAmountSelect(amount)}
                     className={`py-3 rounded-xl font-display font-bold text-sm transition-all border-2 ${selectedAmount === amount
-                        ? "bg-lime border-lime-dark text-forest shadow-md scale-105"
-                        : "border-gray-200 text-gray-700 hover:border-lime hover:text-forest"
+                      ? "bg-lime border-lime-dark text-forest shadow-md scale-105"
+                      : "border-gray-200 text-gray-700 hover:border-lime hover:text-forest"
                       }`}
                     id={`amount-${amount}-btn`}
                   >
@@ -224,7 +224,7 @@ const Donate = () => {
                     name="donorPhone"
                     value={formData.donorPhone}
                     onChange={handleFormChange}
-                    placeholder="+94 70 000-0000"
+                    placeholder="+94 70 000 0000"
                     className="form-input"
                   />
                 </div>
