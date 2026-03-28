@@ -26,17 +26,17 @@ import axiosInstance from "../api/axiosInstance";
 // Annual Financial Overview — donut chart
 const financialBreakdownData = [
   { name: "Donations", value: 10, color: "#9CFC5C" },
-  { name: "Grants", value: 0, color: "#D97706" },
-  { name: "Corporate Partnerships", value: 0, color: "#F59E0B" },
-  { name: "Other", value: 0, color: "#D1D5DB" },
+  { name: "Grants", value: 20, color: "#D97706" },
+  { name: "Corporate Partnerships", value: 30, color: "#F59E0B" },
+  { name: "Other", value: 40, color: "#D1D5DB" },
 ];
 
 // Donation allocation by program — bar chart
 const allocationData = [
   { program: "Water\nProjects", amount: 110, percent: "10%" },
-  { program: "Reforestation", amount: 0, percent: "0%" },
-  { program: "Medical Aid", amount: 0, percent: "0%" },
-  { program: "Education", amount: 0, percent: "0%" },
+  { program: "Reforestation", amount: 10, percent: "20%" },
+  { program: "Medical Aid", amount: 20, percent: "30%" },
+  { program: "Education", amount: 30, percent: "40%" },
 ];
 
 // Success stories
