@@ -145,10 +145,10 @@ const Volunteer = () => {
                         </span>
                       )}
                       <div className="text-2xl mb-2">{role.emoji}</div>
-                      <p className="font-display font-bold text-forest text-sm leading-tight mb-1">
+                      <p className="font-display font-bold text-forest text-base leading-tight mb-1">
                         {role.title}
                       </p>
-                      <p className="text-gray-400 text-[10px] leading-tight">{role.subtitle}</p>
+                      <p className="text-gray-400 text-xs leading-tight">{role.subtitle}</p>
                     </button>
                   ))}
                 </div>
