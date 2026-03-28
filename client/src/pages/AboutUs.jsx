@@ -35,7 +35,7 @@ const AboutUs = () => {
             About <span className="text-lime">Togetherwise</span>
           </h1>
           <p className="text-white/70 text-xl max-w-2xl mx-auto leading-relaxed">
-            Founded in 2018, Togetherwise bridges the gap between global resources and local needs,
+            Founded in 2026, Togetherwise bridges the gap between global resources and local needs,
             creating lasting change in communities across the world.
           </p>
         </div>
@@ -70,7 +70,7 @@ const AboutUs = () => {
                 className="rounded-3xl shadow-2xl w-full h-80 object-cover"
               />
               <div className="absolute -bottom-6 -left-6 bg-lime rounded-2xl p-6 shadow-xl">
-                <p className="font-display font-black text-forest text-3xl">2018</p>
+                <p className="font-display font-black text-forest text-3xl">2026</p>
                 <p className="text-forest/70 text-sm">Founded</p>
               </div>
             </div>
@@ -153,6 +153,7 @@ const AboutUs = () => {
                 <option>Make a donation inquiry</option>
                 <option>Volunteer inquiry</option>
                 <option>Partnership inquiry</option>
+                <option>Other</option>
               </select>
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <input type="text" placeholder="First Name" className="form-input" />
