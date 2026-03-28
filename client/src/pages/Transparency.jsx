@@ -25,7 +25,7 @@ import axiosInstance from "../api/axiosInstance";
 
 // Annual Financial Overview — donut chart
 const financialBreakdownData = [
-  { name: "Donations", value: 0, color: "#9CFC5C" },
+  { name: "Donations", value: 10, color: "#9CFC5C" },
   { name: "Grants", value: 0, color: "#D97706" },
   { name: "Corporate Partnerships", value: 0, color: "#F59E0B" },
   { name: "Other", value: 0, color: "#D1D5DB" },
