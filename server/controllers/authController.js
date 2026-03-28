@@ -14,7 +14,7 @@ const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-// ─── Helper: Generate JWT and set as HttpOnly cookie ─────────────────────────
+//  Helper: Generate JWT and set as HttpOnly cookie 
 /**
  * Signs a JWT for the given user ID and attaches it to the response
  * as an HttpOnly cookie named 'token'.
@@ -23,7 +23,7 @@ const User = require("../models/User");
  * @param {string} userId - The MongoDB ObjectId of the user
  */
 const issueTokenCookie = (res, userId) => {
-  // Sign the JWT with the user's ID and the secret key
+  // Sign the JWT 
   const token = jwt.sign({ id: userId }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN || "7d",
   });
@@ -42,7 +42,7 @@ const issueTokenCookie = (res, userId) => {
   return token;
 };
 
-// ─── POST /api/auth/register ──────────────────────────────────────────────────
+// POST /api/auth/register 
 /**
  * Register a new user (public — creates 'user' role by default).
  * Admin users should be created via the seed script.
@@ -63,7 +63,7 @@ const register = asyncHandler(async (req, res) => {
     throw new Error("An account with this email already exists");
   }
 
-  // Create the new user — password is hashed by the pre-save hook in User.js
+  // Create the new user , password is hashed by the pre-save hook in User.js
   const user = await User.create({ name, email, password });
 
   // Issue JWT cookie
@@ -80,15 +80,14 @@ const register = asyncHandler(async (req, res) => {
   });
 });
 
-// ─── POST /api/auth/login ─────────────────────────────────────────────────────
+//  POST /api/auth/login...
 /**
  * Log in with email and password.
- * Returns user info and sets the JWT in an HttpOnly cookie.
  */
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  // Validate required fields
+  // Confirm required fields
   if (!email || !password) {
     res.status(400);
     throw new Error("Please provide email and password");
@@ -97,7 +96,7 @@ const login = asyncHandler(async (req, res) => {
   // Find the user and explicitly include the password field (select: false by default)
   const user = await User.findOne({ email }).select("+password");
 
-  // If user not found or password doesn't match — use the same error message
+  // If user not found or password doesn't match, use the same error message
   // (avoids user enumeration attacks)
   if (!user || !(await user.comparePassword(password))) {
     res.status(401);
@@ -118,7 +117,7 @@ const login = asyncHandler(async (req, res) => {
   });
 });
 
-// ─── POST /api/auth/logout ────────────────────────────────────────────────────
+// POST /api/auth/logout
 /**
  * Log out by clearing the JWT cookie.
  * The cookie is overwritten with an expired one.
@@ -132,10 +131,9 @@ const logout = asyncHandler(async (req, res) => {
   res.json({ success: true, message: "Logged out successfully" });
 });
 
-// ─── GET /api/auth/me ─────────────────────────────────────────────────────────
+// GET /api/auth/me
 /**
  * Return the currently authenticated user's profile.
- * Protected by the authMiddleware — req.user is available.
  */
 const getMe = asyncHandler(async (req, res) => {
   res.json({

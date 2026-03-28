@@ -25,6 +25,7 @@ import Volunteer from "./pages/Volunteer";
 import Login from "./pages/Login";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
+import ProjectsList from "./pages/admin/ProjectsList";
 import ProjectForm from "./pages/admin/ProjectForm";
 import DonationsList from "./pages/admin/DonationsList";
 import SuccessStoriesList from "./pages/admin/SuccessStoriesList";
@@ -135,7 +136,7 @@ const AppRoutes = () => {
         {/* Default admin route → Dashboard */}
         <Route index element={<Dashboard />} />
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="projects" element={<ProjectForm />} />
+        <Route path="projects" element={<ProjectsList />} />
         <Route path="projects/new" element={<ProjectForm mode="create" />} />
         <Route path="projects/:id/edit" element={<ProjectForm mode="edit" />} />
         <Route path="donations" element={<DonationsList />} />

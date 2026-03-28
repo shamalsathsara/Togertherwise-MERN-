@@ -108,6 +108,12 @@ const getDonationStats = asyncHandler(async (req, res) => {
     paymentStatus: "completed",
   });
 
+  // Get allocation by project category based on current funds
+  const allocationResult = await Project.aggregate([
+    { $group: { _id: "$category", amount: { $sum: "$currentFunds" } } },
+    { $sort: { amount: -1 } } // Sort largest to smallest
+  ]);
+
   res.json({
     success: true,
     stats: {
@@ -115,6 +121,7 @@ const getDonationStats = asyncHandler(async (req, res) => {
       oneTimeCount,
       monthlyCount,
       totalCount: oneTimeCount + monthlyCount,
+      allocation: allocationResult,
     },
   });
 });

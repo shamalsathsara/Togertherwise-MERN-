@@ -18,6 +18,7 @@
 
 const asyncHandler = require("express-async-handler");
 const Donation = require("../models/Donation");
+const Project = require("../models/Project");
 
 // ─── STRIPE INTEGRATION (Future) ─────────────────────────────────────────────
 // Uncomment when STRIPE_SECRET_KEY is available in .env:
@@ -157,6 +158,13 @@ const recordManualDonation = asyncHandler(async (req, res) => {
     message: message || "",
     isAnonymous: isAnonymous || false,
   });
+
+  // If a project is associated, increment its funds so it reflects in charts
+  if (projectId) {
+    await Project.findByIdAndUpdate(projectId, {
+      $inc: { currentFunds: Number(amount) },
+    });
+  }
 
   res.status(201).json({
     success: true,
