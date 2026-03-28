@@ -7,6 +7,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PrivacyPolicyModal from "./PrivacyPolicyModal";
+import logoImg from "../image/logo.png";
 
 const Footer = () => {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
@@ -125,7 +126,7 @@ const Footer = () => {
                 <div className="w-12 h-12">
                   {/* Replace this src with your actual logo path, e.g., src="/logo.png" */}
                   <img
-                    src="image/logo.png"
+                    src={logoImg}
                     alt="Togetherwise Logo"
                     className="w-full h-full object-contain pt-1"
                   />

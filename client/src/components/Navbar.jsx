@@ -6,6 +6,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import logoImg from "../image/logo.png";
 
 // Language translations for the toggle
 const translations = {
@@ -53,8 +54,8 @@ const Navbar = ({ lang, setLang }) => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-          ? "bg-white shadow-md py-2"
-          : "bg-white/95 backdrop-blur-sm py-3"
+        ? "bg-white shadow-md py-2"
+        : "bg-white/95 backdrop-blur-sm py-3"
         }`}
     >
       <nav className="section-wrapper flex items-center justify-between">
@@ -63,9 +64,9 @@ const Navbar = ({ lang, setLang }) => {
           {/* SVG Logo — Hands reaching up with leaf motif */}
           <div className="w-10 h-10 relative">
             {/* Replace this src with your actual logo path, e.g., src="/logo.png" */}
-            <img 
-              src="https://placehold.co/100x100?text=Logo" 
-              alt="Togetherwise Logo" 
+            <img
+              src={logoImg}
+              alt="Togetherwise Logo"
               className="w-full h-full object-contain pt-1"
             />
           </div>
