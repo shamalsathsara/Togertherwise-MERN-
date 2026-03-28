@@ -21,23 +21,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 
-// ─── Chart Data ───────────────────────────────────────────────────────────────
-
-// Annual Financial Overview — donut chart
-const financialBreakdownData = [
-  { name: "Donations", value: 50, color: "#9CFC5C" },
-  { name: "Grants", value: 28, color: "#D97706" },
-  { name: "Corporate Partnerships", value: 15, color: "#F59E0B" },
-  { name: "Other", value: 7, color: "#D1D5DB" },
-];
-
-// Donation allocation by program — bar chart
-const allocationData = [
-  { program: "Water\nProjects", amount: 30000000, percent: "66.5%" },
-  { program: "Reforestation", amount: 2000000, percent: "28.5%" },
-  { program: "Medical Aid", amount: 1000000, percent: "15.5%" },
-  { program: "Education", amount: 200000, percent: "5.5%" },
-];
+// Chart Data initialized dynamically on load
 
 // Success stories
 const successStories = [
@@ -66,11 +50,18 @@ const annualReports = [
 // Custom tooltip for bar chart
 const CustomBarTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
+    const val = payload[0].value;
+    const formattedVal = val >= 1000000 
+      ? `$${(val / 1000000).toFixed(1)}M` 
+      : val >= 1000 
+      ? `$${(val / 1000).toFixed(1)}k` 
+      : `$${val}`;
+
     return (
       <div className="bg-white border border-gray-200 rounded-xl p-3 shadow-lg text-sm">
         <p className="font-bold text-forest">{payload[0].payload.program.replace("\n", " ")}</p>
         <p className="text-gray-600">
-          ${(payload[0].value / 1000000).toFixed(1)}M ({payload[0].payload.percent})
+          {formattedVal} ({payload[0].payload.percent})
         </p>
       </div>
     );
@@ -83,13 +74,63 @@ const Transparency = () => {
   const [stats, setStats] = useState({
     totalAmount: 0, // Fallback demo data
   });
+  const [donutData, setDonutData] = useState([]);
+  const [barData, setBarData] = useState([]);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
         const res = await axiosInstance.get("/donations/stats");
-        if (res.data.success && res.data.stats.totalAmount > 0) {
-          setStats(res.data.stats);
+        if (res.data.success && res.data.stats) {
+          const s = res.data.stats;
+          setStats(s);
+
+          // Update Donut Chart
+          if (s.totalAmount > 0) {
+            setDonutData([
+              { name: "Donations", value: 100, color: "#9CFC5C" },
+              { name: "Grants", value: 0, color: "#D97706" },
+              { name: "Corporate Partnerships", value: 0, color: "#F59E0B" },
+              { name: "Other", value: 0, color: "#D1D5DB" },
+            ]);
+          }
+
+          // Update Bar Chart
+          if (s.allocation) {
+            // Ensure default staple categories are always shown
+            const defaultCategories = [
+              { _id: "Water Projects", amount: 0 },
+              { _id: "Reforestation", amount: 0 },
+              { _id: "Medical Aid", amount: 0 },
+              { _id: "Education", amount: 0 },
+            ];
+
+            // Merge fetched database stats into the defaults
+            s.allocation.forEach(dbItem => {
+              const existing = defaultCategories.find(c => c._id === dbItem._id);
+              if (existing) {
+                existing.amount = dbItem.amount;
+              } else if (dbItem._id) {
+                // Include any other category that might exist in the DB
+                defaultCategories.push(dbItem);
+              }
+            });
+
+            const totalAllocated = defaultCategories.reduce((sum, item) => sum + item.amount, 0);
+            
+            const newBarData = defaultCategories.map(item => {
+              const perc = totalAllocated > 0 ? ((item.amount / totalAllocated) * 100).toFixed(1) : "0";
+              let progName = item._id;
+              if (progName === "Water Projects") progName = "Water\nProjects";
+              
+              return {
+                program: progName,
+                amount: item.amount,
+                percent: `${perc}%`
+              };
+            });
+            setBarData(newBarData);
+          }
         }
       } catch (err) {
         console.error("Failed to fetch donation stats:", err);
@@ -135,7 +176,7 @@ const Transparency = () => {
                 <ResponsiveContainer width={200} height={200}>
                   <PieChart>
                     <Pie
-                      data={financialBreakdownData}
+                      data={donutData}
                       cx="50%"
                       cy="50%"
                       innerRadius={55}
@@ -143,7 +184,7 @@ const Transparency = () => {
                       paddingAngle={2}
                       dataKey="value"
                     >
-                      {financialBreakdownData.map((entry, index) => (
+                      {donutData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
@@ -155,7 +196,7 @@ const Transparency = () => {
               <div className="flex-1">
                 {/* Legend */}
                 <div className="space-y-2 mb-6">
-                  {financialBreakdownData.map((item) => (
+                  {donutData.map((item) => (
                     <div key={item.name} className="flex items-center gap-2.5">
                       <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }} />
                       <span className="text-gray-600 text-sm">{item.name}</span>
@@ -190,7 +231,7 @@ const Transparency = () => {
             </h2>
             <ResponsiveContainer width="100%" height={250}>
               <BarChart
-                data={allocationData}
+                data={barData}
                 margin={{ top: 10, right: 10, left: -10, bottom: 5 }}
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
@@ -201,13 +242,13 @@ const Transparency = () => {
                 />
                 <YAxis
                   tick={{ fontSize: 10, fill: "#6b7280" }}
-                  tickFormatter={(v) => `$${(v / 1000000).toFixed(0)}M`}
+                  tickFormatter={(v) => v >= 1000000 ? `$${(v / 1000000).toFixed(0)}M` : v >= 1000 ? `$${(v / 1000).toFixed(0)}k` : `$${v}`}
                   tickLine={false}
                   axisLine={false}
                 />
                 <Tooltip content={<CustomBarTooltip />} />
                 <Bar dataKey="amount" fill="#D97706" radius={[6, 6, 0, 0]}>
-                  {allocationData.map((entry, index) => (
+                  {barData.map((entry, index) => (
                     <Cell
                       key={`bar-${index}`}
                       fill={index === 0 ? "#9CFC5C" : index === 1 ? "#D97706" : index === 2 ? "#F59E0B" : "#1B3022"}
@@ -219,7 +260,7 @@ const Transparency = () => {
 
             {/* Data labels */}
             <div className="grid grid-cols-4 gap-2 mt-3">
-              {allocationData.map((item, i) => (
+              {barData.map((item, i) => (
                 <div key={i} className="text-center">
                   <p className="text-xs text-gray-500">{item.program.replace("\n", " ")}</p>
                   <p className="text-xs font-bold text-forest">{item.percent}</p>

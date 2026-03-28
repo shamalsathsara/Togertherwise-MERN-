@@ -4,7 +4,7 @@
  * Connected to paymentController.js backend endpoint
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 
@@ -15,6 +15,8 @@ const Donate = () => {
   const [frequency, setFrequency] = useState("one-time"); // 'one-time' | 'monthly'
   const [selectedAmount, setSelectedAmount] = useState(25);
   const [customAmount, setCustomAmount] = useState("");
+  const [projects, setProjects] = useState([]);
+  const [selectedProject, setSelectedProject] = useState("");
   const [formData, setFormData] = useState({
     donorName: "",
     donorEmail: "",
@@ -25,6 +27,20 @@ const Donate = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await axiosInstance.get("/projects?status=active");
+        if (res.data.success) {
+          setProjects(res.data.projects);
+        }
+      } catch (err) {
+        console.error("Could not fetch projects for donation dropdown:", err);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   const finalAmount = customAmount ? Number(customAmount) : selectedAmount;
 
@@ -66,6 +82,7 @@ const Donate = () => {
         amount: finalAmount,
         ...formData,
         frequency,
+        projectId: selectedProject || null,
       });
       setSubmitted(true);
     } catch (err) {
@@ -186,6 +203,26 @@ const Donate = () => {
                   id="custom-amount-input"
                 />
               </div>
+            </div>
+
+            {/* ── Project Selection ──────────────────────────────────── */}
+            <div className="mb-6">
+              <label className="form-label" htmlFor="project-select">
+                Where should your donation go? (Optional)
+              </label>
+              <select
+                id="project-select"
+                value={selectedProject}
+                onChange={(e) => setSelectedProject(e.target.value)}
+                className="form-input bg-gray-50 border border-gray-200"
+              >
+                <option value="">General Fund (Area of greatest need)</option>
+                {projects.map((p) => (
+                  <option key={p._id} value={p._id}>
+                    {p.title}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* ── Impact Preview ─────────────────────────────────────── */}
