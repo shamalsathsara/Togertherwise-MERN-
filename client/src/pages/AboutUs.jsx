@@ -54,9 +54,9 @@ const AboutUs = () => {
                 resources, and community-driven programs that create lasting positive change.
               </p>
               <p className="text-gray-600 leading-relaxed mb-8">
-                Since our founding, we've impacted over <strong className="text-forest">500 families</strong>,
-                completed more than <strong className="text-forest">200 projects</strong>, and built a
-                global network of <strong className="text-forest">5,000+ volunteers</strong> committed to
+                Since our founding, we've impacted over <strong className="text-forest">0 families</strong>,
+                completed more than <strong className="text-forest">0 projects</strong>, and built a
+                global network of <strong className="text-forest">0+ volunteers</strong> committed to
                 building a better world.
               </p>
               <button onClick={() => navigate("/donate")} className="btn-primary">
