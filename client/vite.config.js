@@ -6,6 +6,14 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
+
+    //For testing Codes Preview after delete these 02 lines
+    allowedHosts: true,
+    host: true,
+    strictPort: true,
+    //For testing Codes Preview after delete these 02 lines
+
+
     // Proxy API requests to Express backend during development
     // So /api/... from React automatically goes to http://localhost:5000/api/...
     proxy: {
