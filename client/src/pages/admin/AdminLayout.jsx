@@ -30,19 +30,18 @@ const AdminLayout = () => {
     <div className="min-h-screen bg-gray-100 flex">
       {/* ── Sidebar ─────────────────────────────────────────────────── */}
       <aside
-        className={`${
-          isSidebarOpen ? "w-56" : "w-16"
-        } bg-forest flex flex-col transition-all duration-300 flex-shrink-0`}
+        className={`${isSidebarOpen ? "w-56" : "w-16"
+          } bg-forest flex flex-col transition-all duration-300 flex-shrink-0`}
       >
         {/* Logo */}
         <div className="p-5 border-b border-white/10">
           <div className="flex items-center gap-3">
             <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 flex-shrink-0">
-              <path d="M12 28 C8 22, 6 16, 10 10 C12 7, 15 8, 16 11 L17 16" stroke="#9CFC5C" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M28 28 C32 22, 34 16, 30 10 C28 7, 25 8, 24 11 L23 16" stroke="#9CFC5C" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M16 11 L20 6 L24 11" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <ellipse cx="20" cy="5" rx="3" ry="4" fill="#9CFC5C" opacity="0.8"/>
-              <path d="M10 30 Q20 35 30 30" stroke="#9CFC5C" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M12 28 C8 22, 6 16, 10 10 C12 7, 15 8, 16 11 L17 16" stroke="#9CFC5C" strokeWidth="2" strokeLinecap="round" />
+              <path d="M28 28 C32 22, 34 16, 30 10 C28 7, 25 8, 24 11 L23 16" stroke="#9CFC5C" strokeWidth="2" strokeLinecap="round" />
+              <path d="M16 11 L20 6 L24 11" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              <ellipse cx="20" cy="5" rx="3" ry="4" fill="#9CFC5C" opacity="0.8" />
+              <path d="M10 30 Q20 35 30 30" stroke="#9CFC5C" strokeWidth="2" strokeLinecap="round" />
             </svg>
             {isSidebarOpen && (
               <div>
@@ -60,10 +59,9 @@ const AdminLayout = () => {
               key={to}
               to={to}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 text-sm font-semibold ${
-                  isActive
-                    ? "bg-lime text-forest"
-                    : "text-white/70 hover:bg-white/10 hover:text-white"
+                `flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 text-sm font-semibold ${isActive
+                  ? "bg-lime text-forest"
+                  : "text-white/70 hover:bg-white/10 hover:text-white"
                 }`
               }
             >

@@ -20,6 +20,7 @@ import {
 } from "recharts";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
+import SEO from "../components/SEO";
 
 
 
@@ -141,6 +142,11 @@ const Transparency = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Trust & Transparency" 
+        description="Our promise to you: verified accountability and 100% transparency in how your donations are used to empower communities."
+        path="/transparency"
+      />
       {/* ── Page Header ──────────────────────────────────────────────── */}
       <div className="bg-forest py-16 text-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">

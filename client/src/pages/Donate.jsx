@@ -7,6 +7,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
+import SEO from "../components/SEO";
 
 const PRESET_AMOUNTS = [10, 25, 30, 50, 100];
 
@@ -126,6 +127,11 @@ const Donate = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Support Our Mission" 
+        description="Every dollar you give goes directly toward empowering communities and transforming lives. Support Togetherwise today."
+        path="/donate"
+      />
       {/* ── Page Header ─────────────────────────────────────────────── */}
       <div className="bg-forest py-16 text-center">
         <div className="section-wrapper">

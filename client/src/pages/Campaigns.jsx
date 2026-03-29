@@ -4,6 +4,7 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const ALL_CAMPAIGNS = [
   { id: 1, title: "Clean Water for Rural Schools", category: "Water Projects", description: "Providing clean, safe water to 500+ families in rural communities across Sri Lanka.", goal: 0, raised: 0, image: "https://images.unsplash.com/photo-1590318719961-6e74a0cccfcb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", status: "active" },
@@ -30,6 +31,11 @@ const Campaigns = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Active Campaigns" 
+        description="Browse our active community projects and campaigns. Choose where your support goes and help us empower villages."
+        path="/campaigns"
+      />
       {/* Header */}
       <div className="bg-forest py-16 text-center">
         <div className="section-wrapper">

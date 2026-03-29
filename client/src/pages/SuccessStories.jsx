@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
+import SEO from "../components/SEO";
 
 const STORIES = [
   { id: 1, title: "Clean Water Changes Everything", location: "Sri Lanka", tag: "Water Projects", image: "https://images.unsplash.com/photo-1590318719961-6e74a0cccfcb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", quote: "Before Togetherwise came, we walked 3 miles each day for water. Now our children drink clean water at school and our mothers spend their time on building businesses.", person: "Kumari Navaratne", role: "Village Elder, Hambantota" },
@@ -47,6 +48,11 @@ const SuccessStories = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Success Stories" 
+        description="Read about the real impact of your donations. Real stories of transformation from villages across the globe."
+        path="/success-stories"
+      />
       <div className="bg-forest py-16 text-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="w-64 h-64 bg-lime rounded-full absolute -top-20 right-20" />

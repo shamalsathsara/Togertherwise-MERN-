@@ -4,6 +4,7 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const TEAM = [
   { name: "shamal sathsara", role: "Executive Director", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&q=80" },
@@ -24,6 +25,11 @@ const AboutUs = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO 
+        title="About Us" 
+        description="Learn about Togetherwise — our mission, our values, and the team working to empower communities across the globe."
+        path="/about"
+      />
       {/* Hero */}
       <section className="relative py-24 bg-forest overflow-hidden">
         <div className="absolute inset-0 opacity-10">
