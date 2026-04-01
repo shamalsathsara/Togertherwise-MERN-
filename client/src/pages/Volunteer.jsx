@@ -7,6 +7,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
+import SEO from "../components/SEO";
 import logoImg from "../image/logo.png";
 
 const ROLES = [
@@ -106,6 +107,11 @@ const Volunteer = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Volunteer with Us" 
+        description="Join Togetherwise as a volunteer, fundraiser, or partner. Empower lives and build stronger communities with us."
+        path="/volunteer"
+      />
       {/* ── Header ──────────────────────────────────────────────────── */}
       <div className="bg-forest py-16">
         <div className="section-wrapper text-center">

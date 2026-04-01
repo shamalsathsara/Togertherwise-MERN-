@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import axiosInstance from "../api/axiosInstance";
+import SEO from "../components/SEO";
 
 // ─── Impact Counter Data ─────────────────────────────────────────────────────
 const impactStats = [
@@ -242,6 +243,11 @@ const Home = ({ lang }) => {
 
   return (
     <div className="bg-white">
+      <SEO 
+        title="Empowering Communities" 
+        description="Togetherwise — From village to global. Join us in transforming lives through donations, volunteering, and community empowerment."
+        path="/"
+      />
 
       {/* ══════════════════════════════════════════════════════════════ */}
       {/* HERO SECTION                                                   */}
