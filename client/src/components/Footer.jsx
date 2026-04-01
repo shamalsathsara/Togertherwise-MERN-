@@ -243,7 +243,7 @@ const Footer = () => {
               © {new Date().getFullYear()} Togetherwise. All rights reserved.
             </p>
             <p className="text-white/40 text-xs">
-              Registered NGO — Sri Lanka
+              {/*Registered NGO — Sri Lanka*/}
             </p>
           </div>
         </div>
