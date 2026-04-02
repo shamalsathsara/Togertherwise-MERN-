@@ -11,7 +11,7 @@ import { useInView } from "react-intersection-observer";
 import axiosInstance from "../api/axiosInstance";
 import SEO from "../components/SEO";
 
-// ─── Impact Counter Data ─────────────────────────────────────────────────────
+//  Impact Counter Data 
 const impactStats = [
   { value: 0, suffix: "+", label: "Families Helped", icon: "🏠" },
   { value: 0, suffix: "+", label: "Projects Completed", icon: "✅" },
@@ -19,7 +19,7 @@ const impactStats = [
   { value: 0, suffix: "+", label: "Project Supporting", icon: "🤝" },
 ];
 
-// ─── Campaign Data ────────────────────────────────────────────────────────────
+//  Campaign Data 
 const campaigns = [
   {
     id: 1,
@@ -63,7 +63,7 @@ const campaigns = [
   },
 ];
 
-// ─── Success Story Data ───────────────────────────────────────────────────────
+//  Success Story Data 
 const stories = [
   {
     id: 1,
@@ -85,13 +85,13 @@ const stories = [
   },
 ];
 
-// ─── News Data ────────────────────────────────────────────────────────────────
+//  News Data 
 const newsItems = [
   { id: 1, tag: "COMPLETE", label: "Clean Water Project in Village 1 — A new solar pump is providing clean, safe water to 500+ families.", color: "bg-lime text-forest", image: "https://images.unsplash.com/photo-1590318719961-6e74a0cccfcb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 2, tag: "IN PROGRESS", label: "School Refurbishment In Community — Teachers tasked and curriculum up.", color: "bg-blue-100 text-blue-700", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh0d-xiYqb1w9-xTqC5P-DTuG-qkZ0jAQe5A&s" },
 ];
 
-// ─── Projects & Campaigns Data ────────────────────────────────────────────────
+// Projects & Campaigns Data
 const featuredProjects = [
   {
     id: 1,
@@ -127,7 +127,7 @@ const featuredProjects = [
   },
 ];
 
-// ─── Sub-Components ───────────────────────────────────────────────────────────
+//  Sub-Components 
 
 const CampaignCard = ({ campaign }) => {
   const percent = Math.round((campaign.raised / campaign.goal) * 100);
@@ -215,7 +215,7 @@ const ProjectCard = ({ project }) => {
   );
 };
 
-// ─── Main Home Component ──────────────────────────────────────────────────────
+// Main Home Component 
 const Home = ({ lang }) => {
   const navigate = useNavigate();
   const [liveStories, setLiveStories] = useState([]);
@@ -243,15 +243,15 @@ const Home = ({ lang }) => {
 
   return (
     <div className="bg-white">
-      <SEO 
-        title="Empowering Communities" 
+      <SEO
+        title="Empowering Communities"
         description="Togetherwise — From village to global. Join us in transforming lives through donations, volunteering, and community empowerment."
         path="/"
       />
 
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/*  */}
       {/* HERO SECTION                                                   */}
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/*  */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
@@ -310,9 +310,9 @@ const Home = ({ lang }) => {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/* */}
       {/* IMPACT COUNTERS                                                */}
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/* */}
       <section ref={counterRef} className="bg-forest py-16">
         <div className="section-wrapper">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
@@ -338,9 +338,9 @@ const Home = ({ lang }) => {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/* */}
       {/* OUR MISSION                                                    */}
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/**/}
       <section className="py-20 bg-gray-50">
         <div className="section-wrapper">
           <div className="text-center mb-12">
@@ -367,9 +367,9 @@ const Home = ({ lang }) => {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/* */}
       {/* CURRENT CAMPAIGNS                                              */}
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/*  */}
       <section className="py-20 bg-white">
         <div className="section-wrapper">
           <div className="flex items-end justify-between mb-10">
@@ -393,9 +393,9 @@ const Home = ({ lang }) => {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/*  */}
       {/* SUCCESS STORIES                                                */}
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/*  */}
       <section className="py-20 bg-gray-50">
         <div className="section-wrapper">
           <div className="flex items-end justify-between mb-10">
@@ -440,9 +440,9 @@ const Home = ({ lang }) => {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/*  */}
       {/* PROJECTS & CAMPAIGNS                                           */}
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/*  */}
       <section className="py-20 bg-white">
         <div className="section-wrapper">
           <div className="text-center mb-10">
@@ -458,9 +458,9 @@ const Home = ({ lang }) => {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/* */}
       {/* NEWS & UPDATES                                                 */}
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/* */}
       <section className="py-16 bg-gray-50">
         <div className="section-wrapper">
           <div className="flex items-end justify-between mb-6">
@@ -494,9 +494,9 @@ const Home = ({ lang }) => {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/*  */}
       {/* CTA BANNER                                                     */}
-      {/* ══════════════════════════════════════════════════════════════ */}
+      {/*  */}
       <section className="py-20 bg-forest relative overflow-hidden">
         {/* Decorative circles */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-lime/10 rounded-full -translate-y-1/2 translate-x-1/4" />

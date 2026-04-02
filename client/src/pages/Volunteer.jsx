@@ -107,12 +107,12 @@ const Volunteer = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <SEO 
-        title="Volunteer with Us" 
+      <SEO
+        title="Volunteer with Us"
         description="Join Togetherwise as a volunteer, fundraiser, or partner. Empower lives and build stronger communities with us."
         path="/volunteer"
       />
-      {/* ── Header ──────────────────────────────────────────────────── */}
+      {/* Header */}
       <div className="bg-forest py-16">
         <div className="section-wrapper text-center">
           <span className="badge-lime mb-4 inline-block">Get Involved</span>
@@ -129,7 +129,7 @@ const Volunteer = () => {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
 
-            {/* ── Left: Form ─────────────────────────────────────────── */}
+            {/* Left: Form  */}
             <div className="lg:col-span-3">
               <div className="bg-white rounded-3xl shadow-xl p-8">
 
@@ -270,7 +270,7 @@ const Volunteer = () => {
               </div>
             </div>
 
-            {/* ── Right: Info Panel ──────────────────────────────────── */}
+            {/* Right: Info Panel */}
             <div className="lg:col-span-2 space-y-6">
               {/* Logo + tagline */}
               <div className="text-center">

@@ -8,11 +8,11 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
-// ── Layout ──────────────────────────────────────────────────────────────────
+// ── Layout 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-// ── Public Pages ─────────────────────────────────────────────────────────────
+// ── Public Pages 
 import Home from "./pages/Home";
 import Campaigns from "./pages/Campaigns";
 import SuccessStories from "./pages/SuccessStories";
@@ -21,7 +21,7 @@ import Donate from "./pages/Donate";
 import Transparency from "./pages/Transparency";
 import Volunteer from "./pages/Volunteer";
 
-// ── Admin Pages ───────────────────────────────────────────────────────────────
+// ── Admin Pages 
 import Login from "./pages/Login";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
@@ -81,7 +81,7 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      {/* ── Public Routes ─────────────────────────────────────────── */}
+      {/* ── Public Routes */}
       <Route path="/" element={
         <PublicLayout lang={lang} setLang={setLang}>
           <Home lang={lang} />
@@ -124,10 +124,10 @@ const AppRoutes = () => {
         </PublicLayout>
       } />
 
-      {/* ── Admin Login (public) ───────────────────────────────────── */}
+      {/* ── Admin Login (public)  */}
       <Route path="/admin/login" element={<Login />} />
 
-      {/* ── Protected Admin Routes ─────────────────────────────────── */}
+      {/* ── Protected Admin Routes  */}
       <Route path="/admin" element={
         <ProtectedAdminRoute>
           <AdminLayout />
@@ -144,7 +144,7 @@ const AppRoutes = () => {
         <Route path="success-stories/new" element={<SuccessStoryForm />} />
       </Route>
 
-      {/* ── 404 → Home ─────────────────────────────────────────────── */}
+      {/* ── 404 → Home  */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
     checkSession();
   }, []);
 
-  // ─── Login ───────────────────────────────────────────────────────────────
+  //  Login 
   /**
    * Sends login credentials to the server. On success, the server sets
    * the JWT as an HttpOnly cookie, and we store the user in state.
@@ -71,10 +71,10 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // ─── Logout ──────────────────────────────────────────────────────────────
+  //  Logout 
   /**
    * Calls the logout endpoint to clear the HttpOnly cookie on the server,
-   * then clears the user from local state.
+ 
    */
   const logout = async () => {
     try {

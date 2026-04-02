@@ -80,7 +80,7 @@ const Navbar = ({ lang, setLang }) => {
           </div>
         </Link>
 
-        {/* ── Desktop Nav Links ───────────────────────────────────────────── */}
+        {/*Desktop Nav Links  */}
         <ul className="hidden lg:flex items-center gap-6">
           {navLinks.map(({ to, label }) => (
             <li key={to}>
@@ -97,7 +97,7 @@ const Navbar = ({ lang, setLang }) => {
           ))}
         </ul>
 
-        {/* ── Right Controls ──────────────────────────────────────────────── */}
+        {/* Right Controls  */}
         <div className="flex items-center gap-3">
           {/* Language Toggle */}
           <button
@@ -136,7 +136,7 @@ const Navbar = ({ lang, setLang }) => {
         </div>
       </nav>
 
-      {/* ── Mobile Menu ──────────────────────────────────────────────────── */}
+      {/*  Mobile Menu  */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           }`}

@@ -127,12 +127,12 @@ const Donate = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <SEO 
-        title="Support Our Mission" 
+      <SEO
+        title="Support Our Mission"
         description="Every dollar you give goes directly toward empowering communities and transforming lives. Support Togetherwise today."
         path="/donate"
       />
-      {/* ── Page Header ─────────────────────────────────────────────── */}
+      {/*  Page Header  */}
       <div className="bg-forest py-16 text-center">
         <div className="section-wrapper">
           <span className="badge-lime mb-4 inline-block">Make a Difference</span>
@@ -149,7 +149,7 @@ const Donate = () => {
         <div className="max-w-2xl mx-auto">
           <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-xl p-8">
 
-            {/* ── Frequency Toggle ───────────────────────────────────── */}
+            {/*  Frequency Toggle */}
             <div className="flex bg-gray-100 rounded-2xl p-1 mb-8">
               <button
                 type="button"
@@ -175,7 +175,7 @@ const Donate = () => {
               </button>
             </div>
 
-            {/* ── Amount Selection ───────────────────────────────────── */}
+            {/*  Amount Selection */}
             <div className="mb-6">
               <label className="form-label text-base">Select Amount</label>
               <div className="grid grid-cols-5 gap-2 mb-4">
@@ -208,7 +208,7 @@ const Donate = () => {
               </div>
             </div>
 
-            {/* ── Project Selection ──────────────────────────────────── */}
+            {/*  Project Selection  */}
             <div className="mb-6">
               <label className="form-label" htmlFor="project-select">
                 Where should your donation go? (Optional)
@@ -228,7 +228,7 @@ const Donate = () => {
               </select>
             </div>
 
-            {/* ── Impact Preview ─────────────────────────────────────── */}
+            {/*  Impact Preview  */}
             {finalAmount > 0 && (
               <div className="bg-lime/10 border border-lime/30 rounded-2xl p-4 mb-6">
                 <p className="text-forest font-semibold text-sm">
@@ -241,7 +241,7 @@ const Donate = () => {
               </div>
             )}
 
-            {/* ── Donor Information ──────────────────────────────────── */}
+            {/*  Donor Information  */}
             <div className="space-y-4 mb-6">
               <h3 className="font-display font-bold text-forest text-lg">Your Details</h3>
 
@@ -314,14 +314,14 @@ const Donate = () => {
               </label>
             </div>
 
-            {/* ── Error Message ──────────────────────────────────────── */}
+            {/*  Error Message  */}
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl p-3 mb-4 text-sm">
                 {error}
               </div>
             )}
 
-            {/* ── Submit Button ──────────────────────────────────────── */}
+            {/*  Submit Button  */}
             <button
               type="submit"
               disabled={isSubmitting}
@@ -343,7 +343,7 @@ const Donate = () => {
             </p>
           </form>
 
-          {/* ── Payment Methods Note ─────────────────────────────────── */}
+          {/*  Payment Methods Note  */}
           <div className="mt-6 text-center">
             <p className="text-gray-400 text-sm mb-3">Coming soon: Online payment options</p>
             <div className="flex justify-center items-center gap-4 opacity-50">

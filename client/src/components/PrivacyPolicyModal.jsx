@@ -1,7 +1,6 @@
 /**
  * PrivacyPolicyModal.jsx — Privacy Policy Modal
  * Opens when the user clicks the "Privacy Policy" link in the footer.
- * Overlaid on the current page without navigating away.
  */
 
 import React, { useEffect } from "react";

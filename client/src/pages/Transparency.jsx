@@ -142,12 +142,12 @@ const Transparency = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <SEO 
-        title="Trust & Transparency" 
+      <SEO
+        title="Trust & Transparency"
         description="Our promise to you: verified accountability and 100% transparency in how your donations are used to empower communities."
         path="/transparency"
       />
-      {/* ── Page Header ──────────────────────────────────────────────── */}
+      {/* Page Header */}
       <div className="bg-forest py-16 text-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="w-64 h-64 bg-lime rounded-full absolute -top-20 -right-20" />
@@ -167,12 +167,12 @@ const Transparency = () => {
 
       <div className="section-wrapper py-14">
 
-        {/* ══════════════════════════════════════════════════════════════ */}
-        {/* CHARTS ROW                                                     */}
-        {/* ══════════════════════════════════════════════════════════════ */}
+        {/* */}
+        {/* CHARTS ROW  */}
+        {/*  */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
 
-          {/* ── Donut Chart: Financial Overview ──────────────────────── */}
+          {/*  Donut Chart: Financial Overview */}
           <div className="card p-6">
             <h2 className="font-display font-bold text-forest text-xl mb-6">
               Annual Financial Overview
@@ -230,7 +230,7 @@ const Transparency = () => {
             </div>
           </div>
 
-          {/* ── Bar Chart: Donation Allocation ───────────────────────── */}
+          {/*  Bar Chart: Donation Allocation */}
           <div className="card p-6">
             <h2 className="font-display font-bold text-forest text-xl mb-6">
               Donation Allocation by Program
@@ -276,9 +276,9 @@ const Transparency = () => {
           </div>
         </div>
 
-        {/* ══════════════════════════════════════════════════════════════ */}
-        {/* SUCCESS STORIES + ANNUAL REPORTS ROW                          */}
-        {/* ══════════════════════════════════════════════════════════════ */}
+        {/*  */}
+        {/* SUCCESS STORIES + ANNUAL REPORTS ROW  */}
+        {/* */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-12">
 
           {/* Success Stories (2/5) */}
