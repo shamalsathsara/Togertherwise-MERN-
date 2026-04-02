@@ -8,16 +8,22 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PrivacyPolicyModal from "./PrivacyPolicyModal";
 import logoImg from "../image/logo.png";
+import axiosInstance from "../api/axiosInstance";
 
 const Footer = () => {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [subscribeEmail, setSubscribeEmail] = useState("");
   const [subscribeStatus, setSubscribeStatus] = useState("");
 
-  const handleSubscribe = (e) => {
+  const handleSubscribe = async (e) => {
     e.preventDefault();
     if (subscribeEmail) {
-      setSubscribeStatus("Thank you for subscribing! 🎉");
+      try {
+        const response = await axiosInstance.post("/subscribers", { email: subscribeEmail });
+        setSubscribeStatus(response.data.message || "Thank you for subscribing! 🎉");
+      } catch (err) {
+        setSubscribeStatus("Failed to subscribe. Please try again.");
+      }
       setSubscribeEmail("");
       setTimeout(() => setSubscribeStatus(""), 3000);
     }

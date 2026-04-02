@@ -85,4 +85,19 @@ const updateVolunteerStatus = asyncHandler(async (req, res) => {
   res.json({ success: true, volunteer });
 });
 
-module.exports = { registerVolunteer, getAllVolunteers, updateVolunteerStatus };
+// ─── DELETE /api/volunteers/:id ──────────────────────────────────────────────
+/**
+ * deleteVolunteer — Permanently remove an application (admin only).
+ */
+const deleteVolunteer = asyncHandler(async (req, res) => {
+  const volunteer = await Volunteer.findById(req.params.id);
+  if (!volunteer) {
+    res.status(404);
+    throw new Error("Volunteer application not found");
+  }
+
+  await Volunteer.findByIdAndDelete(req.params.id);
+  res.json({ success: true, message: "Volunteer application deleted" });
+});
+
+module.exports = { registerVolunteer, getAllVolunteers, updateVolunteerStatus, deleteVolunteer };

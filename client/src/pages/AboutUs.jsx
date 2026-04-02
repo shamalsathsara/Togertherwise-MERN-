@@ -2,9 +2,10 @@
  * AboutUs.jsx — About Togetherwise Page
  */
 
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SEO from "../components/SEO";
+import axiosInstance from "../api/axiosInstance";
 
 const TEAM = [
   { name: "shamal sathsara", role: "Executive Director", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&q=80" },
@@ -22,6 +23,46 @@ const VALUES = [
 
 const AboutUs = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [statusMsg, setStatusMsg] = useState({ text: "", type: "" });
+  const [formData, setFormData] = useState({
+    type: "Volunteer inquiry",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await axiosInstance.post("/messages", formData);
+      setStatusMsg({ text: "Message sent successfully! We will get back to you soon.", type: "success" });
+      setFormData({
+        type: "Volunteer inquiry",
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+      // Clear success message after 5 seconds
+      setTimeout(() => setStatusMsg({ text: "", type: "" }), 5000);
+    } catch (error) {
+      setStatusMsg({ 
+        text: error.response?.data?.message || "Failed to send message. Please try again.", 
+        type: "error" 
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -153,8 +194,14 @@ const AboutUs = () => {
               </div>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
-              <select className="form-input mb-4">
+            <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+              <select 
+                name="type" 
+                value={formData.type} 
+                onChange={handleChange} 
+                className="form-input mb-4"
+                required
+              >
                 <option>Join as a member</option>
                 <option>Make a donation inquiry</option>
                 <option>Volunteer inquiry</option>
@@ -162,18 +209,29 @@ const AboutUs = () => {
                 <option>Other</option>
               </select>
               <div className="grid grid-cols-2 gap-4 mb-4">
-                <input type="text" placeholder="First Name" className="form-input" />
-                <input type="text" placeholder="Last Name" className="form-input" />
+                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" className="form-input" required />
+                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" className="form-input" required />
               </div>
               <div className="grid grid-cols-2 gap-4 mb-4">
-                <input type="email" placeholder="Email" className="form-input" />
-                <input type="tel" placeholder="Phone" className="form-input" />
+                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" className="form-input" required />
+                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone" className="form-input" required />
               </div>
-              <textarea rows={3} placeholder="Your request" className="form-input resize-none mb-4" />
-              <button className="btn-primary w-full py-4 uppercase tracking-wide font-bold">
-                Send Message ↗
+              <textarea name="message" value={formData.message} onChange={handleChange} rows={3} placeholder="Your request" className="form-input resize-none mb-4" required />
+              
+              {statusMsg.text && (
+                <div className={`p-3 rounded-xl text-sm mb-4 border ${
+                  statusMsg.type === "success" 
+                    ? "bg-green-50 text-green-700 border-green-100" 
+                    : "bg-red-50 text-red-700 border-red-100"
+                }`}>
+                  {statusMsg.text}
+                </div>
+              )}
+
+              <button type="submit" disabled={loading} className="btn-primary w-full py-4 uppercase tracking-wide font-bold">
+                {loading ? "Sending..." : "Send Message ↗"}
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </section>

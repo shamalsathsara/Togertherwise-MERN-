@@ -11,79 +11,7 @@ import { useInView } from "react-intersection-observer";
 import axiosInstance from "../api/axiosInstance";
 import SEO from "../components/SEO";
 
-//  Impact Counter Data 
-const impactStats = [
-  { value: 0, suffix: "+", label: "Families Helped", icon: "🏠" },
-  { value: 0, suffix: "+", label: "Projects Completed", icon: "✅" },
-  { value: 0, suffix: "+", label: "Active Volunteers", icon: "🌟" },
-  { value: 0, suffix: "+", label: "Project Supporting", icon: "🤝" },
-];
-
-//  Campaign Data 
-const campaigns = [
-  {
-    id: 1,
-    title: "Clean Water for Rural Schools",
-    description: "Providing clean, safe water to 500+ families in rural communities.",
-    category: "Water Projects",
-    goal: 0,
-    raised: 0,
-    image: "https://images.unsplash.com/photo-1590318719961-6e74a0cccfcb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    color: "bg-blue-50",
-  },
-  {
-    id: 2,
-    title: "Solar Panels for Schools",
-    description: "Bringing renewable energy and electricity to off-grid rural schools.",
-    category: "Education",
-    goal: 0,
-    raised: 0,
-    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&q=80",
-    color: "bg-yellow-50",
-  },
-  {
-    id: 3,
-    title: "Changes for Community Centers",
-    description: "Building safe, modern community gathering spaces for local programs.",
-    category: "Community Development",
-    goal: 0,
-    raised: 0,
-    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80",
-    color: "bg-green-50",
-  },
-  {
-    id: 4,
-    title: "Renewing Opportunities",
-    description: "Vocational training and micro-finance programs for women entrepreneurs.",
-    category: "Education",
-    goal: 0,
-    raised: 0,
-    image: "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&q=80",
-    color: "bg-purple-50",
-  },
-];
-
-//  Success Story Data 
-const stories = [
-  {
-    id: 1,
-    quote: "People here benefit to both through in a village in India and seem they was people.",
-    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80",
-    location: "India",
-  },
-  {
-    id: 2,
-    quote: "The community to benefits; impact from the community in Africa and we value people.",
-    image: "https://images.unsplash.com/photo-1594708767771-a7502209ff51?w=600&q=80",
-    location: "Africa",
-  },
-  {
-    id: 3,
-    quote: "Communities have first new opportunities here. Together in a Himachal village, we can bring they see this partners.",
-    image: "https://images.unsplash.com/photo-1542884748-2b87b36c6b90?w=600&q=80",
-    location: "Sri Lanka",
-  },
-];
+// (Deleted unused dummy arrays)
 
 //  News Data 
 const newsItems = [
@@ -91,41 +19,7 @@ const newsItems = [
   { id: 2, tag: "IN PROGRESS", label: "School Refurbishment In Community — Teachers tasked and curriculum up.", color: "bg-blue-100 text-blue-700", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh0d-xiYqb1w9-xTqC5P-DTuG-qkZ0jAQe5A&s" },
 ];
 
-// Projects & Campaigns Data
-const featuredProjects = [
-  {
-    id: 1,
-    title: "Global Charity Project: Solar Power for Schools",
-    problem: "Improving health and providing clean, reliable lighting to rural communities.",
-    goal: 0,
-    raised: 0,
-    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&q=80",
-  },
-  {
-    id: 2,
-    title: "Village Development: Micro-finance for Women",
-    problem: "Group loans, savings programs, and skill development through economic opportunity.",
-    goal: 0,
-    raised: 0,
-    image: "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=500&q=80",
-  },
-  {
-    id: 3,
-    title: "Featured Village Development Project: Himachal Partnership",
-    problem: "Improving health, Flood Recovery, and improvement to Southeast Asia.",
-    goal: 0,
-    raised: 0,
-    image: "https://images.unsplash.com/photo-1542884748-2b87b36c6b90?w=500&q=80",
-  },
-  {
-    id: 4,
-    title: "Featured Education Campaign: Remote Clinics in Africa",
-    problem: "Providing medicine, remote clinics to Africa.",
-    goal: 0,
-    raised: 0,
-    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=500&q=80",
-  },
-];
+// (Deleted featuredProjects since they use DB now)
 
 //  Sub-Components 
 
@@ -215,30 +109,78 @@ const ProjectCard = ({ project }) => {
   );
 };
 
+// ─── Hero Slide Data ──────────────────────────────────────────────────────────
+const heroSlides = [
+  {
+    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1600&q=80",
+    alt: "Children smiling — community empowerment",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=1600&q=80",
+    alt: "Volunteers building together",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1600&q=80",
+    alt: "Clean water initiative",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=1600&q=80",
+    alt: "Education for all",
+  },
+];
+
 // Main Home Component 
 const Home = ({ lang }) => {
   const navigate = useNavigate();
   const [liveStories, setLiveStories] = useState([]);
+  const [liveCampaigns, setLiveCampaigns] = useState([]);
+  const [liveStats, setLiveStats] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const { ref: counterRef, inView: counterInView } = useInView({
     threshold: 0.3,
     triggerOnce: true,
   });
 
+  // Auto-advance the hero slideshow
   useEffect(() => {
-    const fetchStories = async () => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const fetchHomeData = async () => {
       try {
-        const response = await axiosInstance.get("/success-stories/featured");
-        if (response.data.success && response.data.data.length > 0) {
-          setLiveStories(response.data.data);
-        } else {
-          setLiveStories(stories); // fallback to demo array
+        // Fetch Success Stories
+        const storiesRes = await axiosInstance.get("/success-stories/featured");
+        if (storiesRes.data.success && storiesRes.data.data.length > 0) {
+          setLiveStories(storiesRes.data.data);
+        }
+
+        // Fetch Projects
+        const projectsRes = await axiosInstance.get("/projects?status=active");
+        if (projectsRes.data.success) {
+           setLiveCampaigns(projectsRes.data.projects.slice(0, 4));
+        }
+
+        // Fetch Stats
+        const statsRes = await axiosInstance.get("/projects/stats");
+        if (statsRes.data.success) {
+           const dbStats = statsRes.data.stats;
+           setLiveStats([
+             { value: dbStats.total * 25, suffix: "+", label: "Families Helped", icon: "🏠" },
+             { value: dbStats.completed, suffix: "+", label: "Projects Completed", icon: "✅" },
+             { value: dbStats.total * 12, suffix: "+", label: "Active Volunteers", icon: "🌟" },
+             { value: dbStats.active, suffix: "+", label: "Project Supporting", icon: "🤝" },
+           ]);
         }
       } catch (err) {
-        setLiveStories(stories);
+        console.error("Failed to fetch home data", err);
       }
     };
-    fetchStories();
+    fetchHomeData();
   }, []);
 
   return (
@@ -250,18 +192,29 @@ const Home = ({ lang }) => {
       />
 
       {/*  */}
-      {/* HERO SECTION                                                   */}
+      {/* HERO SECTION — IMAGE SLIDESHOW                                  */}
       {/*  */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1600&q=80"
-            alt="Community empowerment"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-forest/90 via-forest/70 to-forest/30" />
-        </div>
+        {/* Sliding Background Images */}
+        {heroSlides.map((slide, index) => (
+          <div
+            key={index}
+            className="absolute inset-0 z-0 transition-opacity duration-[1500ms] ease-in-out"
+            style={{ opacity: currentSlide === index ? 1 : 0 }}
+          >
+            <img
+              src={slide.image}
+              alt={slide.alt}
+              className="w-full h-full object-cover"
+              style={{
+                animation: currentSlide === index ? 'kenburns 8s ease-in-out forwards' : 'none',
+              }}
+            />
+          </div>
+        ))}
+
+        {/* Dark overlay gradient */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-forest/90 via-forest/70 to-forest/30" />
 
         {/* Hero Content */}
         <div className="relative z-10 section-wrapper py-24">
@@ -302,11 +255,20 @@ const Home = ({ lang }) => {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center pt-2">
-            <div className="w-1.5 h-3 bg-white/70 rounded-full" />
-          </div>
+        {/* Slide Indicators */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2.5">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`rounded-full transition-all duration-500 ${
+                currentSlide === index
+                  ? 'w-8 h-2.5 bg-lime'
+                  : 'w-2.5 h-2.5 bg-white/40 hover:bg-white/70'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </section>
 
@@ -316,7 +278,7 @@ const Home = ({ lang }) => {
       <section ref={counterRef} className="bg-forest py-16">
         <div className="section-wrapper">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {impactStats.map((stat, i) => (
+            {liveStats.map((stat, i) => (
               <div key={i} className="counter-card">
                 <div className="text-3xl mb-2">{stat.icon}</div>
                 <div className="font-display font-black text-4xl text-white mb-1">
@@ -353,7 +315,7 @@ const Home = ({ lang }) => {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {impactStats.map((stat, i) => (
+            {liveStats.map((stat, i) => (
               <div key={i} className="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-100
                                       hover:border-lime hover:shadow-md transition-all duration-300">
                 <div className="text-4xl mb-3">{stat.icon}</div>
@@ -386,9 +348,16 @@ const Home = ({ lang }) => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {campaigns.map((campaign) => (
-              <CampaignCard key={campaign.id} campaign={campaign} />
-            ))}
+            {liveCampaigns.map((campaign) => {
+              // Ensure we pass the schema format to CampaignCard (using coverImage, currentFunds)
+              const mappedCampaign = {
+                 ...campaign,
+                 image: campaign.coverImage || campaign.image,
+                 raised: campaign.currentFunds ?? campaign.raised,
+                 description: campaign.shortDescription || campaign.description
+              };
+              return <CampaignCard key={mappedCampaign._id || mappedCampaign.id} campaign={mappedCampaign} />
+            })}
           </div>
         </div>
       </section>
@@ -451,9 +420,15 @@ const Home = ({ lang }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {featuredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
+            {liveCampaigns.map((project) => {
+              const mappedProject = {
+                 ...project,
+                 image: project.coverImage || project.image,
+                 raised: project.currentFunds ?? project.raised,
+                 problem: project.problem || project.description
+              };
+              return <ProjectCard key={mappedProject._id || mappedProject.id} project={mappedProject} />
+            })}
           </div>
         </div>
       </section>

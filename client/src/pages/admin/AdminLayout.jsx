@@ -14,6 +14,9 @@ const NAV_ITEMS = [
   { to: "/admin/projects/new", label: "New Project", icon: "➕" },
   { to: "/admin/donations", label: "Donations", icon: "💸" },
   { to: "/admin/success-stories", label: "Stories", icon: "🌟" },
+  { to: "/admin/messages", label: "Messages / Inquiries", icon: "✉️" },
+  { to: "/admin/volunteers", label: "Volunteers", icon: "🤝" },
+  { to: "/admin/subscribers", label: "Subscribers", icon: "📬" },
 ];
 
 const AdminLayout = () => {
