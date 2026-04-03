@@ -1,11 +1,8 @@
-/**
- * Login.jsx — Admin Login Page
- * Secure login form for the /admin portal.
- */
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import axiosInstance from "../api/axiosInstance";
+import logoImg from "../image/logo.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,6 +11,11 @@ const Login = () => {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [loginStats, setLoginStats] = useState([
+    { value: "—", label: "Active Projects" },
+    { value: "—", label: "Success Stories" },
+    { value: "—", label: "Total Raised" },
+  ]);
 
   // If already logged in as admin, redirect to dashboard
   useEffect(() => {
@@ -21,6 +23,35 @@ const Login = () => {
       navigate("/admin/dashboard", { replace: true });
     }
   }, [user, isAdmin, navigate]);
+
+  // Fetch live stats for the left panel
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const [projectRes, storyRes, donationRes] = await Promise.allSettled([
+          axiosInstance.get("/projects/public-stats"),
+          axiosInstance.get("/success-stories"),
+          axiosInstance.get("/donations/stats"),
+        ]);
+
+        const activeProjects = projectRes.status === "fulfilled"
+          ? projectRes.value.data.stats?.active || 0 : 0;
+        const storiesCount = storyRes.status === "fulfilled"
+          ? storyRes.value.data.count || storyRes.value.data.data?.length || 0 : 0;
+        const totalRaised = donationRes.status === "fulfilled"
+          ? donationRes.value.data.stats?.totalAmount || 0 : 0;
+
+        setLoginStats([
+          { value: String(activeProjects), label: "Active Projects" },
+          { value: String(storiesCount), label: "Success Stories" },
+          { value: `$${totalRaised.toLocaleString()}`, label: "Total Raised" },
+        ]);
+      } catch {
+        // Keep defaults on error
+      }
+    };
+    fetchStats();
+  }, []);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -58,13 +89,7 @@ const Login = () => {
 
         {/* Logo */}
         <div className="relative z-10 flex items-center gap-3">
-          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-12 h-12">
-            <path d="M12 28 C8 22, 6 16, 10 10 C12 7, 15 8, 16 11 L17 16" stroke="#9CFC5C" strokeWidth="2" strokeLinecap="round" />
-            <path d="M28 28 C32 22, 34 16, 30 10 C28 7, 25 8, 24 11 L23 16" stroke="#9CFC5C" strokeWidth="2" strokeLinecap="round" />
-            <path d="M16 11 L20 6 L24 11" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-            <ellipse cx="20" cy="5" rx="3" ry="4" fill="#9CFC5C" opacity="0.8" />
-            <path d="M10 30 Q20 35 30 30" stroke="#9CFC5C" strokeWidth="2" strokeLinecap="round" />
-          </svg>
+          <img src={logoImg} alt="Togetherwise Logo" className="w-12 h-12 object-contain" />
           <div>
             <span className="font-display font-bold text-white text-xl leading-none block">
               Together<span className="text-lime">wise</span>
@@ -88,11 +113,7 @@ const Login = () => {
 
         {/* Stats */}
         <div className="relative z-10 grid grid-cols-3 gap-4">
-          {[
-            { value: "0", label: "Active Projects" },
-            { value: "0", label: "Success Stories" },
-            { value: "$0", label: "Total Raised" },
-          ].map((stat, i) => (
+          {loginStats.map((stat, i) => (
             <div key={i} className="bg-white/10 rounded-xl p-4 text-center backdrop-blur-sm">
               <p className="font-display font-black text-lime text-2xl">{stat.value}</p>
               <p className="text-white/60 text-xs mt-1">{stat.label}</p>

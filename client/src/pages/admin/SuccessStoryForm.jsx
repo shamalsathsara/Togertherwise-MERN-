@@ -28,7 +28,7 @@ const SuccessStoryForm = () => {
     if (selectedFile && selectedFile.size > 5 * 1024 * 1024) {
       setError("File must be smaller than 5MB");
       setFile(null);
-      e.target.value = null; // reset input
+      e.target.value = null;
     } else {
       setError("");
       setFile(selectedFile);
@@ -46,7 +46,6 @@ const SuccessStoryForm = () => {
 
     setIsSubmitting(true);
     try {
-      // Must use FormData since we are uploading a file (multipart/form-data)
       const submitData = new FormData();
       submitData.append("title", formData.title);
       submitData.append("location", formData.location);
@@ -56,7 +55,6 @@ const SuccessStoryForm = () => {
       submitData.append("role", formData.role);
       submitData.append("image", file);
 
-      // Tell axios to send it as multipart form data
       const response = await axiosInstance.post("/success-stories", submitData, {
         headers: {
           "Content-Type": "multipart/form-data"
@@ -75,33 +73,31 @@ const SuccessStoryForm = () => {
   };
 
   return (
-    <div className="max-w-4xl space-y-6">
-      <div className="flex items-center gap-4 mb-6">
-        <button 
-          onClick={() => navigate("/admin/success-stories")}
-          className="p-2 bg-white rounded-lg shadow-sm border border-gray-100 hover:bg-gray-50 transition-colors text-forest"
-        >
-          ← Back
-        </button>
-        <div>
-          <h2 className="font-display font-bold text-forest text-2xl">New Success Story</h2>
-          <p className="text-gray-500 text-sm">Add a new inspiring story to the platform.</p>
-        </div>
-      </div>
+    <div className="max-w-2xl">
+      {/* Back link */}
+      <button 
+        onClick={() => navigate("/admin/success-stories")}
+        className="flex items-center gap-1.5 text-gray-400 hover:text-gray-600 text-sm mb-5 transition-colors"
+      >
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+        Back to Stories
+      </button>
 
-      <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="bg-white rounded-xl border border-gray-100 p-7">
+        <h2 className="font-semibold text-gray-800 text-lg mb-1">New Success Story</h2>
+        <p className="text-gray-400 text-[13px] mb-6">Add a new inspiring story to the platform.</p>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
           
           {error && (
-            <div className="bg-red-50 text-red-600 p-4 rounded-xl text-sm border border-red-100 flex items-start gap-3">
-              <span>⚠️</span>
-              {error}
+            <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm border border-red-100 flex items-center gap-2">
+              <span className="text-red-400">⚠</span> {error}
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-1">
-              <label className="text-sm font-semibold text-forest">Story Title</label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label className="block text-[13px] font-medium text-gray-600 mb-1.5">Story Title *</label>
               <input
                 type="text"
                 name="title"
@@ -113,8 +109,8 @@ const SuccessStoryForm = () => {
               />
             </div>
 
-            <div className="space-y-1">
-              <label className="text-sm font-semibold text-forest">Category Tag</label>
+            <div>
+              <label className="block text-[13px] font-medium text-gray-600 mb-1.5">Category Tag *</label>
               <select
                 name="tag"
                 required
@@ -132,8 +128,8 @@ const SuccessStoryForm = () => {
               </select>
             </div>
 
-            <div className="space-y-1 md:col-span-2">
-              <label className="text-sm font-semibold text-forest">The Quote / Story</label>
+            <div className="md:col-span-2">
+              <label className="block text-[13px] font-medium text-gray-600 mb-1.5">Quote / Story *</label>
               <textarea
                 name="quote"
                 required
@@ -141,12 +137,12 @@ const SuccessStoryForm = () => {
                 value={formData.quote}
                 onChange={handleInputChange}
                 className="input-field resize-none"
-                placeholder="Enter the main quote or short story paragraph..."
+                placeholder="Enter the main quote or short story paragraph…"
               />
             </div>
 
-            <div className="space-y-1">
-              <label className="text-sm font-semibold text-forest">Person's Name</label>
+            <div>
+              <label className="block text-[13px] font-medium text-gray-600 mb-1.5">Person's Name *</label>
               <input
                 type="text"
                 name="person"
@@ -158,8 +154,8 @@ const SuccessStoryForm = () => {
               />
             </div>
 
-            <div className="space-y-1">
-              <label className="text-sm font-semibold text-forest">Person's Role / Title</label>
+            <div>
+              <label className="block text-[13px] font-medium text-gray-600 mb-1.5">Role / Title *</label>
               <input
                 type="text"
                 name="role"
@@ -171,8 +167,8 @@ const SuccessStoryForm = () => {
               />
             </div>
 
-            <div className="space-y-1">
-              <label className="text-sm font-semibold text-forest">Location</label>
+            <div>
+              <label className="block text-[13px] font-medium text-gray-600 mb-1.5">Location *</label>
               <input
                 type="text"
                 name="location"
@@ -184,34 +180,39 @@ const SuccessStoryForm = () => {
               />
             </div>
             
-            <div className="space-y-1">
-              <label className="text-sm font-semibold text-forest">Story Image (Max 5MB)</label>
+            <div>
+              <label className="block text-[13px] font-medium text-gray-600 mb-1.5">Story Image (Max 5MB) *</label>
               <input
                 type="file"
                 name="image"
                 required
                 accept="image/*"
                 onChange={handleFileChange}
-                className="input-field file:bg-lime file:text-forest file:border-0 file:rounded-xl file:px-4 file:py-2 file:text-sm file:font-semibold file:cursor-pointer hover:file:bg-lime-dark"
+                className="input-field text-sm file:bg-lime file:text-forest file:border-0 file:rounded-lg file:px-3 file:py-1.5 file:text-xs file:font-semibold file:cursor-pointer file:mr-3 hover:file:bg-lime-dark"
               />
             </div>
           </div>
 
-          <div className="pt-6 border-t border-gray-100 flex justify-end gap-4">
+          <div className="pt-3 border-t border-gray-50 flex gap-2">
             <button
               type="button"
-              onClick={() => navigate("-1")}
-              className="px-6 py-2 rounded-xl text-forest font-semibold border-2 border-forest hover:bg-forest hover:text-white transition-colors"
+              onClick={() => navigate("/admin/success-stories")}
+              className="flex-1 admin-btn-outline py-2.5"
               disabled={isSubmitting}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="btn-primary"
+              className="flex-1 admin-btn-lime py-2.5"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Uploading & Saving..." : "Publish Success Story"}
+              {isSubmitting ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="w-4 h-4 border-2 border-forest/30 border-t-forest rounded-full animate-spin"/>
+                  Uploading…
+                </span>
+              ) : "Publish Story"}
             </button>
           </div>
         </form>

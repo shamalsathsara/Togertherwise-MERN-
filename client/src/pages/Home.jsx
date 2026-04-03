@@ -166,7 +166,7 @@ const Home = ({ lang }) => {
         }
 
         // Fetch Stats
-        const statsRes = await axiosInstance.get("/projects/stats");
+        const statsRes = await axiosInstance.get("/projects/public-stats");
         if (statsRes.data.success) {
            const dbStats = statsRes.data.stats;
            setLiveStats([
@@ -385,7 +385,7 @@ const Home = ({ lang }) => {
               <div key={story._id || story.id} className="card group overflow-hidden">
                 <div className="relative h-56 overflow-hidden">
                   <img
-                    src={story.image.startsWith("http") ? story.image : `${import.meta.env.VITE_API_URL || "http://localhost:5000"}${story.image}`}
+                    src={story.image.startsWith("http") ? story.image : `${import.meta.env.VITE_API_URL || ""}${story.image}`}
                     alt={`Success story from ${story.location}`}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />

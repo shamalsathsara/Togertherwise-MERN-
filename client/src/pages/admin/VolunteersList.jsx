@@ -53,97 +53,105 @@ const VolunteersList = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5 max-w-6xl">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-display font-bold text-forest text-2xl">Volunteer Applications</h2>
-          <p className="text-gray-500 text-sm">Review and approve new volunteer sign-ups.</p>
+          <h2 className="font-semibold text-gray-800 text-lg">Volunteer Applications</h2>
+          <p className="text-gray-400 text-[13px] mt-0.5">Review and approve new volunteer sign-ups.</p>
         </div>
-        <button onClick={fetchVolunteers} className="btn-secondary text-sm border-gray-200" disabled={isLoading}>
+        <button onClick={fetchVolunteers} className="admin-btn-outline" disabled={isLoading}>
           ↻ Refresh
         </button>
       </div>
 
-      {error && <div className="bg-red-50 text-red-600 p-4 rounded-xl text-sm border border-red-100">{error}</div>}
+      {error && (
+        <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm border border-red-100 flex items-center gap-2">
+          <span className="text-red-400">⚠</span> {error}
+        </div>
+      )}
 
-      <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full text-left">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-100 text-gray-500 text-xs uppercase tracking-wider">
-                <th className="p-4 font-medium">Applied Date</th>
-                <th className="p-4 font-medium">Applicant Details</th>
-                <th className="p-4 font-medium">Role</th>
-                <th className="p-4 font-medium">Location</th>
-                <th className="p-4 font-medium text-center">Status</th>
-                <th className="p-4 font-medium text-right">Actions</th>
+              <tr className="border-b border-gray-100">
+                <th className="px-5 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Applied</th>
+                <th className="px-5 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Applicant</th>
+                <th className="px-5 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Role</th>
+                <th className="px-5 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Location</th>
+                <th className="px-5 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider text-center">Status</th>
+                <th className="px-5 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
               {isLoading ? (
                 <tr>
-                  <td colSpan="6" className="text-center p-8 text-gray-400">
-                    <span className="w-5 h-5 border-2 border-lime border-t-transparent rounded-full animate-spin inline-block align-middle mr-2"></span>
-                    Loading applicants...
+                  <td colSpan="6" className="text-center py-12 text-gray-400">
+                    <div className="flex justify-center items-center gap-3">
+                      <span className="w-5 h-5 border-2 border-lime/40 border-t-lime rounded-full animate-spin"></span>
+                      <span className="text-sm">Loading applicants…</span>
+                    </div>
                   </td>
                 </tr>
               ) : volunteers.length === 0 ? (
                 <tr>
-                  <td colSpan="6" className="text-center p-8 text-gray-400">
-                    No volunteer applications yet.
+                  <td colSpan="6" className="text-center py-12">
+                    <div className="text-gray-300 text-3xl mb-2">🤝</div>
+                    <p className="text-gray-400 text-sm">No volunteer applications yet.</p>
                   </td>
                 </tr>
               ) : (
                 volunteers.map((vol) => (
-                  <tr key={vol._id} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
+                  <tr key={vol._id} className="hover:bg-gray-50/60 transition-colors">
+                    <td className="px-5 py-3.5 text-sm text-gray-500 whitespace-nowrap">
                       {new Date(vol.createdAt).toLocaleDateString()}
                     </td>
-                    <td className="p-4">
-                      <p className="text-sm font-semibold text-forest mb-1">
-                        {vol.firstName} {vol.lastName}
-                      </p>
-                      <p className="text-xs text-gray-500">✉️ {vol.email}</p>
-                      <p className="text-xs text-gray-500">📞 {vol.phone}</p>
+                    <td className="px-5 py-3.5">
+                      <p className="text-sm font-medium text-gray-800">{vol.firstName} {vol.lastName}</p>
+                      <p className="text-[12px] text-gray-400 mt-0.5">{vol.email}</p>
+                      <p className="text-[12px] text-gray-400">{vol.phone}</p>
                     </td>
-                    <td className="p-4 text-sm capitalize">
-                      <span className={`badge-lime text-xs whitespace-nowrap ${vol.role !== 'volunteer' ? 'bg-blue-100 text-blue-800 border-blue-200' : ''}`}>
-                         {vol.role}
+                    <td className="px-5 py-3.5">
+                      <span className={`px-2 py-0.5 rounded text-[11px] font-semibold capitalize ${
+                        vol.role === 'volunteer' ? 'bg-lime/10 text-forest' : 'bg-blue-50 text-blue-700'
+                      }`}>
+                        {vol.role}
                       </span>
                     </td>
-                    <td className="p-4 text-sm max-w-[150px]">
-                      <p className="text-gray-600 truncate" title={vol.streetAddress}>{vol.city}, {vol.country}</p>
+                    <td className="px-5 py-3.5 text-sm text-gray-500 max-w-[150px]">
+                      <p className="truncate" title={vol.streetAddress}>{vol.city}, {vol.country}</p>
                     </td>
-                    <td className="p-4 text-center">
-                      <span className={`px-2 py-1 rounded text-xs font-bold uppercase ${
-                        vol.status === 'approved' ? 'bg-green-100 text-green-700' :
-                        vol.status === 'rejected' ? 'bg-red-100 text-red-700' :
-                        'bg-yellow-100 text-yellow-700'
+                    <td className="px-5 py-3.5 text-center">
+                      <span className={`px-2 py-0.5 rounded text-[11px] font-bold uppercase ${
+                        vol.status === 'approved' ? 'bg-emerald-50 text-emerald-700' :
+                        vol.status === 'rejected' ? 'bg-red-50 text-red-600' :
+                        'bg-amber-50 text-amber-600'
                       }`}>
                         {vol.status}
                       </span>
                     </td>
-                    <td className="p-4 text-right align-middle">
-                      <div className="flex gap-2 justify-end">
+                    <td className="px-5 py-3.5 text-right align-middle">
+                      <div className="flex gap-1.5 justify-end">
                         <button
                           onClick={() => handleStatusChange(vol._id, 'approved')}
                           disabled={vol.status === 'approved'}
-                          className="px-2 py-1 bg-green-50 text-green-600 rounded text-xs hover:bg-green-100 disabled:opacity-50"
+                          className="px-2.5 py-1 bg-emerald-50 text-emerald-600 rounded-md text-[11px] font-semibold hover:bg-emerald-100 disabled:opacity-40 transition-colors cursor-pointer disabled:cursor-not-allowed"
                         >
                           Approve
                         </button>
                         <button
                           onClick={() => handleStatusChange(vol._id, 'rejected')}
                           disabled={vol.status === 'rejected'}
-                          className="px-2 py-1 bg-red-50 text-red-600 rounded text-xs hover:bg-red-100 disabled:opacity-50"
+                          className="px-2.5 py-1 bg-red-50 text-red-500 rounded-md text-[11px] font-semibold hover:bg-red-100 disabled:opacity-40 transition-colors cursor-pointer disabled:cursor-not-allowed"
                         >
                           Reject
                         </button>
                         <button
                           onClick={() => handleDelete(vol._id)}
-                          className="px-2 py-1 text-red-500 rounded text-xs hover:bg-red-50 border border-red-200"
+                          className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-colors cursor-pointer"
+                          title="Delete"
                         >
-                          Delete
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" /></svg>
                         </button>
                       </div>
                     </td>

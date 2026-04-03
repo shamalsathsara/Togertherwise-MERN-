@@ -52,6 +52,9 @@ const upload = multer({
 
 // ─── Routes ───────────────────────────────────────────────────────────────────
 
+// GET /api/projects/public-stats — Public summary stats (Home page, Login page)
+router.get("/public-stats", getProjectStats);
+
 // GET /api/projects/stats — Summary stats for admin dashboard (admin only)
 router.get("/stats", protect, adminOnly, getProjectStats);
 

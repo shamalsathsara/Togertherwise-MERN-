@@ -90,7 +90,7 @@ const Campaigns = () => {
             return (
               <div key={campaign._id} className="card overflow-hidden group">
                 <div className="relative h-52 overflow-hidden">
-                  <img src={campaign.coverImage.startsWith("http") ? campaign.coverImage : `${import.meta.env.VITE_API_URL || "http://localhost:5000"}${campaign.coverImage}`} alt={campaign.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                  <img src={campaign.coverImage.startsWith("http") ? campaign.coverImage : `${import.meta.env.VITE_API_URL || ""}${campaign.coverImage}`} alt={campaign.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                   <div className="absolute top-3 left-3"><span className="badge-lime text-xs">{campaign.category}</span></div>
                 </div>
                 <div className="p-5">

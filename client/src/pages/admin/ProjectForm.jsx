@@ -74,11 +74,9 @@ const ProjectForm = ({ mode = "create" }) => {
     }));
   };
 
-  // Handle file selection and preview generation
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setMediaFiles(files);
-    // Generate preview URLs for images
     const urls = files.map((f) => {
       if (f.type.startsWith("image/")) {
         return URL.createObjectURL(f);
@@ -100,7 +98,6 @@ const ProjectForm = ({ mode = "create" }) => {
     setIsSubmitting(true);
 
     try {
-      // Use FormData to support both JSON fields and file uploads
       const data = new FormData();
       Object.entries(formData).forEach(([key, val]) => {
         data.append(key, val);
@@ -119,7 +116,7 @@ const ProjectForm = ({ mode = "create" }) => {
 
       setSuccess(true);
       setTimeout(() => {
-        navigate("/admin/dashboard");
+        navigate("/admin/projects");
       }, 1500);
     } catch (err) {
       setError(
@@ -135,30 +132,39 @@ const ProjectForm = ({ mode = "create" }) => {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
-          <div className="w-16 h-16 bg-lime/20 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-3xl">✅</span>
+          <div className="w-14 h-14 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-7 h-7 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path d="M5 13l4 4L19 7" /></svg>
           </div>
-          <h3 className="font-display font-bold text-forest text-2xl">
+          <h3 className="font-semibold text-gray-800 text-lg">
             Project {isEditing ? "Updated" : "Created"}!
           </h3>
-          <p className="text-gray-400 text-sm mt-1">Redirecting to dashboard...</p>
+          <p className="text-gray-400 text-sm mt-1">Redirecting to projects…</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-3xl">
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-        <h2 className="font-display font-bold text-forest text-2xl mb-6">
-          {isEditing ? "✏️ Edit Project" : "➕ Add New Project"}
+    <div className="max-w-2xl">
+      {/* Back link */}
+      <button 
+        onClick={() => navigate("/admin/projects")}
+        className="flex items-center gap-1.5 text-gray-400 hover:text-gray-600 text-sm mb-5 transition-colors"
+      >
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+        Back to Projects
+      </button>
+
+      <div className="bg-white rounded-xl border border-gray-100 p-7">
+        <h2 className="font-semibold text-gray-800 text-lg mb-6">
+          {isEditing ? "Edit Project" : "New Project"}
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-5">
 
           {/* Project Title */}
           <div>
-            <label className="form-label" htmlFor="proj-title">Project Title *</label>
+            <label className="block text-[13px] font-medium text-gray-600 mb-1.5" htmlFor="proj-title">Project Title *</label>
             <input
               id="proj-title"
               name="title"
@@ -166,37 +172,37 @@ const ProjectForm = ({ mode = "create" }) => {
               value={formData.title}
               onChange={handleChange}
               placeholder="Community Garden Initiative"
-              className="form-input"
+              className="input-field"
               required
             />
           </div>
 
           {/* Short Description */}
           <div>
-            <label className="form-label" htmlFor="proj-short-desc">Short Description *</label>
+            <label className="block text-[13px] font-medium text-gray-600 mb-1.5" htmlFor="proj-short-desc">Short Description</label>
             <input
               id="proj-short-desc"
               name="shortDescription"
               type="text"
               value={formData.shortDescription}
               onChange={handleChange}
-              placeholder="Connecting people through shared gardening. (Max 150 chars)"
+              placeholder="Brief overview (max 150 chars)"
               maxLength={300}
-              className="form-input"
+              className="input-field"
             />
           </div>
 
           {/* Full Description */}
           <div>
-            <label className="form-label" htmlFor="proj-desc">Full Description *</label>
+            <label className="block text-[13px] font-medium text-gray-600 mb-1.5" htmlFor="proj-desc">Full Description *</label>
             <textarea
               id="proj-desc"
               name="description"
               value={formData.description}
               onChange={handleChange}
-              rows={5}
-              placeholder="Detailed project description..."
-              className="form-input resize-none"
+              rows={4}
+              placeholder="Detailed project description…"
+              className="input-field resize-none"
               required
             />
           </div>
@@ -204,9 +210,9 @@ const ProjectForm = ({ mode = "create" }) => {
           {/* Goal + Category row */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="form-label" htmlFor="proj-goal">Funding Goal (USD) *</label>
+              <label className="block text-[13px] font-medium text-gray-600 mb-1.5" htmlFor="proj-goal">Funding Goal (USD) *</label>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold">$</span>
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">$</span>
                 <input
                   id="proj-goal"
                   name="goal"
@@ -215,31 +221,30 @@ const ProjectForm = ({ mode = "create" }) => {
                   onChange={handleChange}
                   placeholder="50000"
                   min="0"
-                  className="form-input pl-8"
+                  className="input-field pl-7"
                   required
                 />
               </div>
             </div>
             <div>
-              <label className="form-label" htmlFor="proj-category">Category</label>
-              <select id="proj-category" name="category" value={formData.category} onChange={handleChange} className="form-input">
+              <label className="block text-[13px] font-medium text-gray-600 mb-1.5" htmlFor="proj-category">Category</label>
+              <select id="proj-category" name="category" value={formData.category} onChange={handleChange} className="input-field">
                 {CATEGORIES.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
               </select>
             </div>
           </div>
 
-          {/* Dates */}
+          {/* Dates & Status */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="form-label" htmlFor="proj-start">Start Date</label>
+              <label className="block text-[13px] font-medium text-gray-600 mb-1.5" htmlFor="proj-start">Start Date</label>
               <select
                 id="proj-start"
                 name="startDate"
                 value={formData.startDate}
                 onChange={(e) => setFormData(prev => ({ ...prev, startDate: e.target.value }))}
-                className="form-input"
+                className="input-field"
               >
-                {/* Generate month-year options */}
                 {Array.from({ length: 24 }, (_, i) => {
                   const d = new Date();
                   d.setMonth(d.getMonth() - 12 + i);
@@ -250,19 +255,19 @@ const ProjectForm = ({ mode = "create" }) => {
               </select>
             </div>
             <div>
-              <label className="form-label" htmlFor="proj-status">Status</label>
-              <select id="proj-status" name="status" value={formData.status} onChange={handleChange} className="form-input">
-                {STATUS_OPTIONS.map((s) => <option key={s} value={s} className="capitalize">{s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
+              <label className="block text-[13px] font-medium text-gray-600 mb-1.5" htmlFor="proj-status">Status</label>
+              <select id="proj-status" name="status" value={formData.status} onChange={handleChange} className="input-field">
+                {STATUS_OPTIONS.map((s) => <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
               </select>
             </div>
           </div>
 
           {/* Media Upload */}
           <div>
-            <label className="form-label">Upload Media (Images / Videos)</label>
+            <label className="block text-[13px] font-medium text-gray-600 mb-1.5">Upload Media</label>
             <div
-              className="border-2 border-dashed border-gray-200 rounded-2xl p-8 text-center
-                         hover:border-lime hover:bg-lime/5 transition-all cursor-pointer"
+              className="border border-dashed border-gray-200 rounded-xl p-6 text-center
+                         hover:border-lime hover:bg-lime/[0.02] transition-all cursor-pointer"
               onClick={() => document.getElementById("media-upload").click()}
             >
               <input
@@ -273,32 +278,31 @@ const ProjectForm = ({ mode = "create" }) => {
                 onChange={handleFileChange}
                 className="hidden"
               />
-              <div className="text-4xl mb-2">📸</div>
-              <p className="text-gray-600 text-sm font-medium">Click to upload images or videos</p>
-              <p className="text-gray-400 text-xs mt-1">JPEG, PNG, WebP, MP4, MOV — Max 50MB each</p>
+              <div className="text-gray-300 text-2xl mb-1.5">📸</div>
+              <p className="text-gray-500 text-sm font-medium">Click to upload images or videos</p>
+              <p className="text-gray-300 text-xs mt-1">JPEG, PNG, WebP, MP4 — Max 50MB each</p>
             </div>
 
-            {/* Preview thumbnails */}
             {previewUrls.length > 0 && (
-              <div className="flex gap-3 mt-3 flex-wrap">
+              <div className="flex gap-2.5 mt-3 flex-wrap">
                 {previewUrls.map((url, i) =>
                   url ? (
-                    <div key={i} className="relative w-20 h-20">
-                      <img src={url} alt="" className="w-full h-full object-cover rounded-xl" />
+                    <div key={i} className="relative w-16 h-16">
+                      <img src={url} alt="" className="w-full h-full object-cover rounded-lg" />
                       <button
                         type="button"
                         onClick={() => {
                           setPreviewUrls(prev => prev.filter((_, idx) => idx !== i));
                           setMediaFiles(prev => prev.filter((_, idx) => idx !== i));
                         }}
-                        className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center"
+                        className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-red-500 text-white rounded-full text-[10px] flex items-center justify-center hover:bg-red-600"
                       >
                         ✕
                       </button>
                     </div>
                   ) : (
-                    <div key={i} className="w-20 h-20 bg-gray-100 rounded-xl flex items-center justify-center text-xs text-gray-400">
-                      🎥 Video
+                    <div key={i} className="w-16 h-16 bg-gray-50 rounded-lg flex items-center justify-center text-xs text-gray-400 border border-gray-100">
+                      🎥
                     </div>
                   )
                 )}
@@ -307,7 +311,7 @@ const ProjectForm = ({ mode = "create" }) => {
           </div>
 
           {/* Featured Toggle */}
-          <label className="flex items-center gap-3 cursor-pointer group">
+          <label className="flex items-center gap-2.5 cursor-pointer group">
             <input
               type="checkbox"
               name="isFeatured"
@@ -315,41 +319,40 @@ const ProjectForm = ({ mode = "create" }) => {
               onChange={handleChange}
               className="w-4 h-4 text-lime focus:ring-lime border-gray-300 rounded cursor-pointer"
             />
-            <span className="text-sm text-gray-600 group-hover:text-forest transition-colors font-medium">
-              ⭐ Mark as Featured / Success Story
+            <span className="text-sm text-gray-500 group-hover:text-gray-700 transition-colors">
+              Mark as Featured Project
             </span>
           </label>
 
           {/* Error */}
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-sm text-red-600">
-              {error}
+            <div className="bg-red-50 border border-red-100 rounded-lg px-4 py-3 text-sm text-red-600 flex items-center gap-2">
+              <span className="text-red-400">⚠</span> {error}
             </div>
           )}
 
           {/* Actions */}
-          <div className="flex gap-3 pt-2">
+          <div className="flex gap-2 pt-2">
             <button
               type="button"
-              onClick={() => navigate("/admin/dashboard")}
-              className="flex-1 py-3 border-2 border-gray-200 rounded-xl font-semibold text-gray-500
-                         hover:border-forest hover:text-forest transition-all text-sm"
+              onClick={() => navigate("/admin/projects")}
+              className="flex-1 admin-btn-outline py-2.5"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 btn-forest py-3 text-sm disabled:opacity-60 uppercase tracking-wide font-bold"
+              className="flex-1 admin-btn-lime py-2.5"
               id="save-project-btn"
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center gap-2">
-                  <span className="w-4 h-4 border-2 border-lime border-t-transparent rounded-full animate-spin"/>
-                  Saving...
+                  <span className="w-4 h-4 border-2 border-forest/30 border-t-forest rounded-full animate-spin"/>
+                  Saving…
                 </span>
               ) : (
-                "Save & Continue"
+                isEditing ? "Update Project" : "Create Project"
               )}
             </button>
           </div>

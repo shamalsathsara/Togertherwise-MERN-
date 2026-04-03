@@ -42,7 +42,7 @@ const SuccessStories = () => {
   const displayStories = liveStories.length > 0 ? liveStories : STORIES;
   const featuredStory = displayStories[0];
   const gridStories = displayStories.slice(1);
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "";
 
   const getImageUrl = (url) => url.startsWith("http") ? url : `${API_BASE_URL}${url}`;
 

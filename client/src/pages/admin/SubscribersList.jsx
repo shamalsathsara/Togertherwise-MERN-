@@ -54,72 +54,80 @@ const SubscribersList = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5 max-w-6xl">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-display font-bold text-forest text-2xl">Newsletter Subscribers</h2>
-          <p className="text-gray-500 text-sm">Manage users who subscribed through your website footer.</p>
+          <h2 className="font-semibold text-gray-800 text-lg">Newsletter Subscribers</h2>
+          <p className="text-gray-400 text-[13px] mt-0.5">Manage users who subscribed through your website.</p>
         </div>
         <div className="flex gap-2">
-            <button onClick={downloadCSV} className="btn-primary text-sm px-4 py-2" disabled={subscribers.length === 0}>
-            Download CSV
-            </button>
-            <button onClick={fetchSubscribers} className="btn-secondary text-sm border-gray-200" disabled={isLoading}>
+          <button onClick={downloadCSV} className="admin-btn-primary" disabled={subscribers.length === 0}>
+            ↓ Export CSV
+          </button>
+          <button onClick={fetchSubscribers} className="admin-btn-outline" disabled={isLoading}>
             ↻ Refresh
-            </button>
+          </button>
         </div>
       </div>
 
-      {error && <div className="bg-red-50 text-red-600 p-4 rounded-xl text-sm border border-red-100">{error}</div>}
+      {error && (
+        <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm border border-red-100 flex items-center gap-2">
+          <span className="text-red-400">⚠</span> {error}
+        </div>
+      )}
 
-      <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full text-left">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-100 text-gray-500 text-xs uppercase tracking-wider">
-                <th className="p-4 font-medium">Email</th>
-                <th className="p-4 font-medium text-center">Status</th>
-                <th className="p-4 font-medium text-center">Subscribed Date</th>
-                <th className="p-4 font-medium text-right">Actions</th>
+              <tr className="border-b border-gray-100">
+                <th className="px-5 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Email</th>
+                <th className="px-5 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider text-center">Status</th>
+                <th className="px-5 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider text-center">Subscribed</th>
+                <th className="px-5 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
               {isLoading ? (
                 <tr>
-                  <td colSpan="4" className="text-center p-8 text-gray-400">
-                    <span className="w-5 h-5 border-2 border-lime border-t-transparent rounded-full animate-spin inline-block align-middle mr-2"></span>
-                    Loading subscribers...
+                  <td colSpan="4" className="text-center py-12 text-gray-400">
+                    <div className="flex justify-center items-center gap-3">
+                      <span className="w-5 h-5 border-2 border-lime/40 border-t-lime rounded-full animate-spin"></span>
+                      <span className="text-sm">Loading subscribers…</span>
+                    </div>
                   </td>
                 </tr>
               ) : subscribers.length === 0 ? (
                 <tr>
-                  <td colSpan="4" className="text-center p-8 text-gray-400">
-                    No active newsletter subscribers.
+                  <td colSpan="4" className="text-center py-12">
+                    <div className="text-gray-300 text-3xl mb-2">📬</div>
+                    <p className="text-gray-400 text-sm">No subscribers yet.</p>
                   </td>
                 </tr>
               ) : (
                 subscribers.map((sub) => (
-                  <tr key={sub._id} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="p-4 font-medium text-forest whitespace-nowrap">
+                  <tr key={sub._id} className="hover:bg-gray-50/60 transition-colors">
+                    <td className="px-5 py-3.5 text-sm font-medium text-gray-800 whitespace-nowrap">
                       {sub.email}
                     </td>
-                    <td className="p-4 text-center">
-                      <span className={`px-2 py-1 rounded text-xs font-bold uppercase ${
-                        sub.status === 'subscribed' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                    <td className="px-5 py-3.5 text-center">
+                      <span className={`px-2 py-0.5 rounded text-[11px] font-bold uppercase ${
+                        sub.status === 'subscribed' ? 'bg-emerald-50 text-emerald-700' : 'bg-red-50 text-red-600'
                       }`}>
                         {sub.status}
                       </span>
                     </td>
-                    <td className="p-4 text-sm text-gray-500 text-center whitespace-nowrap">
+                    <td className="px-5 py-3.5 text-sm text-gray-500 text-center whitespace-nowrap">
                       {new Date(sub.createdAt).toLocaleDateString()}
                     </td>
-                    <td className="p-4 text-right align-middle">
+                    <td className="px-5 py-3.5 text-right">
                       <button
-                          onClick={() => handleDelete(sub._id)}
-                          className="px-2 py-1 text-red-500 rounded text-xs hover:bg-red-50"
-                        >
-                          Delete
-                        </button>
+                        onClick={() => handleDelete(sub._id)}
+                        className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-colors cursor-pointer"
+                        title="Remove subscriber"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" /></svg>
+                      </button>
                     </td>
                   </tr>
                 ))
