@@ -20,6 +20,7 @@ const axiosInstance = axios.create({
 
   headers: {
     "Content-Type": "application/json",
+    "Bypass-Tunnel-Reminder": "true",
   },
 });
 
