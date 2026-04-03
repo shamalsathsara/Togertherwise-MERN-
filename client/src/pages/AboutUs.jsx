@@ -8,7 +8,7 @@ import SEO from "../components/SEO";
 import axiosInstance from "../api/axiosInstance";
 
 const TEAM = [
-  { name: "shamal sathsara", role: "Executive Director", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&q=80" },
+  { name: "Dr. priyanka", role: "Executive Director", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&q=80" },
   { name: "Arun Wickramasinghe", role: "Programs Director", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80" },
   { name: "Fatima Al-Rashid", role: "Community Engagement", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&q=80" },
   { name: "James Okonkwo", role: "Field Operations Lead", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" },
@@ -55,9 +55,9 @@ const AboutUs = () => {
       // Clear success message after 5 seconds
       setTimeout(() => setStatusMsg({ text: "", type: "" }), 5000);
     } catch (error) {
-      setStatusMsg({ 
-        text: error.response?.data?.message || "Failed to send message. Please try again.", 
-        type: "error" 
+      setStatusMsg({
+        text: error.response?.data?.message || "Failed to send message. Please try again.",
+        type: "error"
       });
     } finally {
       setLoading(false);
@@ -66,8 +66,8 @@ const AboutUs = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <SEO 
-        title="About Us" 
+      <SEO
+        title="About Us"
         description="Learn about Togetherwise — our mission, our values, and the team working to empower communities across the globe."
         path="/about"
       />
@@ -195,10 +195,10 @@ const AboutUs = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
-              <select 
-                name="type" 
-                value={formData.type} 
-                onChange={handleChange} 
+              <select
+                name="type"
+                value={formData.type}
+                onChange={handleChange}
                 className="form-input mb-4"
                 required
               >
@@ -217,13 +217,12 @@ const AboutUs = () => {
                 <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone" className="form-input" required />
               </div>
               <textarea name="message" value={formData.message} onChange={handleChange} rows={3} placeholder="Your request" className="form-input resize-none mb-4" required />
-              
+
               {statusMsg.text && (
-                <div className={`p-3 rounded-xl text-sm mb-4 border ${
-                  statusMsg.type === "success" 
-                    ? "bg-green-50 text-green-700 border-green-100" 
+                <div className={`p-3 rounded-xl text-sm mb-4 border ${statusMsg.type === "success"
+                    ? "bg-green-50 text-green-700 border-green-100"
                     : "bg-red-50 text-red-700 border-red-100"
-                }`}>
+                  }`}>
                   {statusMsg.text}
                 </div>
               )}
