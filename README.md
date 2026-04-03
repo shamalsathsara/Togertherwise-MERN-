@@ -28,6 +28,7 @@ cd server
 cp .env.example .env       # Fill in your values (MongoDB URI, JWT secret)
 npm install
 npm run dev                # Starts on http://localhost:5000
+
 ```
 
 ### 3. Seed the Admin User (first time only)
@@ -42,6 +43,8 @@ npm run seed
 cd client
 npm install
 npm run dev                # Starts on http://localhost:5173
+npm run share  #in client therminal
+
 ```
 
 ## 📁 Project Structure
