@@ -48,7 +48,8 @@ const issueTokenCookie = (res, userId) => {
  * Admin users should be created via the seed script.
  */
 const register = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, password } = req.body;
+  const email = req.body.email?.toLowerCase().trim();
 
   // Validate required fields
   if (!name || !email || !password) {
@@ -85,7 +86,8 @@ const register = asyncHandler(async (req, res) => {
  * Log in with email and password.
  */
 const login = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { password } = req.body;
+  const email = req.body.email?.toLowerCase().trim();
 
   // Confirm required fields
   if (!email || !password) {

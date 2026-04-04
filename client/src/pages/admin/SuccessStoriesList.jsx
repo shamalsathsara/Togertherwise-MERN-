@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axiosInstance";
 
 const SuccessStoriesList = () => {
+  const navigate = useNavigate();
   const [stories, setStories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -124,13 +125,26 @@ const SuccessStoriesList = () => {
                       <p className="text-[12px] text-gray-400">{story.role}</p>
                     </td>
                     <td className="px-5 py-3.5 text-right">
-                      <button 
-                        onClick={() => setStoryToDelete(story._id)}
-                        className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-colors cursor-pointer"
-                        title="Delete Story"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" /></svg>
-                      </button>
+                      <div className="flex items-center justify-end gap-1">
+                        {/* Edit */}
+                        <button
+                          onClick={() => navigate(`/admin/success-stories/${story._id}/edit`)}
+                          className="p-1.5 text-gray-400 hover:text-lime-dark hover:bg-lime/10 rounded-md transition-colors cursor-pointer"
+                          title="Edit Story"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                            <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                          </svg>
+                        </button>
+                        {/* Delete */}
+                        <button 
+                          onClick={() => setStoryToDelete(story._id)}
+                          className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-colors cursor-pointer"
+                          title="Delete Story"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" /></svg>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))

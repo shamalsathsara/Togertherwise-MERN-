@@ -7,6 +7,7 @@ const {
   getSuccessStories,
   getFeaturedSuccessStories,
   createSuccessStory,
+  updateSuccessStory,
   deleteSuccessStory,
 } = require("../controllers/successStoryController");
 
@@ -14,8 +15,9 @@ const {
 router.get("/", getSuccessStories);
 router.get("/featured", getFeaturedSuccessStories);
 
-// Admin routes (Create with file upload, and Delete)
+// Admin routes (Create with file upload, Delete, and Update)
 router.post("/", protect, adminOnly, upload.single("image"), createSuccessStory);
+router.put("/:id", protect, adminOnly, upload.single("image"), updateSuccessStory);
 router.delete("/:id", protect, adminOnly, deleteSuccessStory);
 
 module.exports = router;

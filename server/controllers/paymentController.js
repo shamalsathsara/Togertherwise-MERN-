@@ -145,9 +145,14 @@ const recordManualDonation = asyncHandler(async (req, res) => {
     throw new Error("Amount, donor name, and email are required");
   }
 
+  if (Number(amount) <= 0) {
+    res.status(400);
+    throw new Error("Donation amount must be greater than zero");
+  }
+
   // Create the donation record in the database
   const donation = await Donation.create({
-    amount,
+    amount: Number(amount),
     donorName: isAnonymous ? "Anonymous" : donorName,
     donorEmail,
     donorPhone: donorPhone || "",

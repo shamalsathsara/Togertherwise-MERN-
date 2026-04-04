@@ -144,7 +144,8 @@ const AppRoutes = () => {
         <Route path="projects/:id/edit" element={<ProjectForm mode="edit" />} />
         <Route path="donations" element={<DonationsList />} />
         <Route path="success-stories" element={<SuccessStoriesList />} />
-        <Route path="success-stories/new" element={<SuccessStoryForm />} />
+        <Route path="success-stories/new" element={<SuccessStoryForm mode="create" />} />
+        <Route path="success-stories/:id/edit" element={<SuccessStoryForm mode="edit" />} />
         <Route path="messages" element={<MessagesList />} />
         <Route path="volunteers" element={<VolunteersList />} />
         <Route path="subscribers" element={<SubscribersList />} />

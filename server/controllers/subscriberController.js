@@ -6,7 +6,7 @@ const Subscriber = require("../models/Subscriber");
  * createSubscriber — Save an email to the newsletter (public)
  */
 const createSubscriber = asyncHandler(async (req, res) => {
-  const { email } = req.body;
+  const email = req.body.email?.toLowerCase().trim();
   if (!email) {
     res.status(400);
     throw new Error("Email is required");

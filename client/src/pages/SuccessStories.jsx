@@ -1,5 +1,7 @@
 /**
  * SuccessStories.jsx — Success Stories Page
+ * Displays stories fetched live from the database.
+ * Admin can manage stories via the admin panel.
  */
 
 import React, { useState, useEffect } from "react";
@@ -7,31 +9,21 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import SEO from "../components/SEO";
 
-const STORIES = [
-  { id: 1, title: "Clean Water Changes Everything", location: "Sri Lanka", tag: "Water Projects", image: "https://images.unsplash.com/photo-1590318719961-6e74a0cccfcb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", quote: "Before Togetherwise came, we walked 3 miles each day for water. Now our children drink clean water at school and our mothers spend their time on building businesses.", person: "Kumari Navaratne", role: "Village Elder, Hambantota" },
-  { id: 2, title: "Solar Power Lights Up Learning", location: "India", tag: "Education", image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80", quote: "Our students now study after dark. The solar panels didn't just bring electricity — they brought hope for a different future for our children.", person: "Rajesh Kumar", role: "School Principal, Tamil Nadu" },
-  { id: 3, title: "Women Rising Through Micro-Finance", location: "Bangladesh", tag: "Community Development", image: "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=600&q=80", quote: "The loan was small but the impact is enormous. My weaving business now supports my whole family and I teach five other women my skills.", person: "Fatima Begum", role: "Entrepreneur, Dhaka" },
-  { id: 4, title: "Trees Reclaim the Land", location: "Southeast Asia", tag: "Reforestation", image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&q=80", quote: "We planted over 15,000 trees this year. The forest is coming back and so is the rain that our farmers depend on.", person: "Thiri Zaw", role: "Environmental Officer, Myanmar" },
-  { id: 5, title: "Mobile Clinics Save Lives", location: "Africa", tag: "Medical Aid", image: "https://images.unsplash.com/photo-1594708767771-a7502209ff51?w=600&q=80", quote: "The mobile clinic comes to our village every month. My son had malaria and was treated within hours. Without it, I don't know what would have happened.", person: "Ama Owusu", role: "Mother, Northern Ghana" },
-  { id: 6, title: "Community Centers Build Unity", location: "Sri Lanka", tag: "Community Development", image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80", quote: "The center is where we meet, argue, resolve, celebrate, and plan. It's the heart of our village now.", person: "Sunil Perera", role: "Community Leader, Kandy" },
-];
-
 const SuccessStories = () => {
   const navigate = useNavigate();
-  const [liveStories, setLiveStories] = useState([]);
+  const [stories, setStories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "";
 
   useEffect(() => {
     const fetchStories = async () => {
       try {
         const response = await axiosInstance.get("/success-stories");
-        if (response.data.success && response.data.data.length > 0) {
-          setLiveStories(response.data.data);
-        } else {
-          setLiveStories(STORIES); // Fallback to demo
+        if (response.data.success) {
+          setStories(response.data.data);
         }
       } catch (err) {
-        setLiveStories(STORIES);
+        console.error("Failed to fetch stories:", err);
       } finally {
         setIsLoading(false);
       }
@@ -39,12 +31,10 @@ const SuccessStories = () => {
     fetchStories();
   }, []);
 
-  const displayStories = liveStories.length > 0 ? liveStories : STORIES;
-  const featuredStory = displayStories[0];
-  const gridStories = displayStories.slice(1);
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "";
-
   const getImageUrl = (url) => url.startsWith("http") ? url : `${API_BASE_URL}${url}`;
+
+  const featuredStory = stories[0];
+  const gridStories = stories.slice(1);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -70,6 +60,15 @@ const SuccessStories = () => {
         {isLoading ? (
           <div className="flex justify-center items-center py-20">
             <div className="w-10 h-10 border-4 border-lime border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        ) : stories.length === 0 ? (
+          /* Empty state — shown when no stories exist in DB */
+          <div className="text-center py-20">
+            <div className="text-6xl mb-4">⭐</div>
+            <h2 className="font-display font-bold text-forest text-2xl mb-2">No Stories Yet</h2>
+            <p className="text-gray-400 text-base max-w-md mx-auto">
+              Success stories will appear here once they are added by the admin. Check back soon!
+            </p>
           </div>
         ) : (
           <>
@@ -103,7 +102,7 @@ const SuccessStories = () => {
             {/* Story Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
               {gridStories.map((story) => (
-                <div key={story._id || story.id} className="card group overflow-hidden">
+                <div key={story._id} className="card group overflow-hidden">
                   <div className="relative h-52 overflow-hidden">
                     <img src={getImageUrl(story.image)} alt={story.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-gradient-to-t from-forest/70 to-transparent" />
@@ -152,3 +151,4 @@ const SuccessStories = () => {
 };
 
 export default SuccessStories;
+

@@ -14,7 +14,6 @@ const registerVolunteer = asyncHandler(async (req, res) => {
   const {
     firstName,
     lastName,
-    email,
     phone,
     gender,
     dateOfBirth,
@@ -24,6 +23,7 @@ const registerVolunteer = asyncHandler(async (req, res) => {
     role,
     about,
   } = req.body;
+  const email = req.body.email?.toLowerCase().trim();
 
   // Check if this email already has a pending/approved application
   const existing = await Volunteer.findOne({ email });

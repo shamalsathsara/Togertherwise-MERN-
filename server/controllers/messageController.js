@@ -6,7 +6,8 @@ const Message = require("../models/Message");
  * sendMessage — Public endpoint to submit a contact form message.
  */
 const sendMessage = asyncHandler(async (req, res) => {
-  const { type, firstName, lastName, email, phone, message } = req.body;
+  const { type, firstName, lastName, phone, message } = req.body;
+  const email = req.body.email?.toLowerCase().trim();
 
   if (!type || !firstName || !lastName || !email || !phone || !message) {
     res.status(400);

@@ -45,6 +45,36 @@ const createSuccessStory = asyncHandler(async (req, res) => {
   res.status(201).json({ success: true, data: story });
 });
 
+// @desc    Update a success story
+// @route   PUT /api/success-stories/:id
+// @access  Private/Admin
+const updateSuccessStory = asyncHandler(async (req, res) => {
+  const story = await SuccessStory.findById(req.params.id);
+
+  if (!story) {
+    res.status(404);
+    throw new Error("Success story not found");
+  }
+
+  const { title, location, tag, quote, person, role } = req.body;
+
+  // Only replace image if a new file was uploaded
+  if (req.file) {
+    story.image = `/uploads/${req.file.filename}`;
+  }
+
+  // Use != null checks so an admin can intentionally set a field to empty string
+  if (title      != null) story.title    = title;
+  if (location   != null) story.location = location;
+  if (tag        != null) story.tag      = tag;
+  if (quote      != null) story.quote    = quote;
+  if (person     != null) story.person   = person;
+  if (role       != null) story.role     = role;
+
+  const updated = await story.save();
+  res.status(200).json({ success: true, data: updated });
+});
+
 // @desc    Delete a success story
 // @route   DELETE /api/success-stories/:id
 // @access  Private/Admin
@@ -65,5 +95,6 @@ module.exports = {
   getSuccessStories,
   getFeaturedSuccessStories,
   createSuccessStory,
+  updateSuccessStory,
   deleteSuccessStory,
 };
