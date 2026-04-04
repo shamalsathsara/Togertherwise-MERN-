@@ -33,6 +33,7 @@ const paymentRoutes = require("./routes/paymentRoutes");
 const successStoryRoutes = require("./routes/successStoryRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const subscriberRoutes = require("./routes/subscriberRoutes");
+const newsRoutes = require("./routes/newsRoutes");
 
 // ─── Initialize Express App ───────────────────────────────────────────────────
 const app = express();
@@ -79,6 +80,7 @@ app.use("/api/payment", paymentRoutes);
 app.use("/api/success-stories", successStoryRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/subscribers", subscriberRoutes);
+app.use("/api/news", newsRoutes);
 
 // ─── Health Check Route ───────────────────────────────────────────────────────
 app.get("/api/health", (req, res) => {

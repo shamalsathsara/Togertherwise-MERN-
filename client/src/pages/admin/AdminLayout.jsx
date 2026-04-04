@@ -28,6 +28,7 @@ const Icons = {
   logout: (p) => <Icon d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4 M16 17l5-5-5-5 M21 12H9" {...p} />,
   menu: (p) => <Icon d="M3 12h18 M3 6h18 M3 18h18" {...p} />,
   site: (p) => <Icon d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6 M15 3h6v6 M10 14L21 3" {...p} />,
+  news: (p) => <Icon d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2zM12 12H8M16 8H8M16 16H8" {...p} />,
 };
 
 const NAV_SECTIONS = [
@@ -43,6 +44,7 @@ const NAV_SECTIONS = [
       { to: "/admin/projects", label: "Projects", icon: Icons.projects },
       { to: "/admin/projects/new", label: "New Project", icon: Icons.add },
       { to: "/admin/success-stories", label: "Stories", icon: Icons.stories },
+      { to: "/admin/news", label: "News & Updates", icon: Icons.news },
     ],
   },
   {
@@ -64,6 +66,8 @@ const PAGE_TITLES = {
   "/admin/donations": "Donations",
   "/admin/success-stories": "Success Stories",
   "/admin/success-stories/new": "New Story",
+  "/admin/news": "News & Updates",
+  "/admin/news/new": "New News Item",
   "/admin/messages": "Messages",
   "/admin/volunteers": "Volunteers",
   "/admin/subscribers": "Subscribers",

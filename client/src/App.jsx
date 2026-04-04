@@ -33,6 +33,8 @@ import SuccessStoryForm from "./pages/admin/SuccessStoryForm";
 import MessagesList from "./pages/admin/MessagesList";
 import VolunteersList from "./pages/admin/VolunteersList";
 import SubscribersList from "./pages/admin/SubscribersList";
+import NewsUpdatesList from "./pages/admin/NewsUpdatesList";
+import NewsUpdateForm from "./pages/admin/NewsUpdateForm";
 
 /**
  * ProtectedAdminRoute — Wraps admin routes.
@@ -146,6 +148,9 @@ const AppRoutes = () => {
         <Route path="success-stories" element={<SuccessStoriesList />} />
         <Route path="success-stories/new" element={<SuccessStoryForm mode="create" />} />
         <Route path="success-stories/:id/edit" element={<SuccessStoryForm mode="edit" />} />
+        <Route path="news" element={<NewsUpdatesList />} />
+        <Route path="news/new" element={<NewsUpdateForm mode="create" />} />
+        <Route path="news/:id/edit" element={<NewsUpdateForm mode="edit" />} />
         <Route path="messages" element={<MessagesList />} />
         <Route path="volunteers" element={<VolunteersList />} />
         <Route path="subscribers" element={<SubscribersList />} />
