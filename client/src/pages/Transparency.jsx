@@ -24,29 +24,7 @@ import SEO from "../components/SEO";
 
 
 
-// Success stories
-const successStories = [
-  {
-    id: 1,
-    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=80",
-    quote: "People here benefit to both through in a village in India and seem they was people.",
-    location: "India",
-  },
-  {
-    id: 2,
-    image: "https://images.unsplash.com/photo-1594708767771-a7502209ff51?w=400&q=80",
-    quote: "The community to benefits; impact from the community in Africa and we value people.",
-    location: "Africa",
-  },
-];
 
-// Annual reports
-const annualReports = [
-  { year: 2025, label: "2025 Annual Report", url: "/reports/annual-report-2025.pdf" }, //Add reports to this
-  { year: 2024, label: "2024 Annual Report", url: "/reports/annual-report-2024.pdf" },
-  { year: 2023, label: "2023 Annual Report", url: "/reports/annual-report-2023.pdf" },
-  { year: 2022, label: "2022 Annual Report", url: "/reports/annual-report-2022.pdf" },
-];
 
 // Custom tooltip for bar chart
 const CustomBarTooltip = ({ active, payload }) => {
@@ -72,11 +50,12 @@ const CustomBarTooltip = ({ active, payload }) => {
 
 const Transparency = () => {
   const navigate = useNavigate();
-  const [stats, setStats] = useState({
-    totalAmount: 0, // Fallback demo data
-  });
+  const [stats, setStats] = useState({ totalAmount: 0 });
   const [donutData, setDonutData] = useState([]);
   const [barData, setBarData] = useState([]);
+  const [liveStories, setLiveStories] = useState([]);
+
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "";
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -132,6 +111,11 @@ const Transparency = () => {
             });
             setBarData(newBarData);
           }
+        }
+        // Fetch success stories for this page
+        const storiesRes = await axiosInstance.get("/success-stories");
+        if (storiesRes.data.success) {
+          setLiveStories(storiesRes.data.data.slice(0, 2));
         }
       } catch (err) {
         console.error("Failed to fetch donation stats:", err);
@@ -276,70 +260,57 @@ const Transparency = () => {
           </div>
         </div>
 
-        {/*  */}
-        {/* SUCCESS STORIES + ANNUAL REPORTS ROW  */}
-        {/* */}
+        {/* SUCCESS STORIES + ANNUAL REPORTS ROW */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-12">
 
           {/* Success Stories (2/5) */}
           <div className="lg:col-span-2">
             <h2 className="font-display font-bold text-forest text-xl mb-5">Success Stories</h2>
-            <div className="space-y-4">
-              {successStories.map((story) => (
-                <div key={story.id} className="card overflow-hidden">
-                  <div className="relative h-40">
-                    <img
-                      src={story.image}
-                      alt="Success story"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-forest/70 to-transparent" />
-                    <span className="absolute bottom-3 left-3 badge-lime text-xs">{story.location}</span>
+            {liveStories.length === 0 ? (
+              <div className="card p-8 text-center text-gray-300">
+                <div className="text-4xl mb-2">⭐</div>
+                <p className="text-sm">Stories will appear here once added by the admin.</p>
+                <button onClick={() => navigate("/success-stories")} className="mt-4 text-xs text-forest font-semibold hover:underline">View All Stories →</button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {liveStories.map((story) => (
+                  <div key={story._id} className="card overflow-hidden">
+                    <div className="relative h-40">
+                      <img
+                        src={story.image.startsWith("http") ? story.image : `${API_BASE_URL}${story.image}`}
+                        alt="Success story"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-forest/70 to-transparent" />
+                      <span className="absolute bottom-3 left-3 badge-lime text-xs">{story.location}</span>
+                    </div>
+                    <div className="p-4">
+                      <p className="text-gray-500 text-xs italic mb-3 line-clamp-2">"{story.quote}"</p>
+                      <button
+                        onClick={() => navigate("/success-stories")}
+                        className="text-forest font-semibold text-xs bg-lime/20 hover:bg-lime rounded-lg px-3 py-1.5 transition-colors"
+                      >
+                        Read Story →
+                      </button>
+                    </div>
                   </div>
-                  <div className="p-4">
-                    <p className="text-gray-500 text-xs italic mb-3">"{story.quote}"</p>
-                    <button
-                      onClick={() => navigate("/success-stories")}
-                      className="text-forest font-semibold text-xs bg-lime/20 hover:bg-lime rounded-lg px-3 py-1.5 transition-colors"
-                    >
-                      Read Story →
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Annual Reports + CTA (3/5) */}
           <div className="lg:col-span-3 space-y-6">
-            {/* Annual Reports Grid */}
+            {/* Annual Reports — Coming Soon */}
             <div>
               <h2 className="font-display font-bold text-forest text-xl mb-5">Annual Reports</h2>
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-4">
-                {annualReports.map((report) => (
-                  <div
-                    key={report.year}
-                    className="card p-4 text-center cursor-pointer hover:border-lime border-2 border-transparent"
-                  >
-                    <div className="w-16 h-16 mx-auto mb-3 relative">
-                      {/* Book icon */}
-                      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                        <rect x="8" y="8" width="48" height="48" rx="4" fill="#f0fdf4" stroke="#1B3022" strokeWidth="2" />
-                        <path d="M20 20h24M20 28h24M20 36h16" stroke="#1B3022" strokeWidth="2" strokeLinecap="round" />
-                        <circle cx="42" cy="42" r="10" fill="#9CFC5C" />
-                        <path d="M38 42 l3 3 5-5" stroke="#1B3022" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                    <p className="font-display font-bold text-forest text-xs mb-1">{report.year}</p>
-                    <p className="text-gray-400 text-xs mb-3">Annual Report</p>
-                    <button
-                      onClick={() => window.open(report.url, "_blank", "noopener,noreferrer")}
-                      className="w-full text-xs bg-lime text-forest font-semibold py-1.5 rounded-lg hover:bg-lime-dark transition-colors"
-                    >
-                      Read more
-                    </button>
-                  </div>
-                ))}
+              <div className="card p-8 text-center">
+                <div className="text-4xl mb-3">📄</div>
+                <p className="font-semibold text-forest text-base mb-1">Coming Soon</p>
+                <p className="text-gray-400 text-sm max-w-xs mx-auto">
+                  Annual reports will be published here once available. Check back after our first full year of operations.
+                </p>
               </div>
             </div>
 
@@ -371,3 +342,4 @@ const Transparency = () => {
 };
 
 export default Transparency;
+

@@ -166,10 +166,10 @@ const Home = ({ lang }) => {
         if (statsRes.data.success) {
            const dbStats = statsRes.data.stats;
            setLiveStats([
-             { value: dbStats.total * 25, suffix: "+", label: "Families Helped", icon: "🏠" },
              { value: dbStats.completed, suffix: "+", label: "Projects Completed", icon: "✅" },
-             { value: dbStats.total * 12, suffix: "+", label: "Active Volunteers", icon: "🌟" },
-             { value: dbStats.active, suffix: "+", label: "Project Supporting", icon: "🤝" },
+             { value: dbStats.active,    suffix: "+", label: "Active Projects",    icon: "🤝" },
+             { value: dbStats.total,     suffix: "+", label: "Total Projects",     icon: "📋" },
+             { value: dbStats.featured,  suffix: "+", label: "Featured Projects",  icon: "🌟" },
            ]);
         }
 
