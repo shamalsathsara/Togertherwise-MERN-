@@ -71,31 +71,51 @@ const AboutUs = () => {
         description="Learn about Togetherwise — our mission, our values, and the team working to empower communities across the globe."
         path="/about"
       />
-      {/* Hero */}
-      <section className="relative py-24 bg-forest overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="w-96 h-96 bg-lime rounded-full absolute -top-20 right-20 blur-3xl" />
+
+      {/* ── Hero ───────────────────────────────────────────────────────── */}
+      <section className="relative py-28 overflow-hidden" style={{
+        background: "linear-gradient(135deg, #111E16 0%, #1B3022 55%, #2D4F37 100%)"
+      }}>
+        {/* Decorative elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl" style={{ background: "rgba(156,252,92,0.1)", transform: "translate(30%,-30%)" }} />
+          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-3xl" style={{ background: "rgba(156,252,92,0.06)", transform: "translate(-20%,20%)" }} />
+          <div className="absolute top-1/2 left-8 w-40 h-40 rounded-full border border-lime/10 hidden lg:block" style={{ transform: "translateY(-50%)" }} />
+          <div className="absolute top-1/2 right-8 w-24 h-24 rounded-full border border-white/6 hidden lg:block" style={{ transform: "translateY(-50%)" }} />
+          {/* Dot grid */}
+          <div className="absolute bottom-8 right-1/4 hidden xl:grid grid-cols-6 gap-3 opacity-15">
+            {Array.from({ length: 18 }).map((_, i) => (
+              <div key={i} className="w-1 h-1 rounded-full bg-lime" />
+            ))}
+          </div>
         </div>
+
         <div className="section-wrapper relative z-10 text-center">
-          <span className="badge-lime mb-4 inline-block">Our Story</span>
-          <h1 className="font-display font-black text-white text-4xl sm:text-5xl mb-6">
-            About <span className="text-lime">Togetherwise</span>
+          <span className="badge-lime mb-5 inline-block animate-fade-in">Our Story</span>
+          <h1 className="font-display font-black text-white text-4xl sm:text-6xl mb-6 animate-slide-up leading-tight">
+            About <span className="text-gradient-lime">Togetherwise</span>
           </h1>
-          <p className="text-white/70 text-xl max-w-2xl mx-auto leading-relaxed">
+          <p className="text-white/65 text-xl max-w-2xl mx-auto leading-relaxed animate-slide-up delay-200">
             Founded in 2026, Togetherwise bridges the gap between global resources and local needs,
             creating lasting change in communities across the world.
           </p>
         </div>
       </section>
 
-      {/* Mission + Vision */}
-      <section className="py-20 bg-gray-50">
-        <div className="section-wrapper">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* ── Mission + Vision ───────────────────────────────────────────── */}
+      <section className="py-24 relative overflow-hidden" style={{
+        background: "linear-gradient(180deg, #f5f8f5 0%, #ffffff 100%)"
+      }}>
+        {/* Corner decorations */}
+        <div className="absolute top-0 right-0 w-64 h-64 pointer-events-none" style={{ background: "radial-gradient(circle at 100% 0%, rgba(156,252,92,0.07), transparent 60%)" }} />
+        <div className="absolute bottom-0 left-0 w-80 h-80 pointer-events-none" style={{ background: "radial-gradient(circle at 0% 100%, rgba(27,48,34,0.04), transparent 60%)" }} />
+
+        <div className="section-wrapper relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <span className="badge-forest mb-3 inline-block">Our Mission</span>
-              <h2 className="section-title mb-4">Empowering Communities From Village to Global</h2>
-              <p className="text-gray-600 leading-relaxed mb-6">
+              <span className="badge-forest mb-4 inline-block">Our Mission</span>
+              <h2 className="section-title mb-5">Empowering Communities From Village to Global</h2>
+              <p className="text-gray-600 leading-relaxed mb-5">
                 Village to Global is dedicated to supporting organizations and local initiatives that uplift
                 communities. We focus on empowering people through sustainable development, access to essential
                 resources, and community-driven programs that create lasting positive change.
@@ -106,38 +126,75 @@ const AboutUs = () => {
                 global network of <strong className="text-forest">0+ volunteers</strong> committed to
                 building a better world.
               </p>
-              <button onClick={() => navigate("/donate")} className="btn-primary">
+
+              {/* Feature list */}
+              {["Sustainable community development", "100% financial transparency", "Local leader partnerships"].map((item, i) => (
+                <div key={i} className="flex items-center gap-3 mb-3">
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)" }}>
+                    <span className="text-forest text-xs font-black">✓</span>
+                  </div>
+                  <span className="text-gray-700 text-sm font-medium">{item}</span>
+                </div>
+              ))}
+
+              <button onClick={() => navigate("/donate")} className="btn-primary mt-6">
                 Support Our Work
               </button>
             </div>
+
             <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1542884748-2b87b36c6b90?w=700&q=80"
-                alt="Community empowerment"
-                className="rounded-3xl shadow-2xl w-full h-80 object-cover"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-lime rounded-2xl p-6 shadow-xl">
-                <p className="font-display font-black text-forest text-3xl">2026</p>
-                <p className="text-forest/70 text-sm">Founded</p>
+              <div className="relative rounded-3xl overflow-hidden shadow-luxury group">
+                <img
+                  src="https://images.unsplash.com/photo-1542884748-2b87b36c6b90?w=700&q=80"
+                  alt="Community empowerment"
+                  className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-forest/40 to-transparent" />
               </div>
+
+              {/* Floating year card */}
+              <div className="absolute -bottom-8 -left-8 rounded-2xl p-6 shadow-lime animate-float" style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)" }}>
+                <p className="font-display font-black text-forest text-3xl">2026</p>
+                <p className="text-forest/70 text-sm font-medium">Founded</p>
+              </div>
+
+              {/* Corner decorative ring */}
+              <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full border-2 border-forest/10 hidden lg:block animate-spin-slow" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values */}
-      <section className="py-20 bg-white">
-        <div className="section-wrapper">
-          <div className="text-center mb-12">
-            <span className="badge-lime mb-3 inline-block">What We Stand For</span>
+      {/* ── Values ────────────────────────────────────────────────────── */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        {/* Pattern decoration */}
+        <div className="absolute top-8 left-8 hidden lg:grid grid-cols-4 gap-3 opacity-15 pointer-events-none">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-forest" />
+          ))}
+        </div>
+        <div className="absolute bottom-8 right-8 hidden lg:grid grid-cols-4 gap-3 opacity-10 pointer-events-none">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-lime" />
+          ))}
+        </div>
+
+        <div className="section-wrapper relative z-10">
+          <div className="text-center mb-14">
+            <span className="badge-lime mb-4 inline-block">What We Stand For</span>
             <h2 className="section-title">Our Core Values</h2>
           </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map((v, i) => (
-              <div key={i} className="p-6 rounded-2xl border-2 border-gray-100 hover:border-lime
-                                      hover:shadow-md transition-all duration-300 text-center group">
-                <div className="text-4xl mb-4">{v.icon}</div>
-                <h3 className="font-display font-bold text-forest text-lg mb-2 group-hover:text-lime-dark transition-colors">
+              <div key={i} className="card-luxury p-7 text-center group">
+                {/* Top accent line */}
+                <div className="h-0.5 w-0 group-hover:w-full rounded-full mb-6 -mt-1 transition-all duration-500 mx-auto" style={{ background: "linear-gradient(90deg,#9CFC5C,#7DD940)" }} />
+
+                <div className="icon-circle mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-2xl">{v.icon}</span>
+                </div>
+                <h3 className="font-display font-bold text-forest text-lg mb-3 group-hover:text-lime-dark transition-colors">
                   {v.title}
                 </h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{v.desc}</p>
@@ -147,54 +204,82 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="py-20 bg-gray-50">
-        <div className="section-wrapper">
-          <div className="text-center mb-12">
-            <span className="badge-forest mb-3 inline-block">The People Behind It</span>
+      {/* ── Team ──────────────────────────────────────────────────────── */}
+      <section className="py-24 relative overflow-hidden" style={{
+        background: "linear-gradient(180deg, #f0f4f1 0%, #e8f0ea 100%)"
+      }}>
+        {/* Decorative rings */}
+        <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full border border-forest/8 hidden xl:block pointer-events-none" />
+        <div className="absolute -bottom-16 -left-8 w-64 h-64 rounded-full border border-lime/10 hidden xl:block pointer-events-none" />
+
+        <div className="section-wrapper relative z-10">
+          <div className="text-center mb-14">
+            <span className="badge-forest mb-4 inline-block">The People Behind It</span>
             <h2 className="section-title">Our Leadership Team</h2>
           </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {TEAM.map((member, i) => (
-              <div key={i} className="card text-center p-6 group">
-                <div className="relative w-24 h-24 mx-auto mb-4">
+              <div key={i} className="card-luxury text-center p-7 group">
+                <div className="relative w-28 h-28 mx-auto mb-5">
+                  {/* Spinning gradient ring */}
+                  <div className="absolute inset-0 rounded-full p-0.5 animate-spin-slow" style={{ background: "linear-gradient(135deg,#9CFC5C,transparent,#9CFC5C)", opacity: 0.4 }} />
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover rounded-full ring-4 ring-lime/20 group-hover:ring-lime transition-all duration-300"
+                    className="w-full h-full object-cover rounded-full relative z-10 transition-transform duration-500 group-hover:scale-105"
+                    style={{ border: "3px solid rgba(156,252,92,0.3)" }}
                   />
+                  {/* Hover glow */}
+                  <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: "0 0 20px rgba(156,252,92,0.4)" }} />
                 </div>
-                <h3 className="font-display font-bold text-forest text-base">{member.name}</h3>
-                <p className="text-gray-400 text-sm mt-1">{member.role}</p>
+                <h3 className="font-display font-bold text-forest text-base mb-1">{member.name}</h3>
+                <p className="text-gray-400 text-sm">{member.role}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-20 bg-white">
-        <div className="section-wrapper">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* ── Contact Section ───────────────────────────────────────────── */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        {/* Corner fills */}
+        <div className="absolute top-0 right-0 w-80 h-80 pointer-events-none" style={{ background: "radial-gradient(circle at 100% 0%, rgba(156,252,92,0.06), transparent 60%)" }} />
+        <div className="absolute bottom-0 left-0 w-64 h-64 pointer-events-none" style={{ background: "radial-gradient(circle at 0% 100%, rgba(27,48,34,0.04), transparent 60%)" }} />
+
+        <div className="section-wrapper relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             <div>
-              <span className="badge-lime mb-3 inline-block">Contact Us</span>
-              <h2 className="section-title mb-2">How can we help?</h2>
-              <p className="text-gray-500 mb-6 text-sm">
+              <span className="badge-lime mb-4 inline-block">Contact Us</span>
+              <h2 className="section-title mb-3">How can we help?</h2>
+              <p className="text-gray-500 mb-8 leading-relaxed">
                 Togetherwise is the most guaranteed estimated and most believed of community benefits shared up.
               </p>
-              <div className="space-y-3 mb-8">
+              <div className="space-y-4 mb-8">
                 {["Volunteer Opportunities", "Donate & Support", "Raise a request", "Join our Community"].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <span className="w-6 h-6 bg-lime rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-forest text-xs font-bold">✓</span>
-                    </span>
-                    <span className="text-gray-600 text-sm">{item}</span>
+                  <div key={i} className="flex items-center gap-3 group">
+                    <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110" style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)", boxShadow: "0 2px 8px rgba(156,252,92,0.3)" }}>
+                      <span className="text-forest text-xs font-black">✓</span>
+                    </div>
+                    <span className="text-gray-600 font-medium group-hover:text-forest transition-colors">{item}</span>
                   </div>
                 ))}
               </div>
+
+              {/* Visual accent */}
+              <div className="rounded-2xl p-5 mt-4" style={{ background: "linear-gradient(135deg,rgba(27,48,34,0.04),rgba(156,252,92,0.06))", border: "1px solid rgba(156,252,92,0.15)" }}>
+                <p className="text-forest font-semibold text-sm">💬 Quick response guaranteed</p>
+                <p className="text-gray-500 text-xs mt-1">We typically respond within 24 hours on business days</p>
+              </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+            <form onSubmit={handleSubmit} className="card-luxury p-8">
+              {/* Form header accent */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1 h-8 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
+                <h3 className="font-display font-bold text-forest text-lg">Send a Message</h3>
+              </div>
+
               <select
                 name="type"
                 value={formData.type}

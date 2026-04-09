@@ -95,86 +95,111 @@ const Footer = () => {
   return (
     <>
       {/* ── Subscribe Banner ───────────────────────────────────────────── */}
-      <div className="bg-forest-dark">
-        <div className="section-wrapper py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white font-display font-bold text-xl uppercase tracking-wider">
-            Stay in the Loop
-          </p>
+      <div className="relative overflow-hidden" style={{
+        background: "linear-gradient(135deg, #111E16 0%, #1B3022 60%, #2D4F37 100%)"
+      }}>
+        {/* Decorative corners */}
+        <div className="absolute top-0 right-0 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(156,252,92,0.08)", transform: "translate(30%, -30%)" }} />
+        <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full blur-2xl pointer-events-none" style={{ background: "rgba(156,252,92,0.05)", transform: "translate(-20%, 20%)" }} />
+
+        <div className="section-wrapper py-8 flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
+          <div>
+            <p className="text-white font-display font-black text-2xl leading-none">
+              Stay in the Loop
+            </p>
+            <p className="text-white/50 text-sm mt-1">Get the latest updates from Togetherwise</p>
+          </div>
           <form onSubmit={handleSubscribe} className="flex gap-2 w-full sm:w-auto">
             <input
               type="email"
               value={subscribeEmail}
               onChange={(e) => setSubscribeEmail(e.target.value)}
               placeholder="Enter your email address"
-              className="flex-1 sm:w-72 px-4 py-2.5 rounded-full bg-white/10 border border-white/20
-                         text-white placeholder-white/50 text-sm focus:outline-none focus:border-lime
-                         focus:bg-white/20 transition-all"
+              className="flex-1 sm:w-72 px-4 py-3 rounded-xl bg-white/8 border border-white/15
+                         text-white placeholder-white/40 text-sm focus:outline-none focus:border-lime
+                         focus:bg-white/12 transition-all"
+              style={{ background: "rgba(255,255,255,0.08)" }}
             />
-            <button type="submit" className="btn-primary text-sm px-5 py-2.5 whitespace-nowrap">
+            <button type="submit" className="btn-primary text-sm px-5 py-3 whitespace-nowrap">
               Subscribe ↗
             </button>
           </form>
           {subscribeStatus && (
-            <p className="text-lime text-sm font-medium">{subscribeStatus}</p>
+            <p className="text-lime text-sm font-medium animate-fade-in">{subscribeStatus}</p>
           )}
         </div>
       </div>
 
       {/* ── Main Footer ────────────────────────────────────────────────── */}
-      <footer className="bg-forest text-white">
-        <div className="section-wrapper py-12">
+      <footer className="relative overflow-hidden text-white" style={{
+        background: "linear-gradient(180deg, #1B3022 0%, #111E16 100%)"
+      }}>
+        {/* Decorative mesh background */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl" style={{ background: "rgba(156,252,92,0.04)", transform: "translate(-30%, -30%)" }} />
+          <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full blur-3xl" style={{ background: "rgba(45,79,55,0.3)", transform: "translate(20%, 20%)" }} />
+          {/* Geometric rings */}
+          <div className="absolute top-16 right-16 w-48 h-48 rounded-full border border-white/4 hidden xl:block" />
+          <div className="absolute bottom-20 left-16 w-32 h-32 rounded-full border border-lime/6 hidden xl:block" />
+        </div>
+
+        <div className="section-wrapper py-14 relative z-10">
+          {/* Top luxury divider */}
+          <div className="luxury-divider mb-12" />
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
             {/* ── Brand Column ─────────────────────────────────────────── */}
             <div className="lg:col-span-2">
               {/* Logo */}
-              <Link to="/" className="flex items-center gap-3 mb-4 group">
-                <div className="w-12 h-12">
+              <Link to="/" className="flex items-center gap-3 mb-5 group w-fit">
+                <div className="w-12 h-12 rounded-xl overflow-hidden"
+                  style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}>
                   {/* Replace this src with your actual logo path, e.g., src="/logo.png" */}
                   <img
                     src={logoImg}
                     alt="Togetherwise Logo"
-                    className="w-full h-full object-contain pt-1"
+                    className="w-full h-full object-contain pt-1 transition-transform duration-300 group-hover:scale-110"
                   />
                 </div>
                 <div>
                   <span className="font-display font-bold text-white text-xl leading-none block">
                     Together<span className="text-lime">wise</span>
                   </span>
-                  <span className="text-xs text-white/50 tracking-wide uppercase">
+                  <span className="text-xs text-white/40 tracking-wide uppercase">
                     Empowering Communities
                   </span>
                 </div>
               </Link>
 
-              <p className="text-white/70 text-sm leading-relaxed max-w-xs mb-6">
+              <p className="text-white/55 text-sm leading-relaxed max-w-xs mb-7">
                 Village to Global is dedicated to supporting organizations and local initiatives
                 that uplift communities worldwide through sustainable development.
               </p>
 
               {/* Contact Info */}
-              <div className="space-y-2.5">
+              <div className="space-y-3">
                 <a
                   href="https://maps.app.goo.gl/ZoyftZRjV1BuHpMf8"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 text-white/70 hover:text-lime transition-colors group"
+                  className="flex items-start gap-3 text-white/55 hover:text-lime transition-colors group"
                 >
-                  <span className="mt-0.5 flex-shrink-0">📍</span>
+                  <span className="mt-0.5 flex-shrink-0 text-lime/60">📍</span>
                   <span className="text-sm">No 1/C Singhapura Hokandara South</span>
                 </a>
                 <a
                   href="mailto:donation23@gmail.com"
-                  className="flex items-center gap-3 text-white/70 hover:text-lime transition-colors"
+                  className="flex items-center gap-3 text-white/55 hover:text-lime transition-colors"
                 >
-                  <span>📩</span>
+                  <span className="text-lime/60">📩</span>
                   <span className="text-sm">thilan9109@gmail.com</span>
                 </a>
                 <a
                   href="tel:+94772581698"
-                  className="flex items-center gap-3 text-white/70 hover:text-lime transition-colors"
+                  className="flex items-center gap-3 text-white/55 hover:text-lime transition-colors"
                 >
-                  <span>📞</span>
+                  <span className="text-lime/60">📞</span>
                   <span className="text-sm">+94 778821632</span>
                 </a>
               </div>
@@ -182,18 +207,18 @@ const Footer = () => {
 
             {/* ── Quick Links ───────────────────────────────────────────── */}
             <div>
-              <h3 className="font-display font-bold text-white text-sm uppercase tracking-wider mb-4">
+              <h3 className="font-display font-bold text-white text-sm uppercase tracking-widest mb-5">
                 Quick Links
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2.5">
                 {quickLinks.map(({ to, label }) => (
                   <li key={to}>
                     <Link
                       to={to}
-                      className="text-white/70 hover:text-lime text-sm transition-colors
-                                 flex items-center gap-2 group"
+                      className="text-white/55 hover:text-lime text-sm transition-all duration-200
+                                 flex items-center gap-2.5 group"
                     >
-                      <span className="w-1 h-1 rounded-full bg-lime/50 group-hover:bg-lime transition-colors" />
+                      <span className="w-4 h-0.5 rounded-full bg-lime/30 group-hover:bg-lime group-hover:w-6 transition-all duration-300" />
                       {label}
                     </Link>
                   </li>
@@ -203,10 +228,10 @@ const Footer = () => {
 
             {/* ── Social & Legal ────────────────────────────────────────── */}
             <div>
-              <h3 className="font-display font-bold text-white text-sm uppercase tracking-wider mb-4">
+              <h3 className="font-display font-bold text-white text-sm uppercase tracking-widest mb-5">
                 Follow Us
               </h3>
-              <div className="flex flex-wrap gap-3 mb-8">
+              <div className="flex flex-wrap gap-2.5 mb-8">
                 {socialLinks.map(({ id, href, label, icon }) => (
                   <a
                     key={id}
@@ -214,9 +239,23 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center
-                               text-white/70 hover:bg-lime hover:text-forest
-                               transition-all duration-200 hover:scale-110"
+                    className="w-10 h-10 rounded-xl flex items-center justify-center
+                               text-white/60 hover:text-forest
+                               transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
+                    style={{
+                      background: "rgba(255,255,255,0.08)",
+                      border: "1px solid rgba(255,255,255,0.1)"
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.background = "linear-gradient(135deg,#9CFC5C,#7DD940)";
+                      e.currentTarget.style.border = "1px solid transparent";
+                      e.currentTarget.style.boxShadow = "0 4px 16px rgba(156,252,92,0.3)";
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                      e.currentTarget.style.border = "1px solid rgba(255,255,255,0.1)";
+                      e.currentTarget.style.boxShadow = "none";
+                    }}
                   >
                     {icon}
                   </a>
@@ -226,15 +265,15 @@ const Footer = () => {
               <div className="space-y-2">
                 <button
                   onClick={() => setIsPrivacyOpen(true)}
-                  className="text-white/70 hover:text-lime text-sm transition-colors underline-offset-2 hover:underline"
+                  className="text-white/55 hover:text-lime text-sm transition-colors underline-offset-2 hover:underline"
                   id="privacy-policy-btn"
                 >
                   Privacy Policy
                 </button>
-                <span className="text-white/30 mx-2">/</span>
+                <span className="text-white/20 mx-2">/</span>
                 <button
                   onClick={() => setIsPrivacyOpen(true)}
-                  className="text-white/70 hover:text-lime text-sm transition-colors underline-offset-2 hover:underline"
+                  className="text-white/55 hover:text-lime text-sm transition-colors underline-offset-2 hover:underline"
                 >
                   Terms
                 </button>
@@ -243,12 +282,18 @@ const Footer = () => {
           </div>
 
           {/* ── Bottom Bar ─────────────────────────────────────────────── */}
-          <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row
-                          items-center justify-between gap-3">
-            <p className="text-white/40 text-xs">
+          <div className="mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
+            style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+            <p className="text-white/30 text-xs">
               © {new Date().getFullYear()} Togetherwise. All rights reserved.
             </p>
-            <p className="text-white/40 text-xs">
+            <div className="flex items-center gap-1">
+              <div className="w-4 h-4 rounded-full bg-lime/20 flex items-center justify-center">
+                <div className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
+              </div>
+              <p className="text-white/30 text-xs">Made with love for communities worldwide</p>
+            </div>
+            <p className="text-white/30 text-xs">
               {/*Registered NGO — Sri Lanka*/}
             </p>
           </div>

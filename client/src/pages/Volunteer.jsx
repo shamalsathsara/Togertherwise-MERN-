@@ -85,10 +85,19 @@ const Volunteer = () => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-        <div className="bg-white rounded-3xl shadow-xl p-10 max-w-md w-full text-center animate-slide-up">
-          <div className="w-20 h-20 bg-lime/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <span className="text-4xl">🌟</span>
+      <div className="min-h-screen flex items-center justify-center px-4" style={{
+        background: "linear-gradient(135deg, #f5f8f5 0%, #eef4ef 100%)"
+      }}>
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl" style={{ background: "rgba(156,252,92,0.08)", transform: "translate(30%,-30%)" }} />
+          <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full blur-3xl" style={{ background: "rgba(27,48,34,0.05)", transform: "translate(-30%,30%)" }} />
+        </div>
+
+        <div className="card-luxury p-12 max-w-md w-full text-center animate-slide-up relative z-10">
+          <div className="relative w-24 h-24 mx-auto mb-6">
+            <div className="w-24 h-24 rounded-full flex items-center justify-center animate-pulse-ring" style={{ background: "linear-gradient(135deg,rgba(156,252,92,0.2),rgba(156,252,92,0.1))" }}>
+              <span className="text-5xl">🌟</span>
+            </div>
           </div>
           <h2 className="font-display font-bold text-forest text-3xl mb-3">Welcome Aboard!</h2>
           <p className="text-gray-500 mb-2">
@@ -97,6 +106,7 @@ const Volunteer = () => {
           <p className="text-gray-400 text-sm mb-8">
             We'll reach out to <strong>{formData.email}</strong> within 3 business days.
           </p>
+          <div className="luxury-divider mb-8" />
           <button onClick={() => navigate("/")} className="btn-primary w-full">
             Back to Home
           </button>
@@ -106,32 +116,50 @@ const Volunteer = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #f5f8f5 0%, #eef4ef 100%)" }}>
       <SEO
         title="Volunteer with Us"
         description="Join Togetherwise as a volunteer, fundraiser, or partner. Empower lives and build stronger communities with us."
         path="/volunteer"
       />
+
       {/* Header */}
-      <div className="bg-forest py-16">
-        <div className="section-wrapper text-center">
-          <span className="badge-lime mb-4 inline-block">Get Involved</span>
-          <h1 className="font-display font-black text-white text-4xl sm:text-5xl mb-4">
-            Join The Movement
+      <div className="relative py-24 overflow-hidden" style={{
+        background: "linear-gradient(135deg, #111E16 0%, #1B3022 55%, #2D4F37 100%)"
+      }}>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl" style={{ background: "rgba(156,252,92,0.1)", transform: "translate(30%,-30%)" }} />
+          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-3xl" style={{ background: "rgba(156,252,92,0.07)", transform: "translate(-20%,20%)" }} />
+          <div className="absolute top-1/2 right-8 w-40 h-40 rounded-full border border-lime/10 hidden lg:block" style={{ transform: "translateY(-50%)" }} />
+          <div className="absolute top-1/2 left-8 w-24 h-24 rounded-full border border-white/6 hidden lg:block" style={{ transform: "translateY(-50%)" }} />
+        </div>
+
+        <div className="section-wrapper text-center relative z-10">
+          <span className="badge-lime mb-5 inline-block animate-fade-in">Get Involved</span>
+          <h1 className="font-display font-black text-white text-4xl sm:text-6xl mb-4 animate-slide-up leading-tight">
+            Join The <span className="text-gradient-lime">Movement</span>
           </h1>
-          <p className="text-white/70 text-lg max-w-xl mx-auto">
+          <p className="text-white/65 text-lg max-w-xl mx-auto animate-slide-up delay-200">
             Build with us. Empower lives. Choose your path and make a difference.
           </p>
         </div>
       </div>
 
-      <div className="section-wrapper py-12">
+      <div className="section-wrapper py-14">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
 
             {/* Left: Form  */}
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-3xl shadow-xl p-8">
+              <div className="card-luxury p-8">
+                {/* Form header */}
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-1 h-10 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
+                  <div>
+                    <h2 className="font-display font-bold text-forest text-xl">Registration Form</h2>
+                    <p className="text-gray-400 text-xs">Choose your role and fill in your details</p>
+                  </div>
+                </div>
 
                 {/* Role Selector Cards */}
                 <div className="grid grid-cols-3 gap-3 mb-8">
@@ -140,18 +168,24 @@ const Volunteer = () => {
                       key={role.id}
                       type="button"
                       onClick={() => setSelectedRole(role.id)}
-                      className={`relative p-4 rounded-2xl border-2 text-left transition-all duration-200 ${selectedRole === role.id
-                        ? "border-lime bg-lime/10 shadow-md"
-                        : "border-gray-200 hover:border-lime/50"
-                        }`}
+                      className={`relative p-4 rounded-2xl border-2 text-left transition-all duration-300 ${
+                        selectedRole === role.id
+                          ? "border-transparent shadow-lime"
+                          : "border-gray-200 hover:border-lime/40 hover:shadow-sm"
+                      }`}
+                      style={selectedRole === role.id ? {
+                        background: "linear-gradient(135deg,rgba(156,252,92,0.12),rgba(156,252,92,0.05))",
+                        borderColor: "transparent",
+                        boxShadow: "0 4px 20px rgba(156,252,92,0.25), 0 0 0 2px rgba(156,252,92,0.5)"
+                      } : {}}
                     >
                       {selectedRole === role.id && (
-                        <span className="absolute top-2 right-2 w-5 h-5 bg-lime rounded-full flex items-center justify-center">
-                          <span className="text-forest text-xs font-bold">✓</span>
+                        <span className="absolute top-2 right-2 w-5 h-5 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)" }}>
+                          <span className="text-forest text-xs font-black">✓</span>
                         </span>
                       )}
                       <div className="text-2xl mb-2">{role.emoji}</div>
-                      <p className="font-display font-bold text-forest text-base leading-tight mb-1">
+                      <p className="font-display font-bold text-forest text-sm leading-tight mb-1">
                         {role.title}
                       </p>
                       <p className="text-gray-400 text-xs leading-tight">{role.subtitle}</p>
@@ -198,7 +232,7 @@ const Volunteer = () => {
                             className="w-4 h-4 text-lime focus:ring-lime border-gray-300"
                             required
                           />
-                          <span className="text-sm text-gray-600 group-hover:text-forest capitalize">
+                          <span className="text-sm text-gray-600 group-hover:text-forest capitalize transition-colors">
                             {g === "other" ? "Prefer not to say" : g.charAt(0).toUpperCase() + g.slice(1)}
                           </span>
                         </label>
@@ -273,35 +307,38 @@ const Volunteer = () => {
             {/* Right: Info Panel */}
             <div className="lg:col-span-2 space-y-6">
               {/* Logo + tagline */}
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4">
+              <div className="card-luxury text-center p-8">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl overflow-hidden" style={{ background: "rgba(27,48,34,0.06)", border: "1px solid rgba(27,48,34,0.1)" }}>
                   <img
                     src={logoImg}
                     alt="Togetherwise Logo"
                     className="w-full h-full object-contain pt-1"
                   />
                 </div>
-                <p className="text-gray-400 font-medium text-sm uppercase tracking-wider">Build with us</p>
-                <h2 className="font-display font-black text-forest text-3xl">Join The Movement</h2>
-                <p className="text-forest font-semibold text-lg">Empower lives</p>
+                <p className="text-gray-400 font-medium text-xs uppercase tracking-widest mb-2">Build with us</p>
+                <h2 className="font-display font-black text-forest text-2xl mb-1">Join The Movement</h2>
+                <p className="text-lime-dark font-semibold">Empower lives</p>
               </div>
 
               {/* Role description */}
-              <div className="bg-forest/5 rounded-2xl p-5">
-                <h3 className="font-display font-bold text-forest mb-2">
-                  {ROLES.find(r => r.id === selectedRole)?.title}
-                </h3>
+              <div className="card-luxury p-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-1 h-6 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
+                  <h3 className="font-display font-bold text-forest">
+                    {ROLES.find(r => r.id === selectedRole)?.title}
+                  </h3>
+                </div>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   {ROLES.find(r => r.id === selectedRole)?.description}
                 </p>
               </div>
 
               {/* Photo */}
-              <div className="rounded-2xl overflow-hidden shadow-lg">
+              <div className="rounded-2xl overflow-hidden shadow-luxury group">
                 <img
                   src="https://images.unsplash.com/photo-1542884748-2b87b36c6b90?w=600&q=80"
                   alt="Community volunteers"
-                  className="w-full h-52 object-cover"
+                  className="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
 
@@ -313,9 +350,9 @@ const Volunteer = () => {
                   { value: "0+", label: "Projects Completed" },
                   { value: "0%", label: "Satisfaction Rate" },
                 ].map((stat, i) => (
-                  <div key={i} className="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100">
+                  <div key={i} className="card-luxury text-center p-4">
                     <p className="font-display font-black text-forest text-xl">{stat.value}</p>
-                    <p className="text-gray-400 text-xs">{stat.label}</p>
+                    <p className="text-gray-400 text-xs mt-1">{stat.label}</p>
                   </div>
                 ))}
               </div>

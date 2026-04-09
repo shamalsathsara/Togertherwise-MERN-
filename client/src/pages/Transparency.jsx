@@ -25,7 +25,6 @@ import SEO from "../components/SEO";
 
 
 
-
 // Custom tooltip for bar chart
 const CustomBarTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
@@ -37,7 +36,7 @@ const CustomBarTooltip = ({ active, payload }) => {
         : `$${val}`;
 
     return (
-      <div className="bg-white border border-gray-200 rounded-xl p-3 shadow-lg text-sm">
+      <div className="card-luxury p-3 text-sm" style={{ minWidth: "140px" }}>
         <p className="font-bold text-forest">{payload[0].payload.program.replace("\n", " ")}</p>
         <p className="text-gray-600">
           {formattedVal} ({payload[0].payload.percent})
@@ -125,25 +124,34 @@ const Transparency = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #f5f8f5 0%, #eef4ef 100%)" }}>
       <SEO
         title="Trust & Transparency"
         description="Our promise to you: verified accountability and 100% transparency in how your donations are used to empower communities."
         path="/transparency"
       />
-      {/* Page Header */}
-      <div className="bg-forest py-16 text-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="w-64 h-64 bg-lime rounded-full absolute -top-20 -right-20" />
-          <div className="w-48 h-48 bg-lime rounded-full absolute -bottom-10 -left-10" />
+
+      {/* ── Page Header ────────────────────────────────────────────────── */}
+      <div className="relative py-28 text-center overflow-hidden" style={{
+        background: "linear-gradient(135deg, #111E16 0%, #1B3022 55%, #2D4F37 100%)"
+      }}>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-72 h-72 rounded-full blur-3xl" style={{ background: "rgba(156,252,92,0.1)", transform: "translate(30%,-30%)" }} />
+          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-3xl" style={{ background: "rgba(156,252,92,0.07)", transform: "translate(-20%,20%)" }} />
+          <div className="absolute top-8 right-12 w-40 h-40 rounded-full border border-lime/10 hidden lg:block" />
+          <div className="absolute bottom-8 left-12 w-24 h-24 rounded-full border border-white/6 hidden lg:block" />
+          {/* Lock icon floating */}
+          <div className="absolute top-1/2 right-16 text-lime/15 text-6xl hidden xl:block animate-float" style={{ transform:"translateY(-50%)" }}>🔒</div>
+          <div className="absolute top-1/2 left-16 text-lime/10 text-5xl hidden xl:block animate-float" style={{ transform:"translateY(-50%)", animationDelay:"1.5s" }}>✅</div>
         </div>
+
         <div className="section-wrapper relative z-10">
-          <span className="badge-lime mb-4 inline-block">100% Transparent</span>
-          <h1 className="font-display font-black text-white text-4xl sm:text-5xl mb-4">
+          <span className="badge-lime mb-5 inline-block animate-fade-in">100% Transparent</span>
+          <h1 className="font-display font-black text-white text-4xl sm:text-5xl mb-4 animate-slide-up leading-tight">
             A Global Commitment To{" "}
-            <span className="text-lime">Trust & Transparency</span>
+            <span className="text-gradient-lime">Trust & Transparency</span>
           </h1>
-          <p className="text-white/70 text-lg max-w-xl mx-auto">
+          <p className="text-white/65 text-lg max-w-xl mx-auto animate-slide-up delay-200">
             Our Promise. Verified Accountability. Your Impact.
           </p>
         </div>
@@ -157,10 +165,15 @@ const Transparency = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
 
           {/*  Donut Chart: Financial Overview */}
-          <div className="card p-6">
-            <h2 className="font-display font-bold text-forest text-xl mb-6">
-              Annual Financial Overview
-            </h2>
+          <div className="card-luxury p-7">
+            {/* Card header */}
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-1 h-7 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
+              <h2 className="font-display font-bold text-forest text-xl">
+                Annual Financial Overview
+              </h2>
+            </div>
+
             <div className="flex flex-col sm:flex-row items-center gap-6">
               <div className="flex-shrink-0">
                 <ResponsiveContainer width={200} height={200}>
@@ -171,7 +184,7 @@ const Transparency = () => {
                       cy="50%"
                       innerRadius={55}
                       outerRadius={90}
-                      paddingAngle={2}
+                      paddingAngle={3}
                       dataKey="value"
                     >
                       {donutData.map((entry, index) => (
@@ -196,7 +209,7 @@ const Transparency = () => {
                 </div>
 
                 {/* Totals */}
-                <div className="bg-gray-50 rounded-xl p-4 space-y-2">
+                <div className="rounded-2xl p-4 space-y-2" style={{ background: "rgba(27,48,34,0.04)", border: "1px solid rgba(27,48,34,0.06)" }}>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600 font-medium">Total Income</span>
                     <span className="font-bold text-forest">${stats.totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
@@ -205,9 +218,9 @@ const Transparency = () => {
                     <span className="text-gray-600 font-medium">Total Expense</span>
                     <span className="font-bold text-red-500">${(stats.totalAmount * 0.85).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
-                  <div className="border-t border-gray-200 pt-2 flex justify-between text-sm">
+                  <div className="pt-2 flex justify-between text-sm" style={{ borderTop: "1px solid rgba(27,48,34,0.08)" }}>
                     <span className="text-gray-600 font-medium">Net</span>
-                    <span className="font-bold text-lime-dark">+${(stats.totalAmount * 0.15).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    <span className="font-bold" style={{ color: "#7DD940" }}>+${(stats.totalAmount * 0.15).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                 </div>
               </div>
@@ -215,16 +228,20 @@ const Transparency = () => {
           </div>
 
           {/*  Bar Chart: Donation Allocation */}
-          <div className="card p-6">
-            <h2 className="font-display font-bold text-forest text-xl mb-6">
-              Donation Allocation by Program
-            </h2>
+          <div className="card-luxury p-7">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-1 h-7 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
+              <h2 className="font-display font-bold text-forest text-xl">
+                Donation Allocation by Program
+              </h2>
+            </div>
+
             <ResponsiveContainer width="100%" height={250}>
               <BarChart
                 data={barData}
                 margin={{ top: 10, right: 10, left: -10, bottom: 5 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(27,48,34,0.06)" />
                 <XAxis
                   dataKey="program"
                   tick={{ fontSize: 11, fill: "#6b7280" }}
@@ -237,7 +254,7 @@ const Transparency = () => {
                   axisLine={false}
                 />
                 <Tooltip content={<CustomBarTooltip />} />
-                <Bar dataKey="amount" fill="#D97706" radius={[6, 6, 0, 0]}>
+                <Bar dataKey="amount" fill="#D97706" radius={[8, 8, 0, 0]}>
                   {barData.map((entry, index) => (
                     <Cell
                       key={`bar-${index}`}
@@ -265,33 +282,41 @@ const Transparency = () => {
 
           {/* Success Stories (2/5) */}
           <div className="lg:col-span-2">
-            <h2 className="font-display font-bold text-forest text-xl mb-5">Success Stories</h2>
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-1 h-7 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
+              <h2 className="font-display font-bold text-forest text-xl">Success Stories</h2>
+            </div>
+
             {liveStories.length === 0 ? (
-              <div className="card p-8 text-center text-gray-300">
-                <div className="text-4xl mb-2">⭐</div>
-                <p className="text-sm">Stories will appear here once added by the admin.</p>
-                <button onClick={() => navigate("/success-stories")} className="mt-4 text-xs text-forest font-semibold hover:underline">View All Stories →</button>
+              <div className="card-luxury p-10 text-center">
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-3" style={{ background: "rgba(27,48,34,0.05)" }}>
+                  <span className="text-3xl">⭐</span>
+                </div>
+                <p className="text-gray-400 text-sm">Stories will appear here once added by the admin.</p>
+                <button onClick={() => navigate("/success-stories")} className="mt-4 text-xs text-forest font-semibold hover:text-lime-dark transition-colors">View All Stories →</button>
               </div>
             ) : (
               <div className="space-y-4">
                 {liveStories.map((story) => (
-                  <div key={story._id} className="card overflow-hidden">
+                  <div key={story._id} className="card-luxury overflow-hidden">
                     <div className="relative h-40">
                       <img
                         src={story.image.startsWith("http") ? story.image : `${API_BASE_URL}${story.image}`}
                         alt="Success story"
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-forest/70 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-forest/80 to-transparent" />
                       <span className="absolute bottom-3 left-3 badge-lime text-xs">{story.location}</span>
                     </div>
-                    <div className="p-4">
-                      <p className="text-gray-500 text-xs italic mb-3 line-clamp-2">"{story.quote}"</p>
+                    <div className="p-5">
+                      {/* Quote accent */}
+                      <div className="w-5 h-0.5 rounded-full mb-2" style={{ background: "linear-gradient(90deg,#9CFC5C,#7DD940)" }} />
+                      <p className="text-gray-500 text-xs italic mb-4 line-clamp-2">"{story.quote}"</p>
                       <button
                         onClick={() => navigate("/success-stories")}
-                        className="text-forest font-semibold text-xs bg-lime/20 hover:bg-lime rounded-lg px-3 py-1.5 transition-colors"
+                        className="text-forest font-semibold text-xs transition-colors hover:text-lime-dark flex items-center gap-1"
                       >
-                        Read Story →
+                        Read Story <span>→</span>
                       </button>
                     </div>
                   </div>
@@ -304,10 +329,15 @@ const Transparency = () => {
           <div className="lg:col-span-3 space-y-6">
             {/* Annual Reports — Coming Soon */}
             <div>
-              <h2 className="font-display font-bold text-forest text-xl mb-5">Annual Reports</h2>
-              <div className="card p-8 text-center">
-                <div className="text-4xl mb-3">📄</div>
-                <p className="font-semibold text-forest text-base mb-1">Coming Soon</p>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-1 h-7 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
+                <h2 className="font-display font-bold text-forest text-xl">Annual Reports</h2>
+              </div>
+              <div className="card-luxury p-10 text-center">
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(27,48,34,0.05)" }}>
+                  <span className="text-3xl">📄</span>
+                </div>
+                <p className="font-semibold text-forest text-base mb-2">Coming Soon</p>
                 <p className="text-gray-400 text-sm max-w-xs mx-auto">
                   Annual reports will be published here once available. Check back after our first full year of operations.
                 </p>
@@ -315,23 +345,34 @@ const Transparency = () => {
             </div>
 
             {/* CTA Box */}
-            <div className="bg-forest rounded-2xl p-8 text-center relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-lime/10 rounded-full -translate-y-1/2 translate-x-1/4" />
-              <h3 className="font-display font-bold text-white text-2xl mb-3">
-                Be a Catalyst for Change.{" "}
-                <span className="text-lime">Together, we can make a difference.</span>
-              </h3>
-              <p className="text-white/70 text-sm mb-6">
-                Join us in transforming lives. Whether through donations, volunteering, or partnerships,
-                your support helps build stronger communities and a better world.
-              </p>
-              <div className="flex justify-center gap-3">
-                <button onClick={() => navigate("/donate")} className="btn-primary text-sm">
-                  Donate Now
-                </button>
-                <button onClick={() => navigate("/volunteer")} className="btn-secondary text-sm">
-                  Join with Us
-                </button>
+            <div className="rounded-2xl p-8 text-center relative overflow-hidden" style={{
+              background: "linear-gradient(135deg, #111E16 0%, #1B3022 55%, #2D4F37 100%)"
+            }}>
+              {/* Decorative */}
+              <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-2xl" style={{ background: "rgba(156,252,92,0.1)", transform: "translate(20%,-20%)" }} />
+              <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full blur-2xl" style={{ background: "rgba(156,252,92,0.08)", transform: "translate(-20%,20%)" }} />
+
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-4" style={{ background: "rgba(156,252,92,0.12)", border: "1px solid rgba(156,252,92,0.25)" }}>
+                  <span className="text-lime text-xs font-semibold">Take Action</span>
+                </div>
+
+                <h3 className="font-display font-bold text-white text-2xl mb-3 leading-tight">
+                  Be a Catalyst for Change.{" "}
+                  <span className="text-gradient-lime">Together, we can make a difference.</span>
+                </h3>
+                <p className="text-white/65 text-sm mb-6 leading-relaxed">
+                  Join us in transforming lives. Whether through donations, volunteering, or partnerships,
+                  your support helps build stronger communities and a better world.
+                </p>
+                <div className="flex justify-center gap-3">
+                  <button onClick={() => navigate("/donate")} className="btn-primary text-sm">
+                    Donate Now
+                  </button>
+                  <button onClick={() => navigate("/volunteer")} className="btn-secondary text-sm">
+                    Join with Us
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -342,4 +383,3 @@ const Transparency = () => {
 };
 
 export default Transparency;
-

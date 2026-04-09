@@ -97,11 +97,23 @@ const Donate = () => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-        <div className="bg-white rounded-3xl shadow-xl p-10 max-w-md w-full text-center animate-slide-up">
-          <div className="w-20 h-20 bg-lime/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <span className="text-4xl">💚</span>
+      <div className="min-h-screen flex items-center justify-center px-4" style={{
+        background: "linear-gradient(135deg, #f5f8f5 0%, #eef4ef 100%)"
+      }}>
+        {/* Decorative background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl" style={{ background: "rgba(156,252,92,0.08)", transform: "translate(30%,-30%)" }} />
+          <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full blur-3xl" style={{ background: "rgba(27,48,34,0.05)", transform: "translate(-30%,30%)" }} />
+        </div>
+
+        <div className="card-luxury p-12 max-w-md w-full text-center animate-slide-up relative z-10">
+          {/* Success icon */}
+          <div className="relative w-24 h-24 mx-auto mb-6">
+            <div className="w-24 h-24 rounded-full flex items-center justify-center animate-pulse-ring" style={{ background: "linear-gradient(135deg,rgba(156,252,92,0.2),rgba(156,252,92,0.1))" }}>
+              <span className="text-5xl">💚</span>
+            </div>
           </div>
+
           <h2 className="font-display font-bold text-forest text-3xl mb-3">Thank You!</h2>
           <p className="text-gray-500 mb-2">
             Your {frequency} donation of{" "}
@@ -111,8 +123,12 @@ const Donate = () => {
           <p className="text-gray-400 text-sm mb-8">
             A confirmation will be sent to <strong>{formData.donorEmail}</strong>
           </p>
+
+          {/* Divider */}
+          <div className="luxury-divider mb-8" />
+
           <div className="flex gap-3">
-            <button onClick={() => navigate("/")} className="btn-secondary flex-1 border-forest text-forest hover:bg-forest hover:text-white">
+            <button onClick={() => navigate("/")} className="btn-secondary flex-1 border-forest/30 text-forest hover:bg-forest hover:text-white" style={{ borderColor: "rgba(27,48,34,0.3)" }}>
               Back to Home
             </button>
             <button onClick={() => { setSubmitted(false); setFormData({ donorName: "", donorEmail: "", donorPhone: "", message: "", isAnonymous: false }); setSelectedAmount(25); setCustomAmount(""); }}
@@ -126,38 +142,61 @@ const Donate = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #f5f8f5 0%, #eef4ef 100%)" }}>
       <SEO
         title="Support Our Mission"
         description="Every dollar you give goes directly toward empowering communities and transforming lives. Support Togetherwise today."
         path="/donate"
       />
+
       {/*  Page Header  */}
-      <div className="bg-forest py-16 text-center">
-        <div className="section-wrapper">
-          <span className="badge-lime mb-4 inline-block">Make a Difference</span>
-          <h1 className="font-display font-black text-white text-4xl sm:text-5xl mb-4">
-            Support Our Mission
+      <div className="relative py-24 text-center overflow-hidden" style={{
+        background: "linear-gradient(135deg, #111E16 0%, #1B3022 55%, #2D4F37 100%)"
+      }}>
+        {/* Decorative */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl" style={{ background: "rgba(156,252,92,0.1)", transform: "translate(30%,-30%)" }} />
+          <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full blur-2xl" style={{ background: "rgba(156,252,92,0.07)", transform: "translate(-20%,20%)" }} />
+          <div className="absolute top-1/2 right-8 w-32 h-32 rounded-full border border-lime/10 hidden lg:block" style={{ transform: "translateY(-50%)" }} />
+          <div className="absolute top-1/2 left-8 w-20 h-20 rounded-full border border-white/6 hidden lg:block" style={{ transform: "translateY(-50%)" }} />
+        </div>
+
+        <div className="section-wrapper relative z-10">
+          <span className="badge-lime mb-5 inline-block animate-fade-in">Make a Difference</span>
+          <h1 className="font-display font-black text-white text-4xl sm:text-5xl mb-4 animate-slide-up leading-tight">
+            Support Our <span className="text-gradient-lime">Mission</span>
           </h1>
-          <p className="text-white/70 text-lg max-w-xl mx-auto">
+          <p className="text-white/65 text-lg max-w-xl mx-auto animate-slide-up delay-200">
             Every dollar you give goes directly toward empowering communities and transforming lives.
           </p>
         </div>
       </div>
 
-      <div className="section-wrapper py-12">
+      <div className="section-wrapper py-14">
         <div className="max-w-2xl mx-auto">
-          <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-xl p-8">
+          <form onSubmit={handleSubmit} className="card-luxury p-8">
+            {/* Form header */}
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-1 h-10 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
+              <div>
+                <h2 className="font-display font-bold text-forest text-xl">Your Donation</h2>
+                <p className="text-gray-400 text-xs">Secure & encrypted</p>
+              </div>
+            </div>
 
             {/*  Frequency Toggle */}
-            <div className="flex bg-gray-100 rounded-2xl p-1 mb-8">
+            <div className="flex rounded-2xl p-1 mb-8" style={{ background: "rgba(27,48,34,0.06)" }}>
               <button
                 type="button"
                 onClick={() => setFrequency("one-time")}
-                className={`flex-1 py-3 rounded-xl font-display font-semibold text-sm transition-all ${frequency === "one-time"
-                  ? "bg-forest text-white shadow-md"
+                className={`flex-1 py-3 rounded-xl font-display font-semibold text-sm transition-all duration-300 ${frequency === "one-time"
+                  ? "text-white shadow-forest"
                   : "text-gray-500 hover:text-forest"
                   }`}
+                style={frequency === "one-time" ? {
+                  background: "linear-gradient(135deg,#1B3022,#2D4F37)",
+                  boxShadow: "0 4px 16px rgba(27,48,34,0.3)"
+                } : {}}
                 id="one-time-btn"
               >
                 One-Time
@@ -165,10 +204,14 @@ const Donate = () => {
               <button
                 type="button"
                 onClick={() => setFrequency("monthly")}
-                className={`flex-1 py-3 rounded-xl font-display font-semibold text-sm transition-all ${frequency === "monthly"
-                  ? "bg-forest text-white shadow-md"
+                className={`flex-1 py-3 rounded-xl font-display font-semibold text-sm transition-all duration-300 ${frequency === "monthly"
+                  ? "text-white shadow-forest"
                   : "text-gray-500 hover:text-forest"
                   }`}
+                style={frequency === "monthly" ? {
+                  background: "linear-gradient(135deg,#1B3022,#2D4F37)",
+                  boxShadow: "0 4px 16px rgba(27,48,34,0.3)"
+                } : {}}
                 id="monthly-btn"
               >
                 Monthly
@@ -184,10 +227,16 @@ const Donate = () => {
                     key={amount}
                     type="button"
                     onClick={() => handleAmountSelect(amount)}
-                    className={`py-3 rounded-xl font-display font-bold text-sm transition-all border-2 ${selectedAmount === amount
-                      ? "bg-lime border-lime-dark text-forest shadow-md scale-105"
-                      : "border-gray-200 text-gray-700 hover:border-lime hover:text-forest"
-                      }`}
+                    className={`py-3 rounded-xl font-display font-bold text-sm transition-all duration-200 border-2 ${
+                      selectedAmount === amount
+                        ? "border-transparent text-forest shadow-lime"
+                        : "border-gray-200 text-gray-700 hover:border-lime/40 hover:text-forest"
+                    }`}
+                    style={selectedAmount === amount ? {
+                      background: "linear-gradient(135deg,#9CFC5C,#7DD940)",
+                      boxShadow: "0 4px 16px rgba(156,252,92,0.4)",
+                      transform: "scale(1.05)"
+                    } : {}}
                     id={`amount-${amount}-btn`}
                   >
                     ${amount}
@@ -217,7 +266,7 @@ const Donate = () => {
                 id="project-select"
                 value={selectedProject}
                 onChange={(e) => setSelectedProject(e.target.value)}
-                className="form-input bg-gray-50 border border-gray-200"
+                className="form-input"
               >
                 <option value="">General Fund (Area of greatest need)</option>
                 {projects.map((p) => (
@@ -230,7 +279,10 @@ const Donate = () => {
 
             {/*  Impact Preview  */}
             {finalAmount > 0 && (
-              <div className="bg-lime/10 border border-lime/30 rounded-2xl p-4 mb-6">
+              <div className="rounded-2xl p-4 mb-6 border" style={{
+                background: "linear-gradient(135deg,rgba(156,252,92,0.08),rgba(156,252,92,0.04))",
+                borderColor: "rgba(156,252,92,0.25)"
+              }}>
                 <p className="text-forest font-semibold text-sm">
                   🌱 Your <strong>${finalAmount} {frequency}</strong> donation can provide{" "}
                   {finalAmount >= 100 ? "clean water for a family for 3 months" :
