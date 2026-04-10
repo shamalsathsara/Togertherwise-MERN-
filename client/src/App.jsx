@@ -23,6 +23,8 @@ import Volunteer from "./pages/Volunteer";
 
 // ── Admin Pages 
 import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import ProjectsList from "./pages/admin/ProjectsList";
@@ -129,8 +131,10 @@ const AppRoutes = () => {
         </PublicLayout>
       } />
 
-      {/* ── Admin Login (public)  */}
+      {/* ── Admin Auth (public)  */}
       <Route path="/admin/login" element={<Login />} />
+      <Route path="/admin/forgot-password" element={<ForgotPassword />} />
+      <Route path="/admin/reset-password/:token" element={<ResetPassword />} />
 
       {/* ── Protected Admin Routes  */}
       <Route path="/admin" element={

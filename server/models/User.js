@@ -49,6 +49,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+
+    // Password reset token (stored as SHA-256 hash — never store raw token)
+    resetPasswordToken: {
+      type: String,
+      default: null,
+    },
+
+    // Expiry for the reset token (10 minutes from request)
+    resetPasswordExpire: {
+      type: Date,
+      default: null,
+    },
   },
   {
     // Automatically adds createdAt and updatedAt timestamps

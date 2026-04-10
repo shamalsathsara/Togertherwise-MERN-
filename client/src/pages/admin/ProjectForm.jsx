@@ -278,9 +278,13 @@ const ProjectForm = ({ mode = "create" }) => {
                 onChange={handleFileChange}
                 className="hidden"
               />
-              <div className="text-gray-300 text-2xl mb-1.5">📸</div>
-              <p className="text-gray-500 text-sm font-medium">Click to upload images or videos</p>
-              <p className="text-gray-300 text-xs mt-1">JPEG, PNG, WebP, MP4 — Max 50MB each</p>
+              <div className="flex flex-col items-center justify-center gap-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 text-gray-300">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <p className="text-gray-500 text-sm font-medium">Click to upload images or videos</p>
+                <p className="text-gray-300 text-xs">JPEG, PNG, WebP, MP4 — Max 50MB each</p>
+              </div>
             </div>
 
             {previewUrls.length > 0 && (
@@ -301,8 +305,10 @@ const ProjectForm = ({ mode = "create" }) => {
                       </button>
                     </div>
                   ) : (
-                    <div key={i} className="w-16 h-16 bg-gray-50 rounded-lg flex items-center justify-center text-xs text-gray-400 border border-gray-100">
-                      🎥
+                    <div key={i} className="w-16 h-16 bg-gray-50 rounded-lg flex items-center justify-center border border-gray-100">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 text-gray-300">
+                        <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                      </svg>
                     </div>
                   )
                 )}
