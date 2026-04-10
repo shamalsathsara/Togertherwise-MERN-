@@ -531,9 +531,9 @@ const Home = ({ lang }) => {
                     {story.location}
                   </span>
                 </div>
-                <div className="p-5" style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(8px)" }}>
+                <div className="p-5" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(12px)" }}>
                   <div className="w-6 h-0.5 rounded-full mb-3" style={{ background: "linear-gradient(90deg,#9CFC5C,#7DD940)" }} />
-                  <p className="text-white/75 text-sm italic leading-relaxed mb-4 line-clamp-3">"{story.quote}"</p>
+                  <p className="text-white/90 text-sm italic leading-relaxed mb-4 line-clamp-3">"{story.quote}"</p>
                   <Link to="/success-stories"
                     className="inline-flex items-center gap-2 text-lime font-semibold text-sm hover:text-lime-light transition-colors">
                     Read Story <span className="text-xs">→</span>
@@ -589,9 +589,9 @@ const Home = ({ lang }) => {
                 const API_BASE = import.meta.env.VITE_API_URL || "";
                 const badgeStyle =
                   item.status === "complete" ? { bg: "linear-gradient(135deg,#9CFC5C,#7DD940)", color: "#1B3022" }
-                  : item.status === "upcoming" ? { bg: "#FEF3C7", color: "#92400E" }
-                  : item.status === "paused" ? { bg: "#F3F4F6", color: "#6B7280" }
-                  : { bg: "#DBEAFE", color: "#1D40AF" };
+                    : item.status === "upcoming" ? { bg: "#FEF3C7", color: "#92400E" }
+                      : item.status === "paused" ? { bg: "#F3F4F6", color: "#6B7280" }
+                        : { bg: "#DBEAFE", color: "#1D40AF" };
 
                 const imageUrl = item.image
                   ? item.image.startsWith("http") ? item.image : `${API_BASE}${item.image}`
