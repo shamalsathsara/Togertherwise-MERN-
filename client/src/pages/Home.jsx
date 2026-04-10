@@ -131,13 +131,13 @@ const Home = ({ lang }) => {
       {/* ════════════════════════════════════════════════════════════════ */}
       {/* HERO — SPLIT DIAGONAL LAYOUT                                   */}
       {/* ════════════════════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen overflow-hidden flex flex-col">
+      <section className="relative h-[85vh] lg:h-[80vh] min-h-[660px] overflow-hidden flex flex-col">
 
         {/* ── Split layout container ──────────────────────────────────── */}
-        <div className="flex flex-1 min-h-screen">
+        <div className="flex flex-1 h-full">
 
           {/* LEFT PANEL — Forest Green Content */}
-          <div className="relative z-10 flex flex-col justify-center w-full lg:w-[52%] px-8 sm:px-14 lg:px-20 pt-24 pb-12"
+          <div className="relative z-10 flex flex-col justify-center w-full lg:w-[52%] px-8 sm:px-14 lg:px-20 pt-16 xl:pt-24 pb-8 xl:pb-12"
             style={{ background: "linear-gradient(160deg, #0D1F13 0%, #1B3022 55%, #243D2C 100%)" }}>
 
             {/* Decorative corner top-left */}
@@ -148,7 +148,7 @@ const Home = ({ lang }) => {
             </div>
 
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full w-fit px-4 py-1.5 mb-8 animate-fade-in"
+            <div className="inline-flex items-center gap-2 rounded-full w-fit px-4 py-1.5 mt-6 lg:mt-8 mb-6 xl:mb-8 animate-fade-in"
               style={{ background: "rgba(156,252,92,0.12)", border: "1px solid rgba(156,252,92,0.3)" }}>
               <div className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
               <span className="text-lime text-sm font-medium">Change The World Together</span>
@@ -163,13 +163,13 @@ const Home = ({ lang }) => {
               Those Who Need It
             </h1>
 
-            <p className="text-white/65 text-lg leading-relaxed mb-10 max-w-lg animate-slide-up delay-200">
+            <p className="text-white/65 text-lg leading-relaxed mb-6 xl:mb-10 max-w-lg animate-slide-up delay-200">
               Village to Global is dedicated to supporting communities through sustainable development,
               access to essential resources, and empowerment programs.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 mb-14 animate-slide-up delay-300">
+            <div className="flex flex-wrap gap-4 mb-8 xl:mb-14 animate-slide-up delay-300">
               <button onClick={() => navigate("/campaigns")}
                 id="hero-explore-btn"
                 className="inline-flex items-center gap-3 font-display font-bold text-forest px-7 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-1"
@@ -186,7 +186,7 @@ const Home = ({ lang }) => {
             </div>
 
             {/* Thumbnail strip — small photos at hero bottom */}
-            <div className="flex gap-3 animate-fade-in delay-500">
+            <div className="flex gap-3 animate-fade-in delay-500 lg:-translate-y-8">
               {heroThumbs.map((t, i) => (
                 <div key={i} className="relative group cursor-pointer"
                   style={{ animationDelay: `${i * 0.15}s` }}>
@@ -211,18 +211,18 @@ const Home = ({ lang }) => {
 
           {/* DIAGONAL DIVIDER - angled stripe between panels */}
           <div className="absolute inset-y-0 z-20 hidden lg:block pointer-events-none"
-            style={{ left: "49%", width: "80px" }}>
+            style={{ left: "49%", width: "50px" }}>
             {/* Main diagonal stripe (lime/green) */}
             <div className="absolute inset-y-0" style={{
-              width: "52px",
+              width: "32px",
               background: "linear-gradient(135deg,#9CFC5C,#7DD940)",
               clipPath: "polygon(40% 0%, 100% 0%, 60% 100%, 0% 100%)",
               opacity: 0.9,
             }} />
             {/* Secondary stripe overlay */}
             <div className="absolute inset-y-0" style={{
-              left: "22px",
-              width: "30px",
+              left: "12px",
+              width: "18px",
               background: "rgba(27,48,34,0.4)",
               clipPath: "polygon(40% 0%, 100% 0%, 60% 100%, 0% 100%)",
             }} />
