@@ -96,7 +96,9 @@ const VolunteersList = () => {
               ) : volunteers.length === 0 ? (
                 <tr>
                   <td colSpan="6" className="text-center py-12">
-                    <div className="text-gray-300 text-3xl mb-2">🤝</div>
+                    <div className="flex justify-center mb-3 text-gray-300">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
                     <p className="text-gray-400 text-sm">No volunteer applications yet.</p>
                   </td>
                 </tr>

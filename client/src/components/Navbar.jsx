@@ -58,7 +58,8 @@ const Navbar = ({ lang, setLang }) => {
               Welcome to the Charity &amp; Donation
             </span>
             <span className="hidden sm:flex items-center gap-1 text-white/40">
-              <span>📍</span> Hokandara, Sri Lanka
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 flex-shrink-0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Hokandara, Sri Lanka
             </span>
           </div>
           {/* Right: social icons + language */}

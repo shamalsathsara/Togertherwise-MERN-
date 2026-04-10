@@ -14,11 +14,17 @@ const TEAM = [
   { name: "James Okonkwo", role: "Field Operations Lead", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" },
 ];
 
+const IconGlobe = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>);
+const IconHeart = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>);
+const IconShield = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>);
+const IconHandshake = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M20.5 14.5l-5.19 5.19a2 2 0 0 1-2.83 0L3 10.4a2 2 0 0 1 0-2.83L8.34 2.73a2 2 0 0 1 2.83 0l.88.88"/><path d="M14 14.5l-4-4"/><path d="M10.5 10l7.08-7.08a2 2 0 0 1 2.83 2.83L13 13"/><path d="M20.5 14.5l-6 .5"/></svg>);
+const IconMessage = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>);
+
 const VALUES = [
-  { icon: "🌍", title: "Global Reach", desc: "We work across 15+ countries, connecting communities worldwide." },
-  { icon: "💚", title: "Community First", desc: "Every decision centers on the people we serve, not institutional interests." },
-  { icon: "🔍", title: "Transparency", desc: "100% financial accountability — you always know where your money goes." },
-  { icon: "🤝", title: "Partnership", desc: "We build lasting relationships with local leaders and organizations." },
+  { Icon: IconGlobe, title: "Global Reach", desc: "We work across 15+ countries, connecting communities worldwide." },
+  { Icon: IconHeart, title: "Community First", desc: "Every decision centers on the people we serve, not institutional interests." },
+  { Icon: IconShield, title: "Transparency", desc: "100% financial accountability — you always know where your money goes." },
+  { Icon: IconHandshake, title: "Partnership", desc: "We build lasting relationships with local leaders and organizations." },
 ];
 
 const AboutUs = () => {
@@ -191,8 +197,8 @@ const AboutUs = () => {
                 {/* Top accent line */}
                 <div className="h-0.5 w-0 group-hover:w-full rounded-full mb-6 -mt-1 transition-all duration-500 mx-auto" style={{ background: "linear-gradient(90deg,#9CFC5C,#7DD940)" }} />
 
-                <div className="icon-circle mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-2xl">{v.icon}</span>
+                <div className="icon-circle mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" style={{ color: "#1B3022" }}>
+                  {v.Icon && <v.Icon />}
                 </div>
                 <h3 className="font-display font-bold text-forest text-lg mb-3 group-hover:text-lime-dark transition-colors">
                   {v.title}
@@ -268,7 +274,10 @@ const AboutUs = () => {
 
               {/* Visual accent */}
               <div className="rounded-2xl p-5 mt-4" style={{ background: "linear-gradient(135deg,rgba(27,48,34,0.04),rgba(156,252,92,0.06))", border: "1px solid rgba(156,252,92,0.15)" }}>
-                <p className="text-forest font-semibold text-sm">💬 Quick response guaranteed</p>
+                <p className="text-forest font-semibold text-sm flex items-center gap-2">
+                  <span style={{ color: "#1B3022" }}><IconMessage /></span>
+                  Quick response guaranteed
+                </p>
                 <p className="text-gray-500 text-xs mt-1">We typically respond within 24 hours on business days</p>
               </div>
             </div>
