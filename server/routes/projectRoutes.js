@@ -18,6 +18,7 @@ const {
 } = require("../controllers/projectController");
 const { protect } = require("../middleware/authMiddleware");
 const { adminOnly } = require("../middleware/adminMiddleware");
+const { validateFileContent } = require("../middleware/validateUploadMiddleware");
 
 // ─── Multer Configuration ─────────────────────────────────────────────────────
 // Configure where uploaded files are stored and what filenames are used
@@ -65,10 +66,10 @@ router.get("/", getAllProjects);
 router.get("/:id", getProjectById);
 
 // POST /api/projects — Create project with optional media upload (admin only)
-router.post("/", protect, adminOnly, upload.array("media", 10), createProject);
+router.post("/", protect, adminOnly, upload.array("media", 10), validateFileContent, createProject);
 
 // PUT /api/projects/:id — Update project (admin only)
-router.put("/:id", protect, adminOnly, upload.array("media", 10), updateProject);
+router.put("/:id", protect, adminOnly, upload.array("media", 10), validateFileContent, updateProject);
 
 // DELETE /api/projects/:id — Delete project (admin only)
 router.delete("/:id", protect, adminOnly, deleteProject);

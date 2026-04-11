@@ -6,6 +6,11 @@
  * - CORS: Only allows requests from the React client URL
  * - cookie-parser: Parses cookies for JWT extraction
  * - express.json: Limits body size to prevent large payload attacks
+ * - express-rate-limit: Prevents brute-force and spam attacks
+ *
+ * ⚠️ Hostinger deployment:
+ *   Set NODE_ENV=production in your Hostinger environment variables.
+ *   This enables: secure cookie flag (HTTPS only) and hides stack traces.
  *
  * Route structure:
  * - /api/auth       → Auth (login, register, logout, profile)
@@ -22,6 +27,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+const rateLimit = require("express-rate-limit");
 const connectDB = require("./config/db");
 
 // ─── Import Routes ────────────────────────────────────────────────────────────
@@ -60,6 +66,61 @@ app.use(
   })
 );
 
+// ─── Rate Limiting ────────────────────────────────────────────────────────────
+// Protect against brute-force, credential stuffing, and spam attacks.
+
+/**
+ * Auth limiter — very strict:
+ * Applies to login, register, forgot-password, reset-password.
+ * Max 10 requests per IP per 15 minutes.
+ * Prevents password brute-force and OTP farming.
+ */
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: "Too many attempts. Please try again in 15 minutes." },
+});
+
+/**
+ * Public form limiter — moderate:
+ * Applies to contact messages, newsletter subscribers, volunteer registrations, donations.
+ * Max 20 requests per IP per 15 minutes.
+ * Prevents spam / automated form submissions.
+ */
+const formLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: "Too many requests. Please slow down and try again shortly." },
+});
+
+/**
+ * General API limiter — broad:
+ * Applies to all other /api/* routes (read operations, public stats, etc.).
+ * Max 200 requests per IP per 15 minutes.
+ * Prevents scraping and DoS.
+ */
+const generalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 200,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: "Too many requests from this IP. Please wait and try again." },
+});
+
+// Apply general limiter to all API routes first
+app.use("/api", generalLimiter);
+
+// Then apply tighter limiters over specific route groups
+app.use("/api/auth", authLimiter);
+app.use("/api/messages", formLimiter);
+app.use("/api/subscribers", formLimiter);
+app.use("/api/volunteers", formLimiter);
+app.use("/api/donations", formLimiter);
+
 // Parse incoming JSON bodies (max 10MB for media metadata)
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
@@ -67,9 +128,14 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 // Parse cookies (required for reading the JWT cookie)
 app.use(cookieParser());
 
-// ─── Static Files ─────────────────────────────────────────────────────────────
-// Serve uploaded media files at /uploads
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// Static Files: Serve uploaded media files at /uploads
+// Security: X-Content-Type-Options prevents browsers from MIME-sniffing and
+// executing uploaded files as scripts, even if extension/content-type is wrong.
+app.use("/uploads", (req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("Content-Disposition", "inline"); // 'attachment' would force download instead
+  next();
+}, express.static(path.join(__dirname, "uploads")));
 
 // ─── API Routes ───────────────────────────────────────────────────────────────
 app.use("/api/auth", authRoutes);
@@ -82,17 +148,17 @@ app.use("/api/messages", messageRoutes);
 app.use("/api/subscribers", subscriberRoutes);
 app.use("/api/news", newsRoutes);
 
-// ─── Health Check Route ───────────────────────────────────────────────────────
+// ─── Health Check Route ──────────────────────────────────────────────────────
 app.get("/api/health", (req, res) => {
   res.json({
     status: "OK",
     message: "Togetherwise API is running",
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV,
+    // NOTE: NODE_ENV is intentionally NOT exposed here — it helps attackers profile targets.
   });
 });
 
-// ─── Global Error Handler ─────────────────────────────────────────────────────
+// ─── Global Error Handler ──────────────────────────────────────────────────────
 // Catches errors thrown by asyncHandler and returns consistent JSON error responses
 app.use((err, req, res, next) => {
   // Use the status code set before the error, or default to 500
@@ -103,8 +169,10 @@ app.use((err, req, res, next) => {
   res.status(statusCode).json({
     success: false,
     message: err.message,
-    // Include stack trace only in development (not in production for security)
-    stack: process.env.NODE_ENV === "production" ? undefined : err.stack,
+    // Stack trace is ONLY included in explicit development mode.
+    // If NODE_ENV is unset, missing, or anything other than 'development', it is hidden.
+    // This is important: on Hostinger, set NODE_ENV=production to ensure this.
+    stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
   });
 });
 

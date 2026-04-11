@@ -13,6 +13,7 @@ const donationSchema = new mongoose.Schema(
       type: Number,
       required: [true, "Donation amount is required"],
       min: [1, "Minimum donation is $1"],
+      max: [1000000, "Donation amount cannot exceed $1,000,000"],
     },
 
     // ─── Donor Information ─────────────────────────────────

@@ -32,12 +32,20 @@ const createDonation = asyncHandler(async (req, res) => {
     throw new Error("Amount, donor name, and email are required");
   }
 
+  // Server-side amount validation (defence-in-depth on top of model validator)
   if (Number(amount) <= 0) {
     res.status(400);
     throw new Error("Donation amount must be greater than zero");
   }
 
+  if (Number(amount) > 1000000) {
+    res.status(400);
+    throw new Error("Donation amount exceeds the maximum allowed value");
+  }
+
   // Create the donation record
+  // NOTE: paymentStatus is always 'pending' for public submissions.
+  // Only a verified Stripe webhook or PayPal server-side capture may set it to 'completed'.
   const donation = await Donation.create({
     amount: Number(amount),
     donorName: isAnonymous ? "Anonymous" : donorName,
@@ -46,18 +54,14 @@ const createDonation = asyncHandler(async (req, res) => {
     projectId: projectId || null,
     frequency: frequency || "one-time",
     paymentMethod: paymentMethod || "pending",
-    transactionId: transactionId || "",
-    paymentStatus: transactionId ? "completed" : "pending",
+    transactionId: "", // Never accept transactionId from client — set only via verified webhook
+    paymentStatus: "pending", // Always pending until a payment processor confirms
     message: message || "",
     isAnonymous: isAnonymous || false,
   });
 
-  // If donation is linked to a project, update project's currentFunds
-  if (projectId && donation.paymentStatus === "completed") {
-    await Project.findByIdAndUpdate(projectId, {
-      $inc: { currentFunds: Number(amount) },
-    });
-  }
+  // Only update project funds when a payment processor actually confirms the donation.
+  // Do NOT increment here — that should happen inside a Stripe webhook or PayPal capture handler.
 
   res.status(201).json({ success: true, donation });
 });

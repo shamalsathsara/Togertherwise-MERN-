@@ -237,9 +237,9 @@ const resetPassword = asyncHandler(async (req, res) => {
     throw new Error("Token and new password are required");
   }
 
-  if (password.length < 6) {
+  if (password.length < 12) {
     res.status(400);
-    throw new Error("Password must be at least 6 characters");
+    throw new Error("Password must be at least 12 characters");
   }
 
   // Hash the incoming raw token and look it up
