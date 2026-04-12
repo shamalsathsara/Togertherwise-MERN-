@@ -124,7 +124,7 @@ const Volunteer = () => {
     <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #f5f8f5 0%, #eef4ef 100%)" }}>
       <SEO
         title="Volunteer with Us"
-        description="Join Togetherwise as a volunteer, fundraiser, or partner. Empower lives and build stronger communities with us."
+        description="Join Togertherwerise as a volunteer, fundraiser, or partner. Empower lives and build stronger communities with us."
         path="/volunteer"
       />
 
@@ -318,7 +318,7 @@ const Volunteer = () => {
                 <div className="w-16 h-16 mx-auto mb-4 rounded-2xl overflow-hidden" style={{ background: "rgba(27,48,34,0.06)", border: "1px solid rgba(27,48,34,0.1)" }}>
                   <img
                     src={logoImg}
-                    alt="Togetherwise Logo"
+                    alt="Togertherwerise Logo"
                     className="w-full h-full object-contain pt-1"
                   />
                 </div>

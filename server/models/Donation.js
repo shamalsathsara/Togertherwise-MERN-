@@ -8,12 +8,12 @@ const mongoose = require("mongoose");
 
 const donationSchema = new mongoose.Schema(
   {
-    // Donation amount in USD
+    // Donation amount in LKR
     amount: {
       type: Number,
       required: [true, "Donation amount is required"],
-      min: [1, "Minimum donation is $1"],
-      max: [1000000, "Donation amount cannot exceed $1,000,000"],
+      min: [1, "Minimum donation is LKR 1"],
+      max: [500000000, "Donation amount cannot exceed LKR 500,000,000"],
     },
 
     // ─── Donor Information ─────────────────────────────────

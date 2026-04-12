@@ -97,11 +97,11 @@ const AdminLayout = () => {
         <div className="px-4 py-5 border-b border-white/[0.06]">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-lime/15 flex items-center justify-center flex-shrink-0 overflow-hidden">
-              <img src={logoImg} alt="Togetherwise Logo" className="w-7 h-7 object-contain" />
+              <img src={logoImg} alt="Togertherwerise Logo" className="w-7 h-7 object-contain" />
             </div>
             {isSidebarOpen && (
               <div className="overflow-hidden">
-                <p className="font-display font-bold text-white text-[15px] leading-none tracking-tight">Togetherwise</p>
+                <p className="font-display font-bold text-white text-[15px] leading-none tracking-tight">Togertherwerise</p>
                 <p className="text-white/30 text-[10px] mt-1 font-medium tracking-widest uppercase">Admin Portal</p>
               </div>
             )}

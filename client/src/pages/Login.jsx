@@ -104,7 +104,7 @@ const Login = () => {
         {/* Logo */}
         <div className="relative z-10 flex items-center gap-3">
           <div className="w-12 h-12 rounded-xl overflow-hidden" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)" }}>
-            <img src={logoImg} alt="Togetherwise Logo" className="w-full h-full object-contain" />
+            <img src={logoImg} alt="Togertherwerise Logo" className="w-full h-full object-contain" />
           </div>
           <div>
             <span className="font-display font-bold text-white text-xl leading-none block">
@@ -127,7 +127,7 @@ const Login = () => {
             Report.
           </h1>
           <p className="text-white/55 text-lg leading-relaxed max-w-sm">
-            The Togetherwise admin portal gives you full control over projects, campaigns,
+            The Togertherwerise admin portal gives you full control over projects, campaigns,
             donations, and volunteer management.
           </p>
         </div>
@@ -149,7 +149,7 @@ const Login = () => {
           {/* Mobile logo */}
           <div className="lg:hidden text-center mb-8">
             <h2 className="font-display font-bold text-forest text-2xl">
-              Togetherwise <span style={{ color: "#7DD940" }}>Admin</span>
+              Togertherwerise <span style={{ color: "#7DD940" }}>Admin</span>
             </h2>
           </div>
 
@@ -180,7 +180,7 @@ const Login = () => {
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="admin@togetherwise.org"
+                  placeholder="admin@Togertherwerise.org"
                   className="form-input"
                   autoComplete="email"
                   required
@@ -254,7 +254,7 @@ const Login = () => {
               <p className="text-gray-400 text-xs text-center">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 inline-block mr-1 mb-0.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 This is a protected admin area.<br />
-                Default credentials: <strong>admin@togetherwise.org</strong> / <strong>Admin@123</strong>
+                Default credentials: <strong>admin@Togertherwerise.org</strong> / <strong>Admin@123</strong>
               </p>
             </div>
           </div>

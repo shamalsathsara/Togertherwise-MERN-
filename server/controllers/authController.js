@@ -187,16 +187,16 @@ const forgotPassword = asyncHandler(async (req, res) => {
       await transporter.sendMail({
         from: process.env.SMTP_FROM,
         to: user.email,
-        subject: "Togetherwise Admin — Password Reset Request",
+        subject: "Togertherwerise Admin — Password Reset Request",
         html: `
           <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px;background:#f5f8f5;border-radius:16px;">
             <div style="text-align:center;margin-bottom:24px;">
               <h2 style="color:#1B3022;margin:0;font-size:24px;">Password Reset</h2>
-              <p style="color:#6b7280;font-size:14px;margin-top:8px;">Togetherwise Administration Portal</p>
+              <p style="color:#6b7280;font-size:14px;margin-top:8px;">Togertherwerise Administration Portal</p>
             </div>
             <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid rgba(27,48,34,0.08);">
               <p style="color:#374151;font-size:15px;margin-top:0;">Hi ${user.name},</p>
-              <p style="color:#374151;font-size:15px;">You requested a password reset for your Togetherwise admin account. Click the button below to set a new password:</p>
+              <p style="color:#374151;font-size:15px;">You requested a password reset for your Togertherwerise admin account. Click the button below to set a new password:</p>
               <div style="text-align:center;margin:28px 0;">
                 <a href="${resetUrl}" style="display:inline-block;background:linear-gradient(135deg,#9CFC5C,#7DD940);color:#1B3022;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:100px;font-size:15px;">
                   Reset My Password
@@ -205,7 +205,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
               <p style="color:#6b7280;font-size:13px;">This link expires in <strong>10 minutes</strong>. If you didn't request this, ignore this email — your password won't change.</p>
             </div>
             <p style="text-align:center;color:#9ca3af;font-size:12px;margin-top:20px;">
-              Togetherwise · Hokandara, Sri Lanka
+              Togertherwerise · Hokandara, Sri Lanka
             </p>
           </div>
         `,

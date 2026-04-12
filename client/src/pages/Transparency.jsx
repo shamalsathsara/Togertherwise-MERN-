@@ -30,10 +30,10 @@ const CustomBarTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const val = payload[0].value;
     const formattedVal = val >= 1000000
-      ? `$${(val / 1000000).toFixed(1)}M`
+      ? `LKR ${(val / 1000000).toFixed(1)}M`
       : val >= 1000
-        ? `$${(val / 1000).toFixed(1)}k`
-        : `$${val}`;
+        ? `LKR ${(val / 1000).toFixed(1)}k`
+        : `LKR ${val}`;
 
     return (
       <div className="card-luxury p-3 text-sm" style={{ minWidth: "140px" }}>
@@ -216,15 +216,15 @@ const Transparency = () => {
                 <div className="rounded-2xl p-4 space-y-2" style={{ background: "rgba(27,48,34,0.04)", border: "1px solid rgba(27,48,34,0.06)" }}>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600 font-medium">Total Income</span>
-                    <span className="font-bold text-forest">${stats.totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    <span className="font-bold text-forest">LKR {stats.totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600 font-medium">Total Expense</span>
-                    <span className="font-bold text-red-500">${(stats.totalAmount * 0.85).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    <span className="font-bold text-red-500">LKR {(stats.totalAmount * 0.85).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                   <div className="pt-2 flex justify-between text-sm" style={{ borderTop: "1px solid rgba(27,48,34,0.08)" }}>
                     <span className="text-gray-600 font-medium">Net</span>
-                    <span className="font-bold" style={{ color: "#7DD940" }}>+${(stats.totalAmount * 0.15).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    <span className="font-bold" style={{ color: "#7DD940" }}>+LKR {(stats.totalAmount * 0.15).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                 </div>
               </div>
@@ -253,7 +253,7 @@ const Transparency = () => {
                 />
                 <YAxis
                   tick={{ fontSize: 10, fill: "#6b7280" }}
-                  tickFormatter={(v) => v >= 1000000 ? `$${(v / 1000000).toFixed(0)}M` : v >= 1000 ? `$${(v / 1000).toFixed(0)}k` : `$${v}`}
+                  tickFormatter={(v) => v >= 1000000 ? `LKR ${(v / 1000000).toFixed(0)}M` : v >= 1000 ? `LKR ${(v / 1000).toFixed(0)}k` : `LKR ${v}`}
                   tickLine={false}
                   axisLine={false}
                 />

@@ -135,7 +135,7 @@ const Home = ({ lang }) => {
     <div style={{ background: "#ffffff" }}>
       <SEO
         title="Empowering Communities"
-        description="Togetherwise — From village to global. Join us in transforming lives through donations, volunteering, and community empowerment."
+        description="Togertherwerise — From village to global. Join us in transforming lives through donations, volunteering, and community empowerment."
         path="/"
       />
 

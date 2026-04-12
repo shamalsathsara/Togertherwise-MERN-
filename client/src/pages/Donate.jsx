@@ -9,12 +9,12 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import SEO from "../components/SEO";
 
-const PRESET_AMOUNTS = [10, 25, 30, 50, 100];
+const PRESET_AMOUNTS = [500, 1000, 2500, 5000, 10000];
 
 const Donate = () => {
   const navigate = useNavigate();
   const [frequency, setFrequency] = useState("one-time"); // 'one-time' | 'monthly'
-  const [selectedAmount, setSelectedAmount] = useState(25);
+  const [selectedAmount, setSelectedAmount] = useState(1000);
   const [customAmount, setCustomAmount] = useState("");
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState("");
@@ -117,7 +117,7 @@ const Donate = () => {
           <h2 className="font-display font-bold text-forest text-3xl mb-3">Thank You!</h2>
           <p className="text-gray-500 mb-2">
             Your {frequency} donation of{" "}
-            <span className="text-forest font-bold">${finalAmount}</span>{" "}
+            <span className="text-forest font-bold">LKR {finalAmount.toLocaleString()}</span>{" "}
             has been received.
           </p>
           <p className="text-gray-400 text-sm mb-8">
@@ -131,7 +131,7 @@ const Donate = () => {
             <button onClick={() => navigate("/")} className="btn-secondary flex-1 border-forest/30 text-forest hover:bg-forest hover:text-white" style={{ borderColor: "rgba(27,48,34,0.3)" }}>
               Back to Home
             </button>
-            <button onClick={() => { setSubmitted(false); setFormData({ donorName: "", donorEmail: "", donorPhone: "", message: "", isAnonymous: false }); setSelectedAmount(25); setCustomAmount(""); }}
+            <button onClick={() => { setSubmitted(false); setFormData({ donorName: "", donorEmail: "", donorPhone: "", message: "", isAnonymous: false }); setSelectedAmount(1000); setCustomAmount(""); }}
               className="btn-primary flex-1">
               Donate Again
             </button>
@@ -145,7 +145,7 @@ const Donate = () => {
     <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #f5f8f5 0%, #eef4ef 100%)" }}>
       <SEO
         title="Support Our Mission"
-        description="Every dollar you give goes directly toward empowering communities and transforming lives. Support Togetherwise today."
+        description="Every rupee you give goes directly toward empowering communities and transforming lives. Support Togertherwerise today."
         path="/donate"
       />
 
@@ -167,7 +167,7 @@ const Donate = () => {
             Support Our <span className="text-gradient-lime">Mission</span>
           </h1>
           <p className="text-white/65 text-lg max-w-xl mx-auto animate-slide-up delay-200">
-            Every dollar you give goes directly toward empowering communities and transforming lives.
+            Every rupee you give goes directly toward empowering communities and transforming lives.
           </p>
         </div>
       </div>
@@ -239,19 +239,19 @@ const Donate = () => {
                     } : {}}
                     id={`amount-${amount}-btn`}
                   >
-                    ${amount}
+                    LKR {amount.toLocaleString()}
                   </button>
                 ))}
               </div>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-lg">$</span>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-sm">LKR</span>
                 <input
                   type="number"
                   placeholder="Custom amount"
                   value={customAmount}
                   onChange={handleCustomAmount}
                   min="1"
-                  className="form-input pl-8"
+                  className="form-input pl-14"
                   id="custom-amount-input"
                 />
               </div>
@@ -284,10 +284,10 @@ const Donate = () => {
                 borderColor: "rgba(156,252,92,0.25)"
               }}>
                 <p className="text-forest font-semibold text-sm">
-                  🌱 Your <strong>${finalAmount} {frequency}</strong> donation can provide{" "}
-                  {finalAmount >= 100 ? "clean water for a family for 3 months" :
-                    finalAmount >= 50 ? "school supplies for 5 children" :
-                      finalAmount >= 25 ? "a week of meals for a family" :
+                  🌱 Your <strong>LKR {finalAmount.toLocaleString()} {frequency}</strong> donation can provide{" "}
+                  {finalAmount >= 10000 ? "clean water for a family for 3 months" :
+                    finalAmount >= 5000 ? "school supplies for 5 children" :
+                      finalAmount >= 2500 ? "a week of meals for a family" :
                         "essential supplies for a community member"}.
                 </p>
               </div>
@@ -386,7 +386,7 @@ const Donate = () => {
                   Processing...
                 </span>
               ) : (
-                `Donate $${finalAmount || 0} ${frequency === "monthly" ? "/ Month" : "Now"} ↗`
+                `Donate LKR ${(finalAmount || 0).toLocaleString()} ${frequency === "monthly" ? "/ Month" : "Now"} ↗`
               )}
             </button>
 

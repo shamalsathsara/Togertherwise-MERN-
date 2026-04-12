@@ -210,9 +210,9 @@ const ProjectForm = ({ mode = "create" }) => {
           {/* Goal + Category row */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-[13px] font-medium text-gray-600 mb-1.5" htmlFor="proj-goal">Funding Goal (USD) *</label>
+              <label className="block text-[13px] font-medium text-gray-600 mb-1.5" htmlFor="proj-goal">Funding Goal (LKR) *</label>
               <div className="relative">
-                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">$</span>
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-medium">LKR</span>
                 <input
                   id="proj-goal"
                   name="goal"
@@ -221,7 +221,7 @@ const ProjectForm = ({ mode = "create" }) => {
                   onChange={handleChange}
                   placeholder="50000"
                   min="0"
-                  className="input-field pl-7"
+                  className="input-field pl-12"
                   required
                 />
               </div>

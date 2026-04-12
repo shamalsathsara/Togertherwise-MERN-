@@ -1,5 +1,5 @@
 /**
- * AboutUs.jsx — About Togetherwise Page
+ * AboutUs.jsx — About Togertherwerise Page
  */
 
 import React, { useState } from "react";
@@ -74,7 +74,7 @@ const AboutUs = () => {
     <div className="min-h-screen bg-white">
       <SEO
         title="About Us"
-        description="Learn about Togetherwise — our mission, our values, and the team working to empower communities across the globe."
+        description="Learn about Togertherwerise — our mission, our values, and the team working to empower communities across the globe."
         path="/about"
       />
 
@@ -99,10 +99,10 @@ const AboutUs = () => {
         <div className="section-wrapper relative z-10 text-center">
           <span className="badge-lime mb-5 inline-block animate-fade-in">Our Story</span>
           <h1 className="font-display font-black text-white text-4xl sm:text-6xl mb-6 animate-slide-up leading-tight">
-            About <span className="text-gradient-lime">Togetherwise</span>
+            About <span className="text-gradient-lime">Togertherwerise</span>
           </h1>
           <p className="text-white/65 text-xl max-w-2xl mx-auto leading-relaxed animate-slide-up delay-200">
-            Founded in 2026, Togetherwise bridges the gap between global resources and local needs,
+            Founded in 2026, Togertherwerise bridges the gap between global resources and local needs,
             creating lasting change in communities across the world.
           </p>
         </div>
@@ -259,7 +259,7 @@ const AboutUs = () => {
               <span className="badge-lime mb-4 inline-block">Contact Us</span>
               <h2 className="section-title mb-3">How can we help?</h2>
               <p className="text-gray-500 mb-8 leading-relaxed">
-                Togetherwise is the most guaranteed estimated and most believed of community benefits shared up.
+                Togertherwerise is the most guaranteed estimated and most believed of community benefits shared up.
               </p>
               <div className="space-y-4 mb-8">
                 {["Volunteer Opportunities", "Donate & Support", "Raise a request", "Join our Community"].map((item, i) => (
