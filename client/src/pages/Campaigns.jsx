@@ -121,7 +121,11 @@ const Campaigns = () => {
             return (
               <div key={campaign._id} className="card-luxury overflow-hidden group">
                 <div className="relative h-52 overflow-hidden">
-                  <img src={campaign.coverImage.startsWith("http") ? campaign.coverImage : `${import.meta.env.VITE_API_URL || ""}${campaign.coverImage}`} alt={campaign.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  {/\.(mp4|webm|ogg|mov|avi)$/i.test(campaign.coverImage) ? (
+                    <video src={campaign.coverImage.startsWith("http") ? campaign.coverImage : `${import.meta.env.VITE_API_URL || ""}${campaign.coverImage}`} preload="metadata" autoPlay loop muted playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  ) : (
+                    <img src={campaign.coverImage.startsWith("http") ? campaign.coverImage : `${import.meta.env.VITE_API_URL || ""}${campaign.coverImage}`} alt={campaign.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-forest/70 via-transparent to-transparent" />
                   <div className="absolute top-3 left-3"><span className="badge-lime text-xs">{campaign.category}</span></div>
                 </div>
@@ -130,8 +134,8 @@ const Campaigns = () => {
                   <p className="text-gray-500 text-sm mb-4 line-clamp-2">{campaign.description}</p>
                   <div className="mb-4">
                     <div className="flex justify-between text-xs font-medium mb-2">
-                      <span className="text-gray-500">${(campaign.currentFunds || 0).toLocaleString()} raised</span>
-                      <span className="font-bold" style={{ color: "#7DD940" }}>of ${(campaign.goal || 0).toLocaleString()}</span>
+                      <span className="text-gray-500">LKR {(campaign.currentFunds || 0).toLocaleString()} raised</span>
+                      <span className="font-bold" style={{ color: "#7DD940" }}>of LKR {(campaign.goal || 0).toLocaleString()}</span>
                     </div>
                     <div className="progress-bar">
                       <div className="progress-fill" style={{ width: `${percent}%` }} />

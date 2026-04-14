@@ -54,8 +54,11 @@ const CampaignCard = ({ campaign }) => {
       onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(27,48,34,0.14)"; }}
       onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 24px rgba(27,48,34,0.08)"; }}>
       <div className="relative h-48 overflow-hidden">
-        <img src={campaign.image} alt={campaign.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+        {/\.(mp4|webm|ogg|mov|avi)$/i.test(campaign.image) ? (
+          <video src={campaign.image} preload="metadata" autoPlay loop muted playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+        ) : (
+          <img src={campaign.image} alt={campaign.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+        )}
         <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(27,48,34,0.7), transparent)" }} />
         <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold text-forest"
           style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)", boxShadow: "0 2px 8px rgba(156,252,92,0.4)" }}>
@@ -67,7 +70,7 @@ const CampaignCard = ({ campaign }) => {
         <p className="text-gray-500 text-sm mb-4 line-clamp-2">{campaign.description}</p>
         <div className="mb-4">
           <div className="flex justify-between text-xs font-semibold mb-1.5">
-            <span className="text-gray-500">Raised: <span className="text-forest">${campaign.raised.toLocaleString()}</span></span>
+            <span className="text-gray-500">Raised: <span className="text-forest">LKR {campaign.raised.toLocaleString()}</span></span>
             <span style={{ color: "#7DD940" }}>{percent}%</span>
           </div>
           <div className="h-1.5 rounded-full bg-gray-100 overflow-hidden">
@@ -534,11 +537,15 @@ const Home = ({ lang }) => {
                 onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(156,252,92,0.4)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(0,0,0,0.35)"; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(156,252,92,0.15)"; e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,0,0,0.2)"; }}>
                 <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={story.image.startsWith("http") ? story.image : `${import.meta.env.VITE_API_URL || ""}${story.image}`}
-                    alt={`Story from ${story.location}`}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
+                  {story.video ? (
+                    <video src={story.video.startsWith("http") ? story.video : `${import.meta.env.VITE_API_URL || ""}${story.video}`} preload="none" poster={story.image.startsWith("http") ? story.image : `${import.meta.env.VITE_API_URL || ""}${story.image}`} autoPlay loop muted playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  ) : (
+                    <img
+                      src={story.image.startsWith("http") ? story.image : `${import.meta.env.VITE_API_URL || ""}${story.image}`}
+                      alt={`Story from ${story.location}`}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                  )}
                   <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(17,30,22,0.9) 0%, transparent 60%)" }} />
                   <span className="absolute bottom-4 left-4 px-3 py-1 rounded-full text-xs font-bold text-forest"
                     style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)" }}>

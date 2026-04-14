@@ -19,6 +19,10 @@ const successStorySchema = mongoose.Schema(
       type: String,
       required: [true, "Image is required"],
     },
+    video: {
+      type: String,
+      default: "",
+    },
     quote: {
       type: String,
       required: [true, "Quote is required"],

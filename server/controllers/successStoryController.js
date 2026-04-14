@@ -23,14 +23,15 @@ const getFeaturedSuccessStories = asyncHandler(async (req, res) => {
 const createSuccessStory = asyncHandler(async (req, res) => {
   const { title, location, tag, quote, person, role } = req.body;
 
-  if (!req.file) {
+  if (!req.files || !req.files['image']) {
     res.status(400);
     throw new Error("Please upload an image for the success story");
   }
 
   // Construct the URL to access the uploaded file
   // multer saves it in 'uploads/' directory which we expose statically
-  const image = `/uploads/${req.file.filename}`;
+  const image = `/uploads/${req.files['image'][0].filename}`;
+  const video = req.files['video'] ? `/uploads/${req.files['video'][0].filename}` : "";
 
   const story = await SuccessStory.create({
     title,
@@ -40,6 +41,7 @@ const createSuccessStory = asyncHandler(async (req, res) => {
     person,
     role,
     image,
+    video,
   });
 
   res.status(201).json({ success: true, data: story });
@@ -58,9 +60,14 @@ const updateSuccessStory = asyncHandler(async (req, res) => {
 
   const { title, location, tag, quote, person, role } = req.body;
 
-  // Only replace image if a new file was uploaded
-  if (req.file) {
-    story.image = `/uploads/${req.file.filename}`;
+  // Replace image or video if new files were uploaded
+  if (req.files) {
+    if (req.files['image']) {
+      story.image = `/uploads/${req.files['image'][0].filename}`;
+    }
+    if (req.files['video']) {
+      story.video = `/uploads/${req.files['video'][0].filename}`;
+    }
   }
 
   // Use != null checks so an admin can intentionally set a field to empty string

@@ -77,12 +77,7 @@ const ProjectForm = ({ mode = "create" }) => {
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setMediaFiles(files);
-    const urls = files.map((f) => {
-      if (f.type.startsWith("image/")) {
-        return URL.createObjectURL(f);
-      }
-      return null;
-    });
+    const urls = files.map((f) => URL.createObjectURL(f));
     setPreviewUrls(urls);
   };
 
@@ -291,8 +286,12 @@ const ProjectForm = ({ mode = "create" }) => {
               <div className="flex gap-2.5 mt-3 flex-wrap">
                 {previewUrls.map((url, i) =>
                   url ? (
-                    <div key={i} className="relative w-16 h-16">
-                      <img src={url} alt="" className="w-full h-full object-cover rounded-lg" />
+                    <div key={i} className="relative w-16 h-16 bg-black rounded-lg">
+                      {mediaFiles[i]?.type?.startsWith("video/") ? (
+                        <video src={url} className="w-full h-full object-cover rounded-lg" autoPlay loop muted playsInline />
+                      ) : (
+                        <img src={url} alt="" className="w-full h-full object-cover rounded-lg" />
+                      )}
                       <button
                         type="button"
                         onClick={() => {

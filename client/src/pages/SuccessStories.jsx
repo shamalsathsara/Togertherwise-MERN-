@@ -101,7 +101,11 @@ const SuccessStories = () => {
             {featuredStory && (
               <div className="card-luxury overflow-hidden mb-12 grid grid-cols-1 lg:grid-cols-2">
                 <div className="relative h-80 lg:h-auto overflow-hidden group">
-                  <img src={getImageUrl(featuredStory.image)} alt={featuredStory.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  {featuredStory.video ? (
+                    <video src={getImageUrl(featuredStory.video)} preload="none" poster={getImageUrl(featuredStory.image)} autoPlay loop muted playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  ) : (
+                    <img src={getImageUrl(featuredStory.image)} alt={featuredStory.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-forest/80 via-forest/20 to-transparent" />
                   <span className="absolute bottom-4 left-4 badge-lime">{featuredStory.tag}</span>
                   {/* Featured label */}
@@ -136,7 +140,11 @@ const SuccessStories = () => {
               {gridStories.map((story) => (
                 <div key={story._id} className="card-luxury group overflow-hidden">
                   <div className="relative h-52 overflow-hidden">
-                    <img src={getImageUrl(story.image)} alt={story.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    {story.video ? (
+                      <video src={getImageUrl(story.video)} preload="none" poster={getImageUrl(story.image)} autoPlay loop muted playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    ) : (
+                      <img src={getImageUrl(story.image)} alt={story.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-forest/85 via-forest/20 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
                       <span className="badge-lime text-xs">{story.tag}</span>

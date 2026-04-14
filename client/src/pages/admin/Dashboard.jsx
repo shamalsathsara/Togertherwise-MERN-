@@ -85,7 +85,7 @@ const Dashboard = () => {
         if (projectsRes.data.success) {
           setRecentProjects(projectsRes.data.projects.slice(0, 5).map(p => ({
             title: p.title,
-            subtitle: `Goal: $${p.goal?.toLocaleString()} · Raised: $${p.currentFunds?.toLocaleString() || 0}`,
+            subtitle: `Goal: LKR ${p.goal?.toLocaleString()} · Raised: LKR ${p.currentFunds?.toLocaleString() || 0}`,
             status: p.status,
           })));
         }
