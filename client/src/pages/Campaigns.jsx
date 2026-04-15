@@ -139,7 +139,11 @@ const Campaigns = () => {
             return (
               <div key={campaign._id} className="card-luxury overflow-hidden group">
                 <div className="relative h-52 overflow-hidden">
-                  <img src={campaign.coverImage.startsWith("http") ? campaign.coverImage : `${import.meta.env.VITE_API_URL || ""}${campaign.coverImage}`} alt={campaign.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  {/\.(mp4|webm|ogg|mov|avi)$/i.test(campaign.coverImage) ? (
+                    <video src={campaign.coverImage.startsWith("http") ? campaign.coverImage : `${import.meta.env.VITE_API_URL || ""}${campaign.coverImage}`} preload="metadata" autoPlay loop muted playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  ) : (
+                    <img src={campaign.coverImage.startsWith("http") ? campaign.coverImage : `${import.meta.env.VITE_API_URL || ""}${campaign.coverImage}`} alt={campaign.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-forest/70 via-transparent to-transparent" />
                   <div className="absolute top-3 left-3"><span className="badge-lime text-xs">{catKeys[campaign.category] || campaign.category}</span></div>
                 </div>

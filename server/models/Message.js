@@ -31,11 +31,14 @@ const messageSchema = new mongoose.Schema(
       type: String,
       required: [true, "Phone number is required"],
       trim: true,
+      maxlength: [20, "Phone number is too long"],
+      match: [/^\+?[\d\s\-().]{7,20}$/, "Please enter a valid phone number"],
     },
     message: {
       type: String,
       required: [true, "Message content is required"],
       trim: true,
+      maxlength: [2000, "Message cannot exceed 2000 characters"],
     },
     isRead: {
       type: Boolean,

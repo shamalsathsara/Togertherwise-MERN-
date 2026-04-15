@@ -10,13 +10,13 @@ import axiosInstance from "../api/axiosInstance";
 import SEO from "../components/SEO";
 import { useTranslation } from "react-i18next";
 
-const PRESET_AMOUNTS = [10, 25, 30, 50, 100];
+const PRESET_AMOUNTS = [500, 1000, 2500, 5000, 10000];
 
 const Donate = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [frequency, setFrequency] = useState("one-time"); // 'one-time' | 'monthly'
-  const [selectedAmount, setSelectedAmount] = useState(25);
+  const [selectedAmount, setSelectedAmount] = useState(1000);
   const [customAmount, setCustomAmount] = useState("");
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState("");
@@ -134,7 +134,7 @@ const Donate = () => {
             <button onClick={() => navigate("/")} className="btn-secondary flex-1 border-forest/30 text-forest hover:bg-forest hover:text-white" style={{ borderColor: "rgba(27,48,34,0.3)" }}>
               {t('donate_backHome')}
             </button>
-            <button onClick={() => { setSubmitted(false); setFormData({ donorName: "", donorEmail: "", donorPhone: "", message: "", isAnonymous: false }); setSelectedAmount(25); setCustomAmount(""); }}
+            <button onClick={() => { setSubmitted(false); setFormData({ donorName: "", donorEmail: "", donorPhone: "", message: "", isAnonymous: false }); setSelectedAmount(1000); setCustomAmount(""); }}
               className="btn-primary flex-1">
               {t('donate_again')}
             </button>
@@ -148,7 +148,7 @@ const Donate = () => {
     <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #f5f8f5 0%, #eef4ef 100%)" }}>
       <SEO
         title="Support Our Mission"
-        description="Every dollar you give goes directly toward empowering communities and transforming lives. Support Togetherwise today."
+        description="Every rupee you give goes directly toward empowering communities and transforming lives. Support Togertherwerise today."
         path="/donate"
       />
 
@@ -242,19 +242,19 @@ const Donate = () => {
                     } : {}}
                     id={`amount-${amount}-btn`}
                   >
-                    ${amount}
+                    LKR {amount.toLocaleString()}
                   </button>
                 ))}
               </div>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-lg">$</span>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-sm">LKR</span>
                 <input
                   type="number"
                   placeholder={t('donate_customAmt')}
                   value={customAmount}
                   onChange={handleCustomAmount}
                   min="1"
-                  className="form-input pl-8"
+                  className="form-input pl-14"
                   id="custom-amount-input"
                 />
               </div>

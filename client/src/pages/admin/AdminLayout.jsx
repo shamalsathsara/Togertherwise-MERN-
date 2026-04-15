@@ -97,50 +97,52 @@ const AdminLayout = () => {
         <div className="px-4 py-5 border-b border-white/[0.06]">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-lime/15 flex items-center justify-center flex-shrink-0 overflow-hidden">
-              <img src={logoImg} alt="Togetherwise Logo" className="w-7 h-7 object-contain" />
+              <img src={logoImg} alt="Togertherwerise Logo" className="w-7 h-7 object-contain" />
             </div>
             {isSidebarOpen && (
               <div className="overflow-hidden">
                 <p className="font-display font-bold text-white text-[15px] leading-none tracking-tight">TogetherWErise</p>
                 <p className="text-white/30 text-[10px] mt-1 font-medium tracking-widest uppercase">Admin Portal</p>
-              </div>
+              </div >
             )}
-          </div>
-        </div>
+          </div >
+        </div >
 
-        {/* Navigation */}
-        <nav className="flex-1 py-4 px-3 space-y-5 overflow-y-auto custom-scrollbar">
-          {NAV_SECTIONS.map((section) => (
-            <div key={section.label}>
-              {isSidebarOpen && (
-                <p className="text-[10px] font-semibold text-white/25 uppercase tracking-[0.15em] px-3 mb-2">
-                  {section.label}
-                </p>
-              )}
-              <div className="space-y-0.5">
-                {section.items.map(({ to, label, icon: IconComp }) => (
-                  <NavLink
-                    key={to}
-                    to={to}
-                    end={to === "/admin/dashboard"}
-                    className={({ isActive }) =>
-                      `flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-150 text-[13px] font-medium group ${isActive
-                        ? "bg-lime/90 text-[#1a3a2a] shadow-sm shadow-lime/20"
-                        : "text-white/50 hover:bg-white/[0.06] hover:text-white/80"
-                      }`
-                    }
-                  >
-                    <IconComp />
-                    {isSidebarOpen && <span>{label}</span>}
-                  </NavLink>
-                ))}
-              </div>
-            </div>
+  {/* Navigation */ }
+  < nav className = "flex-1 py-4 px-3 space-y-5 overflow-y-auto custom-scrollbar" >
+  {
+    NAV_SECTIONS.map((section) => (
+      <div key={section.label}>
+        {isSidebarOpen && (
+          <p className="text-[10px] font-semibold text-white/25 uppercase tracking-[0.15em] px-3 mb-2">
+            {section.label}
+          </p>
+        )}
+        <div className="space-y-0.5">
+          {section.items.map(({ to, label, icon: IconComp }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={to === "/admin/dashboard"}
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-150 text-[13px] font-medium group ${isActive
+                  ? "bg-lime/90 text-[#1a3a2a] shadow-sm shadow-lime/20"
+                  : "text-white/50 hover:bg-white/[0.06] hover:text-white/80"
+                }`
+              }
+            >
+              <IconComp />
+              {isSidebarOpen && <span>{label}</span>}
+            </NavLink>
           ))}
-        </nav>
+        </div>
+      </div>
+    ))
+  }
+        </nav >
 
-        {/* Bottom Actions */}
-        <div className="px-3 py-3 border-t border-white/[0.06] space-y-1">
+  {/* Bottom Actions */ }
+  < div className = "px-3 py-3 border-t border-white/[0.06] space-y-1" >
           <a
             href="/"
             target="_blank"
@@ -159,45 +161,45 @@ const AdminLayout = () => {
             <Icons.logout />
             {isSidebarOpen && <span>Logout</span>}
           </button>
+        </div >
+      </aside >
+
+  {/* ── Main Content ──────────────────────────────────────────────── */ }
+  < div className = "flex-1 flex flex-col overflow-hidden" >
+    {/* Top Header */ }
+    < header className = "bg-white/80 backdrop-blur-md border-b border-gray-200/60 px-6 py-3.5 flex items-center justify-between flex-shrink-0 sticky top-0 z-30" >
+      <div className="flex items-center gap-4">
+        <button
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-400 hover:text-gray-600"
+        >
+          <Icons.menu />
+        </button>
+        <div className="flex items-center gap-2 text-sm">
+          <span className="text-gray-400 font-medium">Admin</span>
+          <span className="text-gray-300">/</span>
+          <span className="text-forest font-semibold">{pageTitle}</span>
         </div>
-      </aside>
-
-      {/* ── Main Content ──────────────────────────────────────────────── */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top Header */}
-        <header className="bg-white/80 backdrop-blur-md border-b border-gray-200/60 px-6 py-3.5 flex items-center justify-between flex-shrink-0 sticky top-0 z-30">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-400 hover:text-gray-600"
-            >
-              <Icons.menu />
-            </button>
-            <div className="flex items-center gap-2 text-sm">
-              <span className="text-gray-400 font-medium">Admin</span>
-              <span className="text-gray-300">/</span>
-              <span className="text-forest font-semibold">{pageTitle}</span>
-            </div>
-          </div>
-
-          {/* Admin User Badge */}
-          <div className="flex items-center gap-3">
-            <div className="text-right hidden sm:block">
-              <p className="font-semibold text-gray-700 text-[13px] leading-none">{user?.name || "Administrator"}</p>
-              <p className="text-gray-400 text-[11px] mt-0.5">{user?.email || ""}</p>
-            </div>
-            <div className="w-8 h-8 bg-gradient-to-br from-forest to-forest-light rounded-lg flex items-center justify-center text-white text-xs font-bold">
-              {(user?.name || "A").charAt(0).toUpperCase()}
-            </div>
-          </div>
-        </header>
-
-        {/* Page Content */}
-        <main className="flex-1 overflow-auto p-6">
-          <Outlet />
-        </main>
       </div>
-    </div>
+
+{/* Admin User Badge */ }
+<div className="flex items-center gap-3">
+  <div className="text-right hidden sm:block">
+    <p className="font-semibold text-gray-700 text-[13px] leading-none">{user?.name || "Administrator"}</p>
+    <p className="text-gray-400 text-[11px] mt-0.5">{user?.email || ""}</p>
+  </div>
+  <div className="w-8 h-8 bg-gradient-to-br from-forest to-forest-light rounded-lg flex items-center justify-center text-white text-xs font-bold">
+    {(user?.name || "A").charAt(0).toUpperCase()}
+  </div>
+</div>
+        </header >
+
+  {/* Page Content */ }
+  < main className = "flex-1 overflow-auto p-6" >
+    <Outlet />
+        </main >
+      </div >
+    </div >
   );
 };
 

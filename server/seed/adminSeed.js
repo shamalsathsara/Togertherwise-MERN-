@@ -3,7 +3,7 @@
  * Run with: npm run seed
  *
  * ⚠️  IMPORTANT: Change the admin credentials immediately after first login!
- * Default: admin@togetherwise.org / Admin@123
+ * Default: admin@Togertherwerise.org / Admin@123
  */
 
 require("dotenv").config({ path: "../.env" });
@@ -27,8 +27,8 @@ const seedAdmin = async () => {
     // Create the default admin user
     // Password is automatically hashed by the User model's pre-save hook
     const admin = await User.create({
-      name: "Togetherwise Admin",
-      email: "admin@togetherwise.org",
+      name: "Togertherwerise Admin",
+      email: "admin@Togertherwerise.org",
       password: "Admin@123",   // ⚠️ Change immediately after first login!
       role: "admin",
     });

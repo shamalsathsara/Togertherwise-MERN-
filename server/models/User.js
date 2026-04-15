@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Password is required"],
-      minlength: 6,
+      minlength: [12, "Password must be at least 12 characters"],
       // Exclude password from query results by default
       select: false,
     },
@@ -48,6 +48,18 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String,
       default: "",
+    },
+
+    // Password reset token (stored as SHA-256 hash — never store raw token)
+    resetPasswordToken: {
+      type: String,
+      default: null,
+    },
+
+    // Expiry for the reset token (10 minutes from request)
+    resetPasswordExpire: {
+      type: Date,
+      default: null,
     },
   },
   {

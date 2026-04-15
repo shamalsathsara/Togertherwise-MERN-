@@ -11,26 +11,31 @@ import SEO from "../components/SEO";
 import { useTranslation } from "react-i18next";
 import logoImg from "../image/logo.png";
 
+const IconSprout = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 1 1.1 7.1 4.1 4.1 0 0 1-7.9-.3"/></svg>);
+const IconTrendUp = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>);
+const IconLink = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>);
+const IconAward = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-12 h-12"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>);
+
 const ROLES = [
   {
     id: "volunteer",
     title: "Volunteer Registration",
     subtitle: "Register For Projects & Events",
-    emoji: "🌱",
+    Icon: IconSprout,
     description: "Join our on-the-ground teams and make a direct impact in communities.",
   },
   {
     id: "fundraiser",
     title: "Become a Fundraiser",
     subtitle: "Create & Manage Your Own Campaign",
-    emoji: "🏃",
+    Icon: IconTrendUp,
     description: "Launch your own fundraising campaign and rally your network for a cause.",
   },
   {
     id: "partner",
     title: "Partner with the Organization",
     subtitle: "Corporate & Institutional Partnerships",
-    emoji: "🤝",
+    Icon: IconLink,
     description: "Collaborate at an institutional level to create large-scale, lasting change.",
   },
 ];
@@ -97,8 +102,8 @@ const Volunteer = () => {
 
         <div className="card-luxury p-12 max-w-md w-full text-center animate-slide-up relative z-10">
           <div className="relative w-24 h-24 mx-auto mb-6">
-            <div className="w-24 h-24 rounded-full flex items-center justify-center animate-pulse-ring" style={{ background: "linear-gradient(135deg,rgba(156,252,92,0.2),rgba(156,252,92,0.1))" }}>
-              <span className="text-5xl">🌟</span>
+            <div className="w-24 h-24 rounded-full flex items-center justify-center animate-pulse-ring" style={{ background: "linear-gradient(135deg,rgba(156,252,92,0.2),rgba(156,252,92,0.1))", color: "#1B3022" }}>
+              <IconAward />
             </div>
           </div>
           <h2 className="font-display font-bold text-forest text-3xl mb-3">{t('vol_welcome')}</h2>
@@ -125,7 +130,7 @@ const Volunteer = () => {
     <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #f5f8f5 0%, #eef4ef 100%)" }}>
       <SEO
         title="Volunteer with Us"
-        description="Join Togetherwise as a volunteer, fundraiser, or partner. Empower lives and build stronger communities with us."
+        description="Join Togertherwerise as a volunteer, fundraiser, or partner. Empower lives and build stronger communities with us."
         path="/volunteer"
       />
 
@@ -197,7 +202,9 @@ const Volunteer = () => {
                           <span className="text-forest text-xs font-black">✓</span>
                         </span>
                       )}
-                      <div className="text-2xl mb-2">{role.emoji}</div>
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-2" style={{ color: "#1B3022" }}>
+                        {role.Icon && <role.Icon />}
+                      </div>
                       <p className="font-display font-bold text-forest text-sm leading-tight mb-1">
                         {roleT.title}
                       </p>
@@ -330,7 +337,7 @@ const Volunteer = () => {
                 <div className="w-16 h-16 mx-auto mb-4 rounded-2xl overflow-hidden" style={{ background: "rgba(27,48,34,0.06)", border: "1px solid rgba(27,48,34,0.1)" }}>
                   <img
                     src={logoImg}
-                    alt="Togetherwise Logo"
+                    alt="Togertherwerise Logo"
                     className="w-full h-full object-contain pt-1"
                   />
                 </div>

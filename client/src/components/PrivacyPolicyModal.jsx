@@ -64,7 +64,7 @@ const PrivacyPolicyModal = ({ isOpen, onClose }) => {
           <section className="mb-6">
             <h3 className="font-display font-bold text-forest text-lg mb-3">1. Information We Collect</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Togetherwise collects information you provide directly to us, including when you make a donation,
+              Togertherwerise collects information you provide directly to us, including when you make a donation,
               register as a volunteer, or contact us. This includes your name, email address, phone number,
               and payment information (processed securely through our payment partners).
             </p>
@@ -121,7 +121,7 @@ const PrivacyPolicyModal = ({ isOpen, onClose }) => {
             <h3 className="font-display font-bold text-forest text-lg mb-3">7. Contact Us</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
               If you have any questions about this Privacy Policy, please contact:<br />
-              <strong>Togetherwise</strong><br />
+              <strong>Togertherwerise</strong><br />
               No 1/C Singhapura Hokandara South<br />
               Email: thilan9109@gmail.com<br />
               Phone: +94 778821632

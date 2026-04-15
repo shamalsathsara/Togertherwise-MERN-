@@ -5,15 +5,15 @@ import { Helmet } from 'react-helmet-async';
  * SEO Component — Handles dynamic meta tags for every page.
  * @param {string} title — The title of the page.
  * @param {string} description — The description of the page.
- * @param {string} name — The name of the organization (Togetherwise).
+ * @param {string} name — The name of the organization (Togertherwerise).
  * @param {string} type — The type of content (website, article, etc.).
  * @param {string} image — The preview image URL for social sharing.
  * @param {string} path — The canonical URL path of the current page.
  */
 const SEO = ({ 
   title, 
-  description = "Togetherwise — Empowering communities from village to global. Join us in transforming lives through donations, volunteering, and partnerships.", 
-  name = "Togetherwise", 
+  description = "Togertherwerise — Empowering communities from village to global. Join us in transforming lives through donations, volunteering, and partnerships.", 
+  name = "Togertherwerise", 
   type = "website",
   image = "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&h=630&fit=crop&q=80", // Default OG image
   path = ""

@@ -90,7 +90,7 @@ const Navbar = ({ lang, setLang }) => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group flex-shrink-0">
             <div className="relative">
-              <img src={logoImg} alt="Togetherwise Logo"
+              <img src={logoImg} alt="Togertherwerise Logo"
                 className="w-9 h-9 object-contain transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div>

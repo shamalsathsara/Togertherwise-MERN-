@@ -32,21 +32,21 @@ const getAllNewsAdmin = asyncHandler(async (req, res) => {
  * createNews — Creates a new news item (admin only).
  */
 const createNews = asyncHandler(async (req, res) => {
-  const { label, tag, status, image, order, isVisible } = req.body;
+  const { label, tag, status, imageUrl, order, isVisible } = req.body;
 
   if (!label || !tag) {
     res.status(400);
     throw new Error("News content and tag are required");
   }
 
-  // If an image was uploaded via multer, use that path
-  const imageUrl = req.file ? `/uploads/${req.file.filename}` : (image || "");
+  // If an image was uploaded via multer, use that path; else fall back to imageUrl text field
+  const imageVal = req.file ? `/uploads/${req.file.filename}` : (imageUrl || "");
 
   const item = await NewsUpdate.create({
     label,
     tag,
     status: status || "in-progress",
-    image: imageUrl,
+    image: imageVal,
     order: order ? Number(order) : 0,
     isVisible: isVisible !== undefined ? isVisible : true,
   });
@@ -66,10 +66,10 @@ const updateNews = asyncHandler(async (req, res) => {
     throw new Error("News item not found");
   }
 
-  const { label, tag, status, image, order, isVisible } = req.body;
+  const { label, tag, status, imageUrl, order, isVisible } = req.body;
 
   if (req.file) item.image = `/uploads/${req.file.filename}`;
-  else if (image != null) item.image = image;
+  else if (imageUrl != null) item.image = imageUrl;
 
   if (label     != null) item.label     = label;
   if (tag       != null) item.tag       = tag;

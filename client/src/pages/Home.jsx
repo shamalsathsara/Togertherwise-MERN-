@@ -27,12 +27,23 @@ const heroSlides = [
   "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=1200&q=85",
 ];
 
+// ─── SVG Icon Components ───────────────────────────────────────────────────────
+const IconTarget = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>);
+const IconCreditCard = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>);
+const IconBarChart = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>);
+const IconUsers = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>);
+const IconCheckCircle = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>);
+const IconActivity = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>);
+const IconClipboard = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>);
+const IconStar = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>);
+const IconNewspaper = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><line x1="18" y1="14" x2="10" y2="14"/><line x1="18" y1="10" x2="10" y2="10"/><line x1="12" y1="6" x2="10" y2="6"/></svg>);
+
 // ─── How It Works steps ────────────────────────────────────────────────────────
 const HOW_STEPS = [
-  { num: "01", icon: "🎯", title: "Choose a Cause", desc: "Browse active campaigns and select the cause that resonates with you." },
-  { num: "02", icon: "💳", title: "Make a Donation", desc: "Securely donate any amount — every contribution creates real impact." },
-  { num: "03", icon: "🌱", title: "Track Impact", desc: "See exactly how your donation is used via our transparency dashboard." },
-  { num: "04", icon: "🤝", title: "Join the Community", desc: "Volunteer, fundraise, and grow alongside thousands of changemakers." },
+  { num: "01", Icon: IconTarget, title: "Choose a Cause", desc: "Browse active campaigns and select the cause that resonates with you." },
+  { num: "02", Icon: IconCreditCard, title: "Make a Donation", desc: "Securely donate any amount — every contribution creates real impact." },
+  { num: "03", Icon: IconBarChart, title: "Track Impact", desc: "See exactly how your donation is used via our transparency dashboard." },
+  { num: "04", Icon: IconUsers, title: "Join the Community", desc: "Volunteer, fundraise, and grow alongside thousands of changemakers." },
 ];
 
 // ─── Campaign Card ─────────────────────────────────────────────────────────────
@@ -44,8 +55,11 @@ const CampaignCard = ({ campaign }) => {
       onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(27,48,34,0.14)"; }}
       onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 24px rgba(27,48,34,0.08)"; }}>
       <div className="relative h-48 overflow-hidden">
-        <img src={campaign.image} alt={campaign.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+        {/\.(mp4|webm|ogg|mov|avi)$/i.test(campaign.image) ? (
+          <video src={campaign.image} preload="metadata" autoPlay loop muted playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+        ) : (
+          <img src={campaign.image} alt={campaign.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+        )}
         <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(27,48,34,0.7), transparent)" }} />
         <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold text-forest"
           style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)", boxShadow: "0 2px 8px rgba(156,252,92,0.4)" }}>
@@ -57,7 +71,7 @@ const CampaignCard = ({ campaign }) => {
         <p className="text-gray-500 text-sm mb-4 line-clamp-2">{campaign.description}</p>
         <div className="mb-4">
           <div className="flex justify-between text-xs font-semibold mb-1.5">
-            <span className="text-gray-500">Raised: <span className="text-forest">${campaign.raised.toLocaleString()}</span></span>
+            <span className="text-gray-500">Raised: <span className="text-forest">LKR {campaign.raised.toLocaleString()}</span></span>
             <span style={{ color: "#7DD940" }}>{percent}%</span>
           </div>
           <div className="h-1.5 rounded-full bg-gray-100 overflow-hidden">
@@ -126,7 +140,7 @@ const Home = ({ lang }) => {
     <div style={{ background: "#ffffff" }}>
       <SEO
         title="Empowering Communities"
-        description="Togetherwise — From village to global. Join us in transforming lives through donations, volunteering, and community empowerment."
+        description="Togertherwerise — From village to global. Join us in transforming lives through donations, volunteering, and community empowerment."
         path="/"
       />
 
@@ -287,7 +301,10 @@ const Home = ({ lang }) => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {liveStats.map((stat, i) => (
               <div key={i} className="text-center group transition-all duration-300 hover:-translate-y-1">
-                <div className="text-3xl mb-2 group-hover:scale-125 transition-transform duration-300">{stat.icon}</div>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300"
+                  style={{ background: "rgba(156,252,92,0.15)", color: "#9CFC5C" }}>
+                  {stat.Icon && <stat.Icon />}
+                </div>
                 <div className="font-display font-black text-4xl sm:text-5xl text-white mb-1">
                   {statsInView ? (
                     <CountUp start={0} end={stat.value} duration={2.5} separator="," delay={i * 0.2} />
@@ -339,9 +356,9 @@ const Home = ({ lang }) => {
                     {step.num}
                   </div>
                   {/* Icon circle */}
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-4 transition-transform duration-300 group-hover:scale-110"
-                    style={{ background: "linear-gradient(135deg,rgba(156,252,92,0.15),rgba(156,252,92,0.05))", border: "1px solid rgba(156,252,92,0.2)" }}>
-                    {step.icon}
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                    style={{ background: "linear-gradient(135deg,rgba(156,252,92,0.15),rgba(156,252,92,0.05))", border: "1px solid rgba(156,252,92,0.2)", color: "#7DD940" }}>
+                    {step.Icon && <step.Icon />}
                   </div>
                   <h3 className="font-display font-bold text-forest text-lg mb-2">{t(`home_step${i+1}_title`)}</h3>
                   <p className="text-gray-500 text-sm leading-relaxed">{t(`home_step${i+1}_desc`)}</p>
@@ -519,11 +536,15 @@ const Home = ({ lang }) => {
                 onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(156,252,92,0.4)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(0,0,0,0.35)"; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(156,252,92,0.15)"; e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,0,0,0.2)"; }}>
                 <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={story.image.startsWith("http") ? story.image : `${import.meta.env.VITE_API_URL || ""}${story.image}`}
-                    alt={`Story from ${story.location}`}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
+                  {story.video ? (
+                    <video src={story.video.startsWith("http") ? story.video : `${import.meta.env.VITE_API_URL || ""}${story.video}`} preload="none" poster={story.image.startsWith("http") ? story.image : `${import.meta.env.VITE_API_URL || ""}${story.image}`} autoPlay loop muted playsInline className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  ) : (
+                    <img
+                      src={story.image.startsWith("http") ? story.image : `${import.meta.env.VITE_API_URL || ""}${story.image}`}
+                      alt={`Story from ${story.location}`}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                  )}
                   <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(17,30,22,0.9) 0%, transparent 60%)" }} />
                   <span className="absolute bottom-4 left-4 px-3 py-1 rounded-full text-xs font-bold text-forest"
                     style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)" }}>
@@ -577,8 +598,8 @@ const Home = ({ lang }) => {
           {liveNews.length === 0 ? (
             <div className="text-center py-16">
               <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-4"
-                style={{ background: "rgba(27,48,34,0.05)" }}>
-                <span className="text-4xl">📰</span>
+                style={{ background: "rgba(27,48,34,0.05)", color: "#1B3022" }}>
+                <IconNewspaper />
               </div>
               <p className="text-gray-400">{t('home_noNews')}</p>
             </div>

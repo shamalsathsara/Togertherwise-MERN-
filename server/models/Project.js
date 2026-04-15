@@ -28,7 +28,7 @@ const projectSchema = new mongoose.Schema(
       maxlength: 300,
     },
 
-    // Fundraising goal in USD
+    // Fundraising goal in LKR
     goal: {
       type: Number,
       required: [true, "Funding goal is required"],

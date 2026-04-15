@@ -150,6 +150,11 @@ const recordManualDonation = asyncHandler(async (req, res) => {
     throw new Error("Donation amount must be greater than zero");
   }
 
+  if (Number(amount) > 1000000) {
+    res.status(400);
+    throw new Error("Donation amount exceeds the maximum allowed value");
+  }
+
   // Create the donation record in the database
   const donation = await Donation.create({
     amount: Number(amount),

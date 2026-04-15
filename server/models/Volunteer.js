@@ -33,6 +33,9 @@ const volunteerSchema = new mongoose.Schema(
     phone: {
       type: String,
       required: [true, "Phone number is required"],
+      trim: true,
+      maxlength: [20, "Phone number is too long"],
+      match: [/^\+?[\d\s\-().]{7,20}$/, "Please enter a valid phone number"],
     },
 
     // ─── Demographics ──────────────────────────────────────

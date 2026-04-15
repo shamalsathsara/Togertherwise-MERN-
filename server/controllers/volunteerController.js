@@ -25,6 +25,12 @@ const registerVolunteer = asyncHandler(async (req, res) => {
   } = req.body;
   const email = req.body.email?.toLowerCase().trim();
 
+  // Validate required fields explicitly (gives a cleaner error than Mongoose)
+  if (!firstName || !lastName || !email || !phone) {
+    res.status(400);
+    throw new Error("First name, last name, email, and phone are required");
+  }
+
   // Check if this email already has a pending/approved application
   const existing = await Volunteer.findOne({ email });
   if (existing) {

@@ -139,7 +139,7 @@ const DonationsList = () => {
                       {d.isAnonymous ? "••••••••@" + (d.donorEmail.split("@")[1] || "hidden") : d.donorEmail}
                     </td>
                     <td className="px-5 py-3.5">
-                      <span className="font-semibold text-forest tabular-nums">${d.amount?.toLocaleString()}</span>
+                      <span className="font-semibold text-forest tabular-nums">LKR {d.amount?.toLocaleString()}</span>
                     </td>
                     <td className="px-5 py-3.5 text-sm text-gray-500 capitalize">
                       {d.frequency}

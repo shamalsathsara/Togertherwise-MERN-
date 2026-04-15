@@ -31,10 +31,10 @@ const CustomBarTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const val = payload[0].value;
     const formattedVal = val >= 1000000
-      ? `$${(val / 1000000).toFixed(1)}M`
+      ? `LKR ${(val / 1000000).toFixed(1)}M`
       : val >= 1000
-        ? `$${(val / 1000).toFixed(1)}k`
-        : `$${val}`;
+        ? `LKR ${(val / 1000).toFixed(1)}k`
+        : `LKR ${val}`;
 
     return (
       <div className="card-luxury p-3 text-sm" style={{ minWidth: "140px" }}>
@@ -151,8 +151,12 @@ const Transparency = () => {
           <div className="absolute top-8 right-12 w-40 h-40 rounded-full border border-lime/10 hidden lg:block" />
           <div className="absolute bottom-8 left-12 w-24 h-24 rounded-full border border-white/6 hidden lg:block" />
           {/* Lock icon floating */}
-          <div className="absolute top-1/2 right-16 text-lime/15 text-6xl hidden xl:block animate-float" style={{ transform:"translateY(-50%)" }}>🔒</div>
-          <div className="absolute top-1/2 left-16 text-lime/10 text-5xl hidden xl:block animate-float" style={{ transform:"translateY(-50%)", animationDelay:"1.5s" }}>✅</div>
+          <div className="absolute top-1/2 right-16 hidden xl:flex items-center justify-center text-lime/15 w-16 h-16 animate-float" style={{ transform:"translateY(-50%)" }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="w-14 h-14"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div className="absolute top-1/2 left-16 hidden xl:flex items-center justify-center text-lime/10 w-12 h-12 animate-float" style={{ transform:"translateY(-50%)", animationDelay:"1.5s" }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
         </div>
 
         <div className="section-wrapper relative z-10">
@@ -259,7 +263,7 @@ const Transparency = () => {
                 />
                 <YAxis
                   tick={{ fontSize: 10, fill: "#6b7280" }}
-                  tickFormatter={(v) => v >= 1000000 ? `$${(v / 1000000).toFixed(0)}M` : v >= 1000 ? `$${(v / 1000).toFixed(0)}k` : `$${v}`}
+                  tickFormatter={(v) => v >= 1000000 ? `LKR ${(v / 1000000).toFixed(0)}M` : v >= 1000 ? `LKR ${(v / 1000).toFixed(0)}k` : `LKR ${v}`}
                   tickLine={false}
                   axisLine={false}
                 />
@@ -299,8 +303,8 @@ const Transparency = () => {
 
             {liveStories.length === 0 ? (
               <div className="card-luxury p-10 text-center">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-3" style={{ background: "rgba(27,48,34,0.05)" }}>
-                  <span className="text-3xl">⭐</span>
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-3" style={{ background: "rgba(27,48,34,0.05)", color: "#1B3022" }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
                 </div>
                 <p className="text-gray-400 text-sm">{t('transpx_storiesEmpty')}</p>
                 <button onClick={() => navigate("/success-stories")} className="mt-4 text-xs text-forest font-semibold hover:text-lime-dark transition-colors">{t('transpx_storiesViewAll')}</button>
@@ -344,8 +348,8 @@ const Transparency = () => {
                 <h2 className="font-display font-bold text-forest text-xl">{t('transpx_annualTitle')}</h2>
               </div>
               <div className="card-luxury p-10 text-center">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(27,48,34,0.05)" }}>
-                  <span className="text-3xl">📄</span>
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(27,48,34,0.05)", color: "#1B3022" }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                 </div>
                 <p className="font-semibold text-forest text-base mb-2">{t('transpx_comingSoon')}</p>
                 <p className="text-gray-400 text-sm max-w-xs mx-auto">

@@ -42,3 +42,11 @@ client/.vite/
 #  Misc 
 .cache/
 coverage/
+
+#  Tunnel output files (LocalTunnel / Serveo)
+#  These may contain live URLs or sensitive server info — never commit.
+serveo_output.txt
+tunnel.txt
+tunnel2.txt
+tunnel3.txt
+*.tunnel.txt

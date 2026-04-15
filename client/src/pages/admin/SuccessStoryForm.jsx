@@ -28,8 +28,11 @@ const SuccessStoryForm = ({ mode = "create" }) => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [currentImageUrl, setCurrentImageUrl] = useState(""); // existing image in DB
+  const [currentVideoUrl, setCurrentVideoUrl] = useState(""); // existing video in DB
   const [file, setFile] = useState(null);                      // newly selected file
   const [filePreview, setFilePreview] = useState(null);        // local preview URL
+  const [videoFile, setVideoFile] = useState(null);
+  const [videoPreview, setVideoPreview] = useState(null);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -69,6 +72,13 @@ const SuccessStoryForm = ({ mode = "create" }) => {
               ? story.image
               : `${API_BASE_URL}${story.image}`
           );
+          if (story.video) {
+            setCurrentVideoUrl(
+              story.video.startsWith("http")
+                ? story.video
+                : `${API_BASE_URL}${story.video}`
+            );
+          }
         }
       } catch {
         setError("Failed to load story. Check server connection.");
@@ -103,6 +113,23 @@ const SuccessStoryForm = ({ mode = "create" }) => {
     setFilePreview(URL.createObjectURL(selected));
   };
 
+  const handleVideoChange = (e) => {
+    const selected = e.target.files[0];
+    if (!selected) return;
+
+    if (selected.size > 50 * 1024 * 1024) {
+      setError("Video must be smaller than 50MB.");
+      setVideoFile(null);
+      setVideoPreview(null);
+      e.target.value = null;
+      return;
+    }
+
+    setError("");
+    setVideoFile(selected);
+    setVideoPreview(URL.createObjectURL(selected));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -123,6 +150,7 @@ const SuccessStoryForm = ({ mode = "create" }) => {
       submitData.append("person",   formData.person);
       submitData.append("role",     formData.role);
       if (file) submitData.append("image", file);
+      if (videoFile) submitData.append("video", videoFile);
 
       if (isEditing) {
         await axiosInstance.put(`/success-stories/${id}`, submitData, {
@@ -306,6 +334,20 @@ const SuccessStoryForm = ({ mode = "create" }) => {
                 className="input-field text-sm file:bg-lime file:text-forest file:border-0 file:rounded-lg file:px-3 file:py-1.5 file:text-xs file:font-semibold file:cursor-pointer file:mr-3 hover:file:bg-lime-dark"
               />
             </div>
+
+            {/* Video Upload */}
+            <div>
+              <label className="block text-[13px] font-medium text-gray-600 mb-1.5">
+                Video Clip (optional — Max 50MB)
+              </label>
+              <input
+                type="file"
+                name="video"
+                accept="video/*"
+                onChange={handleVideoChange}
+                className="input-field text-sm file:bg-lime file:text-forest file:border-0 file:rounded-lg file:px-3 file:py-1.5 file:text-xs file:font-semibold file:cursor-pointer file:mr-3 hover:file:bg-lime-dark"
+              />
+            </div>
           </div>
 
           {/* Image preview area */}
@@ -324,6 +366,29 @@ const SuccessStoryForm = ({ mode = "create" }) => {
                   <img src={currentImageUrl} alt="Current" className="w-16 h-16 object-cover rounded-lg border border-gray-200" />
                   <div>
                     <p className="text-xs font-medium text-gray-600">Current image</p>
+                    <p className="text-[11px] text-gray-400 mt-0.5">Upload a new file above to replace it.</p>
+                  </div>
+                </>
+              ) : null}
+            </div>
+          )}
+
+          {/* Video preview area */}
+          {(videoPreview || currentVideoUrl) && (
+            <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl border border-gray-100">
+              {videoPreview ? (
+                <>
+                  <video src={videoPreview} className="w-16 h-16 object-cover rounded-lg border border-gray-200" autoPlay loop muted playsInline />
+                  <div>
+                    <p className="text-xs font-medium text-gray-600">New video selected</p>
+                    <p className="text-[11px] text-gray-400 mt-0.5">This will replace the current video when saved.</p>
+                  </div>
+                </>
+              ) : currentVideoUrl ? (
+                <>
+                  <video src={currentVideoUrl} className="w-16 h-16 object-cover rounded-lg border border-gray-200" autoPlay loop muted playsInline />
+                  <div>
+                    <p className="text-xs font-medium text-gray-600">Current video</p>
                     <p className="text-[11px] text-gray-400 mt-0.5">Upload a new file above to replace it.</p>
                   </div>
                 </>

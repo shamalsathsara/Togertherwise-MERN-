@@ -103,8 +103,30 @@ const updateProject = asyncHandler(async (req, res) => {
     throw new Error("Project not found");
   }
 
-  // Merge updated fields — only update fields that are provided
-  const updatedFields = { ...req.body };
+  // Whitelist only fields that are allowed to be updated.
+  // NEVER spread raw req.body into a MongoDB update — mass-assignment risk.
+  const {
+    title,
+    description,
+    shortDescription,
+    goal,
+    startDate,
+    endDate,
+    status,
+    category,
+    isFeatured,
+  } = req.body;
+
+  const updatedFields = {};
+  if (title           !== undefined) updatedFields.title           = title;
+  if (description     !== undefined) updatedFields.description     = description;
+  if (shortDescription!== undefined) updatedFields.shortDescription= shortDescription;
+  if (goal            !== undefined) updatedFields.goal            = Number(goal);
+  if (startDate       !== undefined) updatedFields.startDate       = startDate;
+  if (endDate         !== undefined) updatedFields.endDate         = endDate;
+  if (status          !== undefined) updatedFields.status          = status;
+  if (category        !== undefined) updatedFields.category        = category;
+  if (isFeatured      !== undefined) updatedFields.isFeatured      = isFeatured === "true" || isFeatured === true;
 
   // If new files were uploaded, append to existing mediaUrls
   if (req.files && req.files.length > 0) {

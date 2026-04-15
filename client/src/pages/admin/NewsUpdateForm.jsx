@@ -102,10 +102,10 @@ const NewsUpdateForm = ({ mode = "create" }) => {
       submitData.append("label",     formData.label);
       submitData.append("tag",       formData.tag);
       submitData.append("status",    formData.status);
-      submitData.append("image",     formData.image);
+      submitData.append("imageUrl",  formData.image);  // text URL field (renamed to avoid clash with file)
       submitData.append("order",     formData.order);
       submitData.append("isVisible", formData.isVisible);
-      if (file) submitData.append("image", file);
+      if (file) submitData.append("image", file); // uploaded file always wins
 
       if (isEditing) {
         await axiosInstance.put(`/news/${id}`, submitData, {

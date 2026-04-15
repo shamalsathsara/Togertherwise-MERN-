@@ -39,13 +39,15 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    // If the server returns 401 (token expired or invalid), redirect to login
-    // BUT only if the user is currently on an admin page — public pages
-    // should never be affected by auth failures (e.g. the /auth/me session check)
     if (error.response?.status === 401) {
-      const isOnAdminPage = window.location.pathname.startsWith("/admin");
-      const isAlreadyOnLogin = window.location.pathname.includes("/admin/login");
-      if (isOnAdminPage && !isAlreadyOnLogin) {
+      const path = window.location.pathname;
+      const isOnAdminPage = path.startsWith("/admin");
+      const isPublicAdminPage = [
+        "/admin/login",
+        "/admin/forgot-password",
+      ].some((p) => path.startsWith(p)) || path.includes("/admin/reset-password");
+
+      if (isOnAdminPage && !isPublicAdminPage) {
         window.location.href = "/admin/login";
       }
     }
