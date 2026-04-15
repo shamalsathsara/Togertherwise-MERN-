@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import SEO from "../components/SEO";
+import { useTranslation } from "react-i18next";
 import logoImg from "../image/logo.png";
 
 const ROLES = [
@@ -41,6 +42,7 @@ const COUNTRIES = [
 ];
 
 const Volunteer = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [selectedRole, setSelectedRole] = useState("volunteer");
   const [submitted, setSubmitted] = useState(false);
@@ -74,7 +76,7 @@ const Volunteer = () => {
     } catch (err) {
       // For demo without backend, still show success
       if (err.response?.data?.message?.includes("already exists")) {
-        setError("This email is already registered as a volunteer.");
+        setError(t('vol_errAlready'));
       } else {
         setSubmitted(true); // Demo fallback
       }
@@ -99,16 +101,20 @@ const Volunteer = () => {
               <span className="text-5xl">🌟</span>
             </div>
           </div>
-          <h2 className="font-display font-bold text-forest text-3xl mb-3">Welcome Aboard!</h2>
+          <h2 className="font-display font-bold text-forest text-3xl mb-3">{t('vol_welcome')}</h2>
           <p className="text-gray-500 mb-2">
-            Your {ROLES.find(r => r.id === selectedRole)?.title} application has been submitted!
+            Your {{
+              "volunteer": t('vol_role1_title'),
+              "fundraiser": t('vol_role2_title'),
+              "partner": t('vol_role3_title')
+            }[selectedRole] || ROLES.find(r => r.id === selectedRole)?.title}{t('vol_appSub')}
           </p>
           <p className="text-gray-400 text-sm mb-8">
-            We'll reach out to <strong>{formData.email}</strong> within 3 business days.
+            {t('vol_reach1')}<strong>{formData.email}</strong>{t('vol_reach2')}
           </p>
           <div className="luxury-divider mb-8" />
           <button onClick={() => navigate("/")} className="btn-primary w-full">
-            Back to Home
+            {t('donate_backHome')}
           </button>
         </div>
       </div>
@@ -135,12 +141,12 @@ const Volunteer = () => {
         </div>
 
         <div className="section-wrapper text-center relative z-10">
-          <span className="badge-lime mb-5 inline-block animate-fade-in">Get Involved</span>
+          <span className="badge-lime mb-5 inline-block animate-fade-in">{t('vol_badge')}</span>
           <h1 className="font-display font-black text-white text-4xl sm:text-6xl mb-4 animate-slide-up leading-tight">
-            Join The <span className="text-gradient-lime">Movement</span>
+            {t('vol_hero1')}<span className="text-gradient-lime">{t('vol_hero2')}</span>
           </h1>
           <p className="text-white/65 text-lg max-w-xl mx-auto animate-slide-up delay-200">
-            Build with us. Empower lives. Choose your path and make a difference.
+            {t('vol_heroDesc')}
           </p>
         </div>
       </div>
@@ -156,14 +162,21 @@ const Volunteer = () => {
                 <div className="flex items-center gap-3 mb-8">
                   <div className="w-1 h-10 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
                   <div>
-                    <h2 className="font-display font-bold text-forest text-xl">Registration Form</h2>
-                    <p className="text-gray-400 text-xs">Choose your role and fill in your details</p>
+                    <h2 className="font-display font-bold text-forest text-xl">{t('vol_formTitle')}</h2>
+                    <p className="text-gray-400 text-xs">{t('vol_formSub')}</p>
                   </div>
                 </div>
 
                 {/* Role Selector Cards */}
                 <div className="grid grid-cols-3 gap-3 mb-8">
-                  {ROLES.map((role) => (
+                  {ROLES.map((role) => {
+                    const roleKeys = {
+                      "volunteer": { title: t('vol_role1_title'), subtitle: t('vol_role1_sub') },
+                      "fundraiser": { title: t('vol_role2_title'), subtitle: t('vol_role2_sub') },
+                      "partner": { title: t('vol_role3_title'), subtitle: t('vol_role3_sub') }
+                    };
+                    const roleT = roleKeys[role.id] || role;
+                    return (
                     <button
                       key={role.id}
                       type="button"
@@ -186,42 +199,48 @@ const Volunteer = () => {
                       )}
                       <div className="text-2xl mb-2">{role.emoji}</div>
                       <p className="font-display font-bold text-forest text-sm leading-tight mb-1">
-                        {role.title}
+                        {roleT.title}
                       </p>
-                      <p className="text-gray-400 text-xs leading-tight">{role.subtitle}</p>
+                      <p className="text-gray-400 text-xs leading-tight">{roleT.subtitle}</p>
                     </button>
-                  ))}
+                  )})}
                 </div>
 
                 {/* Registration Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="form-label" htmlFor="firstName">First Name *</label>
-                      <input id="firstName" name="firstName" type="text" value={formData.firstName} onChange={handleChange} className="form-input" placeholder="First Name" required />
+                      <label className="form-label" htmlFor="firstName">{t('vol_fname')}</label>
+                      <input id="firstName" name="firstName" type="text" value={formData.firstName} onChange={handleChange} className="form-input" required />
                     </div>
                     <div>
-                      <label className="form-label" htmlFor="lastName">Last Name *</label>
-                      <input id="lastName" name="lastName" type="text" value={formData.lastName} onChange={handleChange} className="form-input" placeholder="Last Name" required />
+                      <label className="form-label" htmlFor="lastName">{t('vol_lname')}</label>
+                      <input id="lastName" name="lastName" type="text" value={formData.lastName} onChange={handleChange} className="form-input" required />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="form-label" htmlFor="email">Email Address *</label>
-                      <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} className="form-input" placeholder="Email" required />
+                      <label className="form-label" htmlFor="email">{t('donate_email')}</label>
+                      <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} className="form-input" required />
                     </div>
                     <div>
-                      <label className="form-label" htmlFor="phone">Phone Number *</label>
-                      <input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} className="form-input" placeholder="+94 77..." required />
+                      <label className="form-label" htmlFor="phone">{t('vol_phone')}</label>
+                      <input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} className="form-input" required />
                     </div>
                   </div>
 
                   {/* Gender */}
                   <div>
-                    <label className="form-label">Gender *</label>
+                    <label className="form-label">{t('vol_gender')}</label>
                     <div className="flex gap-6 pt-1">
-                      {["male", "female", "other"].map((g) => (
+                      {["male", "female", "other"].map((g) => {
+                        const genderMap = {
+                          "male": t('vol_g_male'),
+                          "female": t('vol_g_female'),
+                          "other": t('vol_g_preferNot')
+                        };
+                        return (
                         <label key={g} className="flex items-center gap-2 cursor-pointer group">
                           <input
                             type="radio"
@@ -233,26 +252,26 @@ const Volunteer = () => {
                             required
                           />
                           <span className="text-sm text-gray-600 group-hover:text-forest capitalize transition-colors">
-                            {g === "other" ? "Prefer not to say" : g.charAt(0).toUpperCase() + g.slice(1)}
+                            {genderMap[g] || g}
                           </span>
                         </label>
-                      ))}
+                      )})}
                     </div>
                   </div>
 
                   {/* Address */}
                   <div>
-                    <label className="form-label" htmlFor="streetAddress">Address *</label>
-                    <input id="streetAddress" name="streetAddress" type="text" value={formData.streetAddress} onChange={handleChange} className="form-input" placeholder="Street Address" required />
+                    <label className="form-label" htmlFor="streetAddress">{t('vol_address')}</label>
+                    <input id="streetAddress" name="streetAddress" type="text" value={formData.streetAddress} onChange={handleChange} className="form-input" required />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="form-label" htmlFor="city">City *</label>
-                      <input id="city" name="city" type="text" value={formData.city} onChange={handleChange} className="form-input" placeholder="City" required />
+                      <label className="form-label" htmlFor="city">{t('vol_city')}</label>
+                      <input id="city" name="city" type="text" value={formData.city} onChange={handleChange} className="form-input" required />
                     </div>
                     <div>
-                      <label className="form-label" htmlFor="country">Country *</label>
+                      <label className="form-label" htmlFor="country">{t('vol_country')}</label>
                       <select id="country" name="country" value={formData.country} onChange={handleChange} className="form-input" required>
                         {COUNTRIES.map((c) => (
                           <option key={c} value={c}>{c}</option>
@@ -263,20 +282,20 @@ const Volunteer = () => {
 
                   {/* Date of Birth */}
                   <div>
-                    <label className="form-label" htmlFor="dateOfBirth">Date of Birth *</label>
+                    <label className="form-label" htmlFor="dateOfBirth">{t('vol_dob')}</label>
                     <input id="dateOfBirth" name="dateOfBirth" type="date" value={formData.dateOfBirth} onChange={handleChange} className="form-input" required />
                   </div>
 
                   {/* About */}
                   <div>
-                    <label className="form-label" htmlFor="about">Tell Us About Yourself</label>
+                    <label className="form-label" htmlFor="about">{t('vol_aboutTitle')}</label>
                     <textarea
                       id="about"
                       name="about"
                       value={formData.about}
                       onChange={handleChange}
                       rows={3}
-                      placeholder="Share your skills, interests, and why you want to join..."
+                      placeholder={t('vol_aboutPh')}
                       className="form-input resize-none"
                     />
                   </div>
@@ -296,9 +315,9 @@ const Volunteer = () => {
                     {isSubmitting ? (
                       <span className="flex items-center justify-center gap-2">
                         <span className="w-4 h-4 border-2 border-forest border-t-transparent rounded-full animate-spin" />
-                        Submitting...
+                        {t('vol_submitting')}
                       </span>
-                    ) : "Submit"}
+                    ) : t('vol_submit')}
                   </button>
                 </form>
               </div>
@@ -315,9 +334,9 @@ const Volunteer = () => {
                     className="w-full h-full object-contain pt-1"
                   />
                 </div>
-                <p className="text-gray-400 font-medium text-xs uppercase tracking-widest mb-2">Build with us</p>
-                <h2 className="font-display font-black text-forest text-2xl mb-1">Join The Movement</h2>
-                <p className="text-lime-dark font-semibold">Empower lives</p>
+                <p className="text-gray-400 font-medium text-xs uppercase tracking-widest mb-2">{t('vol_build')}</p>
+                <h2 className="font-display font-black text-forest text-2xl mb-1">{t('vol_hero1')}{t('vol_hero2')}</h2>
+                <p className="text-lime-dark font-semibold">{t('vol_empower')}</p>
               </div>
 
               {/* Role description */}
@@ -325,11 +344,19 @@ const Volunteer = () => {
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-1 h-6 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
                   <h3 className="font-display font-bold text-forest">
-                    {ROLES.find(r => r.id === selectedRole)?.title}
+                    {{
+                      "volunteer": t('vol_role1_title'),
+                      "fundraiser": t('vol_role2_title'),
+                      "partner": t('vol_role3_title')
+                    }[selectedRole] || ROLES.find(r => r.id === selectedRole)?.title}
                   </h3>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  {ROLES.find(r => r.id === selectedRole)?.description}
+                  {{
+                    "volunteer": t('vol_role1_desc'),
+                    "fundraiser": t('vol_role2_desc'),
+                    "partner": t('vol_role3_desc')
+                  }[selectedRole] || ROLES.find(r => r.id === selectedRole)?.description}
                 </p>
               </div>
 
@@ -345,10 +372,10 @@ const Volunteer = () => {
               {/* Stats */}
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { value: "0+", label: "Active Volunteers" },
-                  { value: "0+", label: "Countries Reached" },
-                  { value: "0+", label: "Projects Completed" },
-                  { value: "0%", label: "Satisfaction Rate" },
+                  { value: "0+", label: t('vol_stat1') },
+                  { value: "0+", label: t('vol_stat2') },
+                  { value: "0+", label: t('vol_stat3') },
+                  { value: "0%", label: t('vol_stat4') },
                 ].map((stat, i) => (
                   <div key={i} className="card-luxury text-center p-4">
                     <p className="font-display font-black text-forest text-xl">{stat.value}</p>

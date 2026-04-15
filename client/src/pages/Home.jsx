@@ -6,6 +6,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import axiosInstance from "../api/axiosInstance";
@@ -76,6 +77,7 @@ const CampaignCard = ({ campaign }) => {
 
 // ─── Main Component ────────────────────────────────────────────────────────────
 const Home = ({ lang }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [liveStories, setLiveStories] = useState([]);
@@ -104,10 +106,10 @@ const Home = ({ lang }) => {
         if (statsRes.data.success) {
           const s = statsRes.data.stats;
           setLiveStats([
-            { value: s.completed, suffix: "+", label: "Projects Completed", icon: "✅" },
-            { value: s.active, suffix: "+", label: "Active Projects", icon: "🤝" },
-            { value: s.total, suffix: "+", label: "Total Projects", icon: "📋" },
-            { value: s.featured, suffix: "+", label: "Featured", icon: "🌟" },
+            { value: s.completed, suffix: "+", label: "home_stat_completed", icon: "✅" },
+            { value: s.active, suffix: "+", label: "home_stat_active", icon: "🤝" },
+            { value: s.total, suffix: "+", label: "home_stat_total", icon: "📋" },
+            { value: s.featured, suffix: "+", label: "home_stat_featured", icon: "🌟" },
           ]);
         }
 
@@ -151,21 +153,20 @@ const Home = ({ lang }) => {
             <div className="inline-flex items-center gap-2 rounded-full w-fit px-4 py-1.5 mt-6 lg:mt-8 mb-6 xl:mb-8 animate-fade-in"
               style={{ background: "rgba(156,252,92,0.12)", border: "1px solid rgba(156,252,92,0.3)" }}>
               <div className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
-              <span className="text-lime text-sm font-medium">Change The World Together</span>
+              <span className="text-lime text-sm font-medium">{t('home_badge')}</span>
             </div>
 
             {/* Main Heading */}
             <h1 className="font-display font-black text-white leading-[1.05] mb-6 animate-slide-up"
               style={{ fontSize: "clamp(2.2rem, 4.5vw, 4rem)" }}>
-              Kindness is{" "}
-              <span style={{ color: "#9CFC5C" }}>Free</span>, but its{" "}
+              {t('home_hero1')}
+              <span style={{ color: "#9CFC5C" }}>{t('home_hero2')}</span>{t('home_hero3')}
               <br className="hidden sm:block" />
-              Value is Priceless
+              {t('home_hero4')}
             </h1>
 
             <p className="text-white/65 text-lg leading-relaxed mb-6 xl:mb-10 max-w-lg animate-slide-up delay-200">
-              Village to Global is dedicated to supporting communities through sustainable development,
-              access to essential resources, and empowerment programs.
+              {t('home_heroDesc')}
             </p>
 
             {/* CTA Buttons */}
@@ -175,13 +176,13 @@ const Home = ({ lang }) => {
                 className="inline-flex items-center gap-3 font-display font-bold text-forest px-7 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-1"
                 style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)", boxShadow: "0 6px 24px rgba(156,252,92,0.45)" }}>
                 <span className="w-8 h-8 rounded-full bg-forest/20 flex items-center justify-center text-sm">→</span>
-                Explore More
+                {t('home_exploreBtn')}
               </button>
               <button onClick={() => navigate("/donate")}
                 id="hero-donate-btn"
                 className="inline-flex items-center gap-2 font-display font-bold text-white px-7 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-1 hover:bg-white/15"
                 style={{ border: "2px solid rgba(255,255,255,0.35)" }}>
-                Donate Now
+                {t('home_donateBtn')}
               </button>
             </div>
 
@@ -204,7 +205,7 @@ const Home = ({ lang }) => {
                 style={{ border: "2px dashed rgba(156,252,92,0.35)", background: "rgba(156,252,92,0.06)" }}
                 onClick={() => navigate("/success-stories")}>
                 <span className="text-lime text-xl font-bold">+</span>
-                <span className="text-white/50 text-xs mt-0.5">More</span>
+                <span className="text-white/50 text-xs mt-0.5">{t('home_moreBtn')}</span>
               </div>
             </div>
           </div>
@@ -293,7 +294,7 @@ const Home = ({ lang }) => {
                   ) : "0"}
                   <span style={{ color: "#9CFC5C" }}>{stat.suffix}</span>
                 </div>
-                <p className="text-white/55 text-sm font-medium tracking-wide">{stat.label}</p>
+                <p className="text-white/55 text-sm font-medium tracking-wide">{t(stat.label)}</p>
               </div>
             ))}
           </div>
@@ -313,12 +314,12 @@ const Home = ({ lang }) => {
           <div className="text-center mb-16">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold text-forest mb-4"
               style={{ background: "linear-gradient(135deg,rgba(156,252,92,0.2),rgba(156,252,92,0.08))", border: "1px solid rgba(156,252,92,0.35)" }}>
-              How We Work
+              {t('home_howBadge')}
             </span>
             <h2 className="font-display font-black text-forest text-4xl">
-              Making Change <span style={{ color: "#7DD940" }}>Simple</span>
+              {t('home_howTitle1')}<span style={{ color: "#7DD940" }}>{t('home_howTitle2')}</span>
             </h2>
-            <p className="text-gray-500 mt-3 max-w-xl mx-auto">Four easy steps to start making a real difference in communities around the world.</p>
+            <p className="text-gray-500 mt-3 max-w-xl mx-auto">{t('home_howDesc')}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -342,8 +343,8 @@ const Home = ({ lang }) => {
                     style={{ background: "linear-gradient(135deg,rgba(156,252,92,0.15),rgba(156,252,92,0.05))", border: "1px solid rgba(156,252,92,0.2)" }}>
                     {step.icon}
                   </div>
-                  <h3 className="font-display font-bold text-forest text-lg mb-2">{step.title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{step.desc}</p>
+                  <h3 className="font-display font-bold text-forest text-lg mb-2">{t(`home_step${i+1}_title`)}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{t(`home_step${i+1}_desc`)}</p>
                 </div>
               </div>
             ))}
@@ -379,7 +380,7 @@ const Home = ({ lang }) => {
               <div className="absolute top-1/2 left-52 -translate-y-1/2 rounded-2xl p-5 z-10 animate-float"
                 style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)", boxShadow: "0 12px 36px rgba(156,252,92,0.5)", animationDelay: "1s" }}>
                 <p className="font-display font-black text-forest text-3xl">100%</p>
-                <p className="text-forest/70 text-sm font-semibold">Transparent</p>
+                <p className="text-forest/70 text-sm font-semibold">{t('home_missionTrans')}</p>
               </div>
               {/* Deco ring */}
               <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full border-2 border-lime/15 animate-spin-slow pointer-events-none" />
@@ -389,25 +390,23 @@ const Home = ({ lang }) => {
             <div>
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold text-forest mb-5"
                 style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)", boxShadow: "0 2px 10px rgba(156,252,92,0.3)" }}>
-                Our Mission
+                {t('home_missionBadge')}
               </span>
               <h2 className="font-display font-black text-white text-4xl lg:text-5xl leading-tight mb-6">
-                Empowering Communities{" "}
-                <span style={{ color: "#9CFC5C" }}>From Village to Global</span>
+                {t('home_missionTitle1')}
+                <span style={{ color: "#9CFC5C" }}>{t('home_missionTitle2')}</span>
               </h2>
               <p className="text-white/65 leading-relaxed mb-6">
-                Village to Global is dedicated to supporting organizations and local initiatives that uplift
-                communities. We focus on empowering people through sustainable development, access to essential
-                resources, and community-driven programs that create lasting positive change.
+                {t('home_missionDesc1')}
               </p>
               <p className="text-white/65 leading-relaxed mb-8">
-                Since our founding, we've impacted over <strong className="text-lime">0 families</strong>,
-                completed more than <strong className="text-lime">0 projects</strong>, and built a
-                global network of <strong className="text-lime">0+ volunteers</strong>.
+                {t('home_missionDesc2_1')}<strong className="text-lime">{t('home_missionDesc2_2')}</strong>{t('home_missionDesc2_3')}
+                <strong className="text-lime">{t('home_missionDesc2_4')}</strong>{t('home_missionDesc2_5')}
+                <strong className="text-lime">{t('home_missionDesc2_6')}</strong>.
               </p>
 
               {/* Feature list */}
-              {["Sustainable community development", "100% financial accountability", "Local-first approach globally scaled"].map((item, i) => (
+              {[t('home_feature1'), t('home_feature2'), t('home_feature3')].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 mb-3">
                   <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
                     style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)" }}>
@@ -420,7 +419,7 @@ const Home = ({ lang }) => {
               <button onClick={() => navigate("/about")}
                 className="mt-8 inline-flex items-center gap-3 font-display font-bold text-forest px-8 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-1"
                 style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)", boxShadow: "0 6px 24px rgba(156,252,92,0.45)" }}>
-                Learn More →
+                {t('home_learnMoreBtn')}
               </button>
             </div>
           </div>
@@ -451,13 +450,13 @@ const Home = ({ lang }) => {
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-white mb-3"
                 style={{ background: "linear-gradient(135deg,#1B3022,#2D4F37)" }}>
                 <span className="w-1.5 h-1.5 bg-lime rounded-full animate-pulse" />
-                Active Now
+                {t('home_campaignsBadge')}
               </span>
-              <h2 className="font-display font-black text-forest text-4xl">Current Campaigns</h2>
+              <h2 className="font-display font-black text-forest text-4xl">{t('home_campaignsTitle')}</h2>
             </div>
             <Link to="/campaigns"
               className="hidden sm:flex items-center gap-2 font-display font-semibold text-sm text-forest hover:text-lime-dark transition-colors group">
-              View All
+              {t('home_viewAll')}
               <span className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 group-hover:-translate-x-0.5"
                 style={{ background: "rgba(27,48,34,0.07)" }}>→</span>
             </Link>
@@ -500,15 +499,15 @@ const Home = ({ lang }) => {
             <div>
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold text-forest mb-4"
                 style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)", boxShadow: "0 2px 10px rgba(156,252,92,0.3)" }}>
-                Real Impact
+                {t('home_storiesBadge')}
               </span>
               <h2 className="font-display font-black text-white text-4xl">
-                Success <span style={{ color: "#9CFC5C" }}>Stories</span>
+                {t('home_storiesTitle1')}<span style={{ color: "#9CFC5C" }}>{t('home_storiesTitle2')}</span>
               </h2>
             </div>
             <Link to="/success-stories"
               className="hidden sm:flex items-center gap-2 text-lime/70 font-semibold text-sm hover:text-lime transition-colors">
-              Read All →
+              {t('home_readAll')}
             </Link>
           </div>
 
@@ -536,7 +535,7 @@ const Home = ({ lang }) => {
                   <p className="text-white/90 text-sm italic leading-relaxed mb-4 line-clamp-3">"{story.quote}"</p>
                   <Link to="/success-stories"
                     className="inline-flex items-center gap-2 text-lime font-semibold text-sm hover:text-lime-light transition-colors">
-                    Read Story <span className="text-xs">→</span>
+                    {t('home_readStory')} <span className="text-xs">→</span>
                   </Link>
                 </div>
               </div>
@@ -569,9 +568,9 @@ const Home = ({ lang }) => {
             <div>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-forest mb-3"
                 style={{ background: "linear-gradient(135deg,rgba(156,252,92,0.2),rgba(156,252,92,0.08))", border: "1px solid rgba(156,252,92,0.35)" }}>
-                Latest
+                {t('home_newsBadge')}
               </span>
-              <h2 className="font-display font-black text-forest text-4xl">News &amp; Updates</h2>
+              <h2 className="font-display font-black text-forest text-4xl">{t('home_newsTitle')}</h2>
             </div>
           </div>
 
@@ -581,7 +580,7 @@ const Home = ({ lang }) => {
                 style={{ background: "rgba(27,48,34,0.05)" }}>
                 <span className="text-4xl">📰</span>
               </div>
-              <p className="text-gray-400">No news updates yet.</p>
+              <p className="text-gray-400">{t('home_noNews')}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -657,19 +656,18 @@ const Home = ({ lang }) => {
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6"
             style={{ background: "rgba(156,252,92,0.12)", border: "1px solid rgba(156,252,92,0.28)" }}>
             <span className="w-1.5 h-1.5 bg-lime rounded-full animate-pulse" />
-            <span className="text-lime text-xs font-semibold tracking-widest uppercase">Take Action Today</span>
+            <span className="text-lime text-xs font-semibold tracking-widest uppercase">{t('home_ctaBadge')}</span>
           </div>
 
           <h2 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-6xl mb-5 leading-tight">
-            Be a Catalyst{" "}
-            <span style={{ color: "#9CFC5C" }}>for Change.</span>
-            <br />Together, we make{" "}
-            <span style={{ color: "#9CFC5C" }}>a difference.</span>
+            {t('home_ctaTitle1')}
+            <span style={{ color: "#9CFC5C" }}>{t('home_ctaTitle2')}</span>
+            <br />{t('home_ctaTitle3')}
+            <span style={{ color: "#9CFC5C" }}>{t('home_ctaTitle4')}</span>
           </h2>
 
           <p className="text-white/60 text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
-            Join us in transforming lives. Whether through donations, volunteering, or partnerships,
-            your support helps build stronger communities and a better world.
+            {t('home_ctaDesc')}
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
@@ -678,14 +676,14 @@ const Home = ({ lang }) => {
               style={{ border: "2px solid rgba(255,255,255,0.35)", backdropFilter: "blur(4px)" }}
               onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.12)"; }}
               onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
-              Join with Us
+              {t('home_joinBtn')}
             </button>
             <button onClick={() => navigate("/donate")}
               id="cta-donate-btn"
               className="inline-flex items-center gap-3 font-display font-bold text-forest px-9 py-4 rounded-full transition-all duration-300 hover:-translate-y-1"
               style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)", boxShadow: "0 8px 32px rgba(156,252,92,0.5)" }}>
               <span className="w-6 h-6 rounded-full bg-forest/20 flex items-center justify-center text-sm">↗</span>
-              Donate Now
+              {t('home_donateNowCta')}
             </button>
           </div>
         </div>

@@ -6,11 +6,13 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import PrivacyPolicyModal from "./PrivacyPolicyModal";
 import logoImg from "../image/logo.png";
 import axiosInstance from "../api/axiosInstance";
 
 const Footer = () => {
+  const { t } = useTranslation();
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [subscribeEmail, setSubscribeEmail] = useState("");
   const [subscribeStatus, setSubscribeStatus] = useState("");
@@ -20,9 +22,9 @@ const Footer = () => {
     if (subscribeEmail) {
       try {
         const response = await axiosInstance.post("/subscribers", { email: subscribeEmail });
-        setSubscribeStatus(response.data.message || "Thank you for subscribing! 🎉");
+        setSubscribeStatus(response.data.message || t('footer_subSuccess'));
       } catch (err) {
-        setSubscribeStatus("Failed to subscribe. Please try again.");
+        setSubscribeStatus(t('footer_subError'));
       }
       setSubscribeEmail("");
       setTimeout(() => setSubscribeStatus(""), 3000);
@@ -83,13 +85,13 @@ const Footer = () => {
   ];
 
   const quickLinks = [
-    { to: "/", label: "Home" },
-    { to: "/campaigns", label: "Campaigns" },
-    { to: "/success-stories", label: "Success Stories" },
-    { to: "/transparency", label: "Transparency" },
-    { to: "/volunteer", label: "Volunteer" },
-    { to: "/donate", label: "Donate" },
-    { to: "/about", label: "About Us" },
+    { to: "/", label: t('footer_home') },
+    { to: "/campaigns", label: t('footer_campaigns') },
+    { to: "/success-stories", label: t('footer_successStories') },
+    { to: "/transparency", label: t('footer_transparency') },
+    { to: "/volunteer", label: t('footer_volunteer') },
+    { to: "/donate", label: t('footer_donate') },
+    { to: "/about", label: t('footer_aboutUs') },
   ];
 
   return (
@@ -105,23 +107,23 @@ const Footer = () => {
         <div className="section-wrapper py-8 flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
           <div>
             <p className="text-white font-display font-black text-2xl leading-none">
-              Stay in the Loop
+              {t('footer_stayLoop')}
             </p>
-            <p className="text-white/50 text-sm mt-1">Get the latest updates from Togetherwise</p>
+            <p className="text-white/50 text-sm mt-1">{t('footer_getUpdates')}</p>
           </div>
           <form onSubmit={handleSubscribe} className="flex gap-2 w-full sm:w-auto">
             <input
               type="email"
               value={subscribeEmail}
               onChange={(e) => setSubscribeEmail(e.target.value)}
-              placeholder="Enter your email address"
+              placeholder={t('footer_emailPlaceholder')}
               className="flex-1 sm:w-72 px-4 py-3 rounded-xl bg-white/8 border border-white/15
                          text-white placeholder-white/40 text-sm focus:outline-none focus:border-lime
                          focus:bg-white/12 transition-all"
               style={{ background: "rgba(255,255,255,0.08)" }}
             />
             <button type="submit" className="btn-primary text-sm px-5 py-3 whitespace-nowrap">
-              Subscribe ↗
+              {t('footer_subscribeBtn')}
             </button>
           </form>
           {subscribeStatus && (
@@ -173,8 +175,7 @@ const Footer = () => {
               </Link>
 
               <p className="text-white/55 text-sm leading-relaxed max-w-xs mb-7">
-                Village to Global is dedicated to supporting organizations and local initiatives
-                that uplift communities worldwide through sustainable development.
+                {t('footer_desc')}
               </p>
 
               {/* Contact Info */}
@@ -186,7 +187,7 @@ const Footer = () => {
                   className="flex items-start gap-3 text-white/55 hover:text-lime transition-colors group"
                 >
                   <span className="mt-0.5 flex-shrink-0 text-lime/60">📍</span>
-                  <span className="text-sm">No 1/C Singhapura Hokandara South</span>
+                  <span className="text-sm">{t('footer_address')}</span>
                 </a>
                 <a
                   href="mailto:donation23@gmail.com"
@@ -208,7 +209,7 @@ const Footer = () => {
             {/* ── Quick Links ───────────────────────────────────────────── */}
             <div>
               <h3 className="font-display font-bold text-white text-sm uppercase tracking-widest mb-5">
-                Quick Links
+                {t('footer_quickLinks')}
               </h3>
               <ul className="space-y-2.5">
                 {quickLinks.map(({ to, label }) => (
@@ -229,7 +230,7 @@ const Footer = () => {
             {/* ── Social & Legal ────────────────────────────────────────── */}
             <div>
               <h3 className="font-display font-bold text-white text-sm uppercase tracking-widest mb-5">
-                Follow Us
+                {t('footer_followUs')}
               </h3>
               <div className="flex flex-wrap gap-2.5 mb-8">
                 {socialLinks.map(({ id, href, label, icon }) => (
@@ -268,14 +269,14 @@ const Footer = () => {
                   className="text-white/55 hover:text-lime text-sm transition-colors underline-offset-2 hover:underline"
                   id="privacy-policy-btn"
                 >
-                  Privacy Policy
+                  {t('footer_privacy')}
                 </button>
                 <span className="text-white/20 mx-2">/</span>
                 <button
                   onClick={() => setIsPrivacyOpen(true)}
                   className="text-white/55 hover:text-lime text-sm transition-colors underline-offset-2 hover:underline"
                 >
-                  Terms
+                  {t('footer_terms')}
                 </button>
               </div>
             </div>
@@ -285,13 +286,13 @@ const Footer = () => {
           <div className="mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3"
             style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
             <p className="text-white/30 text-xs">
-              © {new Date().getFullYear()} Togetherwise. All rights reserved.
+              © {new Date().getFullYear()} {t('footer_rights')}
             </p>
             <div className="flex items-center gap-1">
               <div className="w-4 h-4 rounded-full bg-lime/20 flex items-center justify-center">
                 <div className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
               </div>
-              <p className="text-white/30 text-xs">Made with love for communities worldwide</p>
+              <p className="text-white/30 text-xs">{t('footer_madeWithLove')}</p>
             </div>
             <p className="text-white/30 text-xs">
               {/*Registered NGO — Sri Lanka*/}

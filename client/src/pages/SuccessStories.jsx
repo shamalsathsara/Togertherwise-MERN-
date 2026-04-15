@@ -8,8 +8,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import SEO from "../components/SEO";
+import { useTranslation } from "react-i18next";
 
 const SuccessStories = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [stories, setStories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -66,12 +68,12 @@ const SuccessStories = () => {
         </div>
 
         <div className="section-wrapper relative z-10">
-          <span className="badge-lime mb-5 inline-block animate-fade-in">Real Impact</span>
+          <span className="badge-lime mb-5 inline-block animate-fade-in">{t('stories_badge')}</span>
           <h1 className="font-display font-black text-white text-4xl sm:text-6xl mb-4 animate-slide-up leading-tight">
-            Success <span className="text-gradient-lime">Stories</span>
+            {t('stories_hero1')}<span className="text-gradient-lime">{t('stories_hero2')}</span>
           </h1>
           <p className="text-white/65 text-lg max-w-xl mx-auto animate-slide-up delay-200">
-            Every number has a name. Every project has a story. These are the people your donations support.
+            {t('stories_heroDesc')}
           </p>
         </div>
       </div>
@@ -90,9 +92,9 @@ const SuccessStories = () => {
             <div className="w-24 h-24 rounded-3xl bg-forest/5 flex items-center justify-center mx-auto mb-5">
               <span className="text-5xl">⭐</span>
             </div>
-            <h2 className="font-display font-bold text-forest text-2xl mb-3">No Stories Yet</h2>
+            <h2 className="font-display font-bold text-forest text-2xl mb-3">{t('stories_noStories')}</h2>
             <p className="text-gray-400 text-base max-w-md mx-auto">
-              Success stories will appear here once they are added by the admin. Check back soon!
+              {t('stories_noDbDesc')}
             </p>
           </div>
         ) : (
@@ -106,7 +108,7 @@ const SuccessStories = () => {
                   <span className="absolute bottom-4 left-4 badge-lime">{featuredStory.tag}</span>
                   {/* Featured label */}
                   <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold text-forest" style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)" }}>
-                    ⭐ Featured
+                    {t('stories_featured')}
                   </div>
                 </div>
                 <div className="p-10 flex flex-col justify-center relative">
@@ -181,18 +183,18 @@ const SuccessStories = () => {
           <div className="relative z-10">
             {/* Label */}
             <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5" style={{ background: "rgba(156,252,92,0.12)", border: "1px solid rgba(156,252,92,0.25)" }}>
-              <span className="text-lime text-xs font-semibold tracking-wider uppercase">Make an Impact</span>
+              <span className="text-lime text-xs font-semibold tracking-wider uppercase">{t('stories_ctaBadge')}</span>
             </div>
 
             <h2 className="font-display font-black text-white text-3xl mb-3 leading-tight">
-              Write the Next <span className="text-gradient-lime">Success Story</span>
+              {t('stories_cta1')}<span className="text-gradient-lime">{t('stories_cta2')}</span>
             </h2>
             <p className="text-white/65 mb-8 max-w-lg mx-auto leading-relaxed">
-              Your donation today can become tomorrow's story of transformation. Every contribution makes a difference.
+              {t('stories_ctaDesc')}
             </p>
             <div className="flex justify-center gap-4">
-              <button onClick={() => navigate("/donate")} className="btn-primary">Donate Now</button>
-              <button onClick={() => navigate("/volunteer")} className="btn-secondary">Volunteer</button>
+              <button onClick={() => navigate("/donate")} className="btn-primary">{t('home_donateNowCta')}</button>
+              <button onClick={() => navigate("/volunteer")} className="btn-secondary">{t('stories_volBtn')}</button>
             </div>
           </div>
         </div>

@@ -305,6 +305,27 @@
     background: rgba(255,255,255,0.1);
     border-radius: 9999px;
   }
+
+  /* ─── Language Specific Overrides (Sinhala Adjustment) ───────────────────── */
+  /* Reduces font size slightly across the app to prevent overflow in tight spaces.
+     Using [class*=""] ensures we also catch responsive variants like lg:text-5xl */
+  .lang-si [class*="text-6xl"] { font-size: 2.3rem !important; line-height: 1.2 !important; }
+  .lang-si [class*="text-5xl"] { font-size: 1.9rem !important; line-height: 1.25 !important; }
+  .lang-si [class*="text-4xl"] { font-size: 1.6rem !important; line-height: 1.3 !important; }
+  .lang-si [class*="text-3xl"] { font-size: 1.3rem !important; line-height: 1.3 !important; }
+  .lang-si [class*="text-2xl"] { font-size: 1.15rem !important; line-height: 1.3 !important; }
+  .lang-si [class*="text-xl"] { font-size: 1.05rem !important; line-height: 1.4 !important; }
+  
+  .lang-si .text-lg { font-size: 0.95rem !important; }
+  .lang-si .text-base { font-size: 0.9rem !important; }
+  .lang-si .text-sm { font-size: 0.8rem !important; }
+  .lang-si .text-xs { font-size: 0.70rem !important; }
+
+  /* Specifically target dynamic clamp headings on Home */
+  .lang-si [style*="clamp"] {
+    font-size: clamp(1.5rem, 3vw, 2.5rem) !important;
+    line-height: 1.2 !important;
+  }
 }
 
 /* ─── Animations ─────────────────────────────────────────────────────────── */

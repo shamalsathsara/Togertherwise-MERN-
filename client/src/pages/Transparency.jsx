@@ -21,6 +21,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import SEO from "../components/SEO";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -48,6 +49,7 @@ const CustomBarTooltip = ({ active, payload }) => {
 };
 
 const Transparency = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [stats, setStats] = useState({ totalAmount: 0 });
   const [donutData, setDonutData] = useState([]);
@@ -67,10 +69,10 @@ const Transparency = () => {
           // Update Donut Chart
           if (s.totalAmount > 0) {
             setDonutData([
-              { name: "Donations", value: 100, color: "#9CFC5C" },
-              { name: "Grants", value: 0, color: "#D97706" },
-              { name: "Corporate Partnerships", value: 0, color: "#F59E0B" },
-              { name: "Other", value: 0, color: "#D1D5DB" },
+              { name: t('transpx_donut1'), value: 100, color: "#9CFC5C" },
+              { name: t('transpx_donut2'), value: 0, color: "#D97706" },
+              { name: t('transpx_donut3'), value: 0, color: "#F59E0B" },
+              { name: t('transpx_donut4'), value: 0, color: "#D1D5DB" },
             ]);
           }
 
@@ -100,7 +102,15 @@ const Transparency = () => {
             const newBarData = defaultCategories.map(item => {
               const perc = totalAllocated > 0 ? ((item.amount / totalAllocated) * 100).toFixed(1) : "0";
               let progName = item._id;
-              if (progName === "Water Projects") progName = "Water\nProjects";
+              
+              const catKeys = {
+                "Water Projects": t('camp_water'),
+                "Education": t('camp_edu'),
+                "Medical Aid": t('camp_med'),
+                "Reforestation": t('camp_forest'),
+                "Community Development": t('camp_dev')
+              };
+              progName = catKeys[progName] || progName;
 
               return {
                 program: progName,
@@ -146,13 +156,13 @@ const Transparency = () => {
         </div>
 
         <div className="section-wrapper relative z-10">
-          <span className="badge-lime mb-5 inline-block animate-fade-in">100% Transparent</span>
+          <span className="badge-lime mb-5 inline-block animate-fade-in">{t('transpx_badge')}</span>
           <h1 className="font-display font-black text-white text-4xl sm:text-5xl mb-4 animate-slide-up leading-tight">
-            A Global Commitment To{" "}
-            <span className="text-gradient-lime">Trust & Transparency</span>
+            {t('transpx_hero1')}
+            <span className="text-gradient-lime">{t('transpx_hero2')}</span>
           </h1>
           <p className="text-white/65 text-lg max-w-xl mx-auto animate-slide-up delay-200">
-            Our Promise. Verified Accountability. Your Impact.
+            {t('transpx_heroDesc')}
           </p>
         </div>
       </div>
@@ -170,7 +180,7 @@ const Transparency = () => {
             <div className="flex items-center gap-3 mb-6">
               <div className="w-1 h-7 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
               <h2 className="font-display font-bold text-forest text-xl">
-                Annual Financial Overview
+                {t('transpx_donutTitle')}
               </h2>
             </div>
 
@@ -211,15 +221,15 @@ const Transparency = () => {
                 {/* Totals */}
                 <div className="rounded-2xl p-4 space-y-2" style={{ background: "rgba(27,48,34,0.04)", border: "1px solid rgba(27,48,34,0.06)" }}>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 font-medium">Total Income</span>
+                    <span className="text-gray-600 font-medium">{t('transpx_totInc')}</span>
                     <span className="font-bold text-forest">${stats.totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 font-medium">Total Expense</span>
+                    <span className="text-gray-600 font-medium">{t('transpx_totExp')}</span>
                     <span className="font-bold text-red-500">${(stats.totalAmount * 0.85).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                   <div className="pt-2 flex justify-between text-sm" style={{ borderTop: "1px solid rgba(27,48,34,0.08)" }}>
-                    <span className="text-gray-600 font-medium">Net</span>
+                    <span className="text-gray-600 font-medium">{t('transpx_net')}</span>
                     <span className="font-bold" style={{ color: "#7DD940" }}>+${(stats.totalAmount * 0.15).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                 </div>
@@ -232,7 +242,7 @@ const Transparency = () => {
             <div className="flex items-center gap-3 mb-6">
               <div className="w-1 h-7 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
               <h2 className="font-display font-bold text-forest text-xl">
-                Donation Allocation by Program
+                {t('transpx_barTitle')}
               </h2>
             </div>
 
@@ -284,7 +294,7 @@ const Transparency = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-1 h-7 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
-              <h2 className="font-display font-bold text-forest text-xl">Success Stories</h2>
+              <h2 className="font-display font-bold text-forest text-xl">{t('transpx_storiesTitle')}</h2>
             </div>
 
             {liveStories.length === 0 ? (
@@ -292,8 +302,8 @@ const Transparency = () => {
                 <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-3" style={{ background: "rgba(27,48,34,0.05)" }}>
                   <span className="text-3xl">⭐</span>
                 </div>
-                <p className="text-gray-400 text-sm">Stories will appear here once added by the admin.</p>
-                <button onClick={() => navigate("/success-stories")} className="mt-4 text-xs text-forest font-semibold hover:text-lime-dark transition-colors">View All Stories →</button>
+                <p className="text-gray-400 text-sm">{t('transpx_storiesEmpty')}</p>
+                <button onClick={() => navigate("/success-stories")} className="mt-4 text-xs text-forest font-semibold hover:text-lime-dark transition-colors">{t('transpx_storiesViewAll')}</button>
               </div>
             ) : (
               <div className="space-y-4">
@@ -316,7 +326,7 @@ const Transparency = () => {
                         onClick={() => navigate("/success-stories")}
                         className="text-forest font-semibold text-xs transition-colors hover:text-lime-dark flex items-center gap-1"
                       >
-                        Read Story <span>→</span>
+                        {t('transpx_storyRead')} <span>→</span>
                       </button>
                     </div>
                   </div>
@@ -331,15 +341,15 @@ const Transparency = () => {
             <div>
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-1 h-7 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
-                <h2 className="font-display font-bold text-forest text-xl">Annual Reports</h2>
+                <h2 className="font-display font-bold text-forest text-xl">{t('transpx_annualTitle')}</h2>
               </div>
               <div className="card-luxury p-10 text-center">
                 <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(27,48,34,0.05)" }}>
                   <span className="text-3xl">📄</span>
                 </div>
-                <p className="font-semibold text-forest text-base mb-2">Coming Soon</p>
+                <p className="font-semibold text-forest text-base mb-2">{t('transpx_comingSoon')}</p>
                 <p className="text-gray-400 text-sm max-w-xs mx-auto">
-                  Annual reports will be published here once available. Check back after our first full year of operations.
+                  {t('transpx_annualDesc')}
                 </p>
               </div>
             </div>
@@ -354,23 +364,22 @@ const Transparency = () => {
 
               <div className="relative z-10">
                 <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-4" style={{ background: "rgba(156,252,92,0.12)", border: "1px solid rgba(156,252,92,0.25)" }}>
-                  <span className="text-lime text-xs font-semibold">Take Action</span>
+                  <span className="text-lime text-xs font-semibold">{t('transpx_ctaBadge')}</span>
                 </div>
 
                 <h3 className="font-display font-bold text-white text-2xl mb-3 leading-tight">
-                  Be a Catalyst for Change.{" "}
-                  <span className="text-gradient-lime">Together, we can make a difference.</span>
+                  {t('home_ctaTitle3')}
+                  <span className="text-gradient-lime">{t('home_ctaTitle4')}</span>
                 </h3>
                 <p className="text-white/65 text-sm mb-6 leading-relaxed">
-                  Join us in transforming lives. Whether through donations, volunteering, or partnerships,
-                  your support helps build stronger communities and a better world.
+                  {t('home_ctaDesc')}
                 </p>
                 <div className="flex justify-center gap-3">
                   <button onClick={() => navigate("/donate")} className="btn-primary text-sm">
-                    Donate Now
+                    {t('home_donateNowCta')}
                   </button>
                   <button onClick={() => navigate("/volunteer")} className="btn-secondary text-sm">
-                    Join with Us
+                    {t('home_joinBtn')}
                   </button>
                 </div>
               </div>

@@ -5,11 +5,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SEO from "../components/SEO";
+import { useTranslation } from "react-i18next";
 import axiosInstance from "../api/axiosInstance";
 
 const CATEGORIES = ["All", "Water Projects", "Education", "Medical Aid", "Reforestation", "Community Development"];
 
 const Campaigns = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [dbCampaigns, setDbCampaigns] = useState([]);
   const [activeFilter, setActiveFilter] = useState("All");
@@ -66,12 +68,12 @@ const Campaigns = () => {
         </div>
 
         <div className="section-wrapper relative z-10">
-          <span className="badge-lime mb-5 inline-block animate-fade-in">Active Now</span>
+          <span className="badge-lime mb-5 inline-block animate-fade-in">{t('camp_badge')}</span>
           <h1 className="font-display font-black text-white text-5xl sm:text-6xl mb-4 animate-slide-up leading-tight">
-            Our <span className="text-gradient-lime">Campaigns</span>
+            {t('camp_hero1')}<span className="text-gradient-lime">{t('camp_hero2')}</span>
           </h1>
           <p className="text-white/65 text-lg max-w-xl mx-auto animate-slide-up delay-200">
-            Browse our active campaigns and choose where your support goes.
+            {t('camp_heroDesc')}
           </p>
         </div>
       </div>
@@ -84,7 +86,7 @@ const Campaigns = () => {
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">🔍</span>
             <input
               type="text"
-              placeholder="Search campaigns..."
+              placeholder={t('camp_search')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="form-input pl-10 max-w-xs"
@@ -94,7 +96,16 @@ const Campaigns = () => {
 
           {/* Category pills */}
           <div className="flex flex-wrap gap-2">
-            {CATEGORIES.map((cat) => (
+            {CATEGORIES.map((cat) => {
+              const catKeys = {
+                "All": t('camp_all'),
+                "Water Projects": t('camp_water'),
+                "Education": t('camp_edu'),
+                "Medical Aid": t('camp_med'),
+                "Reforestation": t('camp_forest'),
+                "Community Development": t('camp_dev')
+              };
+              return (
               <button
                 key={cat}
                 onClick={() => setActiveFilter(cat)}
@@ -108,9 +119,9 @@ const Campaigns = () => {
                   boxShadow: "0 4px 16px rgba(156,252,92,0.35)"
                 } : {}}
               >
-                {cat}
+                {catKeys[cat] || cat}
               </button>
-            ))}
+            )})}
           </div>
         </div>
 
@@ -118,20 +129,27 @@ const Campaigns = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((campaign) => {
             const percent = campaign.goal === 0 ? 0 : Math.min(Math.round((campaign.currentFunds / campaign.goal) * 100), 100);
+            const catKeys = {
+              "Water Projects": t('camp_water'),
+              "Education": t('camp_edu'),
+              "Medical Aid": t('camp_med'),
+              "Reforestation": t('camp_forest'),
+              "Community Development": t('camp_dev')
+            };
             return (
               <div key={campaign._id} className="card-luxury overflow-hidden group">
                 <div className="relative h-52 overflow-hidden">
                   <img src={campaign.coverImage.startsWith("http") ? campaign.coverImage : `${import.meta.env.VITE_API_URL || ""}${campaign.coverImage}`} alt={campaign.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-forest/70 via-transparent to-transparent" />
-                  <div className="absolute top-3 left-3"><span className="badge-lime text-xs">{campaign.category}</span></div>
+                  <div className="absolute top-3 left-3"><span className="badge-lime text-xs">{catKeys[campaign.category] || campaign.category}</span></div>
                 </div>
                 <div className="p-5">
                   <h3 className="font-display font-bold text-forest text-lg mb-2 line-clamp-1">{campaign.title}</h3>
                   <p className="text-gray-500 text-sm mb-4 line-clamp-2">{campaign.description}</p>
                   <div className="mb-4">
                     <div className="flex justify-between text-xs font-medium mb-2">
-                      <span className="text-gray-500">${(campaign.currentFunds || 0).toLocaleString()} raised</span>
-                      <span className="font-bold" style={{ color: "#7DD940" }}>of ${(campaign.goal || 0).toLocaleString()}</span>
+                      <span className="text-gray-500">${(campaign.currentFunds || 0).toLocaleString()}{t('camp_raised')}</span>
+                      <span className="font-bold" style={{ color: "#7DD940" }}>{t('camp_of')}${(campaign.goal || 0).toLocaleString()}</span>
                     </div>
                     <div className="progress-bar">
                       <div className="progress-fill" style={{ width: `${percent}%` }} />
@@ -139,7 +157,7 @@ const Campaigns = () => {
                     <p className="text-right text-xs font-bold mt-1" style={{ color: "#7DD940" }}>{percent}%</p>
                   </div>
                   <button onClick={() => navigate("/donate")} className="btn-primary w-full text-sm py-2.5">
-                    Donate Now
+                    {t('home_donateNowCta')}
                   </button>
                 </div>
               </div>
@@ -153,15 +171,15 @@ const Campaigns = () => {
               <div className="w-14 h-14 border-4 border-gray-100 rounded-full" />
               <div className="absolute inset-0 w-14 h-14 border-4 border-t-lime rounded-full animate-spin" />
             </div>
-            <p className="text-gray-400 font-medium">Loading campaigns...</p>
+            <p className="text-gray-400 font-medium">{t('camp_loading')}</p>
           </div>
         ) : filtered.length === 0 && (
           <div className="text-center py-24">
             <div className="w-20 h-20 rounded-3xl bg-gray-50 flex items-center justify-center mx-auto mb-4">
               <p className="text-4xl">🔍</p>
             </div>
-            <p className="text-gray-400 font-medium text-lg">No campaigns match your search.</p>
-            <p className="text-gray-300 text-sm mt-1">Try adjusting your filters</p>
+            <p className="text-gray-400 font-medium text-lg">{t('camp_noMatch')}</p>
+            <p className="text-gray-300 text-sm mt-1">{t('camp_adjFilter')}</p>
           </div>
         )}
       </div>

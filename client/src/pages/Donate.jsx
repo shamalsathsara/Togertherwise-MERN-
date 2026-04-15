@@ -8,10 +8,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import SEO from "../components/SEO";
+import { useTranslation } from "react-i18next";
 
 const PRESET_AMOUNTS = [10, 25, 30, 50, 100];
 
 const Donate = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [frequency, setFrequency] = useState("one-time"); // 'one-time' | 'monthly'
   const [selectedAmount, setSelectedAmount] = useState(25);
@@ -68,11 +70,11 @@ const Donate = () => {
     setError("");
 
     if (!finalAmount || finalAmount < 1) {
-      setError("Please select or enter a valid donation amount.");
+      setError(t('donate_error'));
       return;
     }
     if (!formData.donorName || !formData.donorEmail) {
-      setError("Please fill in your name and email.");
+      setError(t('donate_error2'));
       return;
     }
 
@@ -89,7 +91,7 @@ const Donate = () => {
     } catch (err) {
       // Capture the error from the backend response
       const serverMessage = err.response?.data?.message;
-      setError(serverMessage || "Payment failed. Please try again! Ensure backend is running.");
+      setError(serverMessage || t('donate_fail'));
     } finally {
       setIsSubmitting(false);
     }
@@ -114,14 +116,15 @@ const Donate = () => {
             </div>
           </div>
 
-          <h2 className="font-display font-bold text-forest text-3xl mb-3">Thank You!</h2>
+          <h2 className="font-display font-bold text-forest text-3xl mb-3">{t('donate_thankTitle')}</h2>
           <p className="text-gray-500 mb-2">
-            Your {frequency} donation of{" "}
+            {t('donate_thank1')}{frequency === 'monthly' ? t('donate_optMonthly') : t('donate_optOneTime')}
+            {t('donate_thank2')}
             <span className="text-forest font-bold">${finalAmount}</span>{" "}
-            has been received.
+            {t('donate_thank3')}
           </p>
           <p className="text-gray-400 text-sm mb-8">
-            A confirmation will be sent to <strong>{formData.donorEmail}</strong>
+            {t('donate_thank4')}<strong>{formData.donorEmail}</strong>
           </p>
 
           {/* Divider */}
@@ -129,11 +132,11 @@ const Donate = () => {
 
           <div className="flex gap-3">
             <button onClick={() => navigate("/")} className="btn-secondary flex-1 border-forest/30 text-forest hover:bg-forest hover:text-white" style={{ borderColor: "rgba(27,48,34,0.3)" }}>
-              Back to Home
+              {t('donate_backHome')}
             </button>
             <button onClick={() => { setSubmitted(false); setFormData({ donorName: "", donorEmail: "", donorPhone: "", message: "", isAnonymous: false }); setSelectedAmount(25); setCustomAmount(""); }}
               className="btn-primary flex-1">
-              Donate Again
+              {t('donate_again')}
             </button>
           </div>
         </div>
@@ -162,12 +165,12 @@ const Donate = () => {
         </div>
 
         <div className="section-wrapper relative z-10">
-          <span className="badge-lime mb-5 inline-block animate-fade-in">Make a Difference</span>
+          <span className="badge-lime mb-5 inline-block animate-fade-in">{t('donate_badge')}</span>
           <h1 className="font-display font-black text-white text-4xl sm:text-5xl mb-4 animate-slide-up leading-tight">
-            Support Our <span className="text-gradient-lime">Mission</span>
+            {t('donate_hero1')}<span className="text-gradient-lime">{t('donate_hero2')}</span>
           </h1>
           <p className="text-white/65 text-lg max-w-xl mx-auto animate-slide-up delay-200">
-            Every dollar you give goes directly toward empowering communities and transforming lives.
+            {t('donate_heroDesc')}
           </p>
         </div>
       </div>
@@ -179,8 +182,8 @@ const Donate = () => {
             <div className="flex items-center gap-3 mb-8">
               <div className="w-1 h-10 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
               <div>
-                <h2 className="font-display font-bold text-forest text-xl">Your Donation</h2>
-                <p className="text-gray-400 text-xs">Secure & encrypted</p>
+                <h2 className="font-display font-bold text-forest text-xl">{t('donate_formTitle')}</h2>
+                <p className="text-gray-400 text-xs">{t('donate_secure')}</p>
               </div>
             </div>
 
@@ -199,7 +202,7 @@ const Donate = () => {
                 } : {}}
                 id="one-time-btn"
               >
-                One-Time
+                {t('donate_optOneTime')}
               </button>
               <button
                 type="button"
@@ -214,13 +217,13 @@ const Donate = () => {
                 } : {}}
                 id="monthly-btn"
               >
-                Monthly
+                {t('donate_optMonthly')}
               </button>
             </div>
 
             {/*  Amount Selection */}
             <div className="mb-6">
-              <label className="form-label text-base">Select Amount</label>
+              <label className="form-label text-base">{t('donate_selectAmt')}</label>
               <div className="grid grid-cols-5 gap-2 mb-4">
                 {PRESET_AMOUNTS.map((amount) => (
                   <button
@@ -247,7 +250,7 @@ const Donate = () => {
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-lg">$</span>
                 <input
                   type="number"
-                  placeholder="Custom amount"
+                  placeholder={t('donate_customAmt')}
                   value={customAmount}
                   onChange={handleCustomAmount}
                   min="1"
@@ -260,7 +263,7 @@ const Donate = () => {
             {/*  Project Selection  */}
             <div className="mb-6">
               <label className="form-label" htmlFor="project-select">
-                Where should your donation go? (Optional)
+                {t('donate_projectLabel')}
               </label>
               <select
                 id="project-select"
@@ -268,7 +271,7 @@ const Donate = () => {
                 onChange={(e) => setSelectedProject(e.target.value)}
                 className="form-input"
               >
-                <option value="">General Fund (Area of greatest need)</option>
+                <option value="">{t('donate_projectGen')}</option>
                 {projects.map((p) => (
                   <option key={p._id} value={p._id}>
                     {p.title}
@@ -284,70 +287,67 @@ const Donate = () => {
                 borderColor: "rgba(156,252,92,0.25)"
               }}>
                 <p className="text-forest font-semibold text-sm">
-                  🌱 Your <strong>${finalAmount} {frequency}</strong> donation can provide{" "}
-                  {finalAmount >= 100 ? "clean water for a family for 3 months" :
-                    finalAmount >= 50 ? "school supplies for 5 children" :
-                      finalAmount >= 25 ? "a week of meals for a family" :
-                        "essential supplies for a community member"}.
+                  {t('donate_impact1')}<strong>${finalAmount} {frequency === "monthly" ? t('donate_optMonthly') : t('donate_optOneTime')}</strong>{t('donate_impact2')}
+                  {finalAmount >= 100 ? t('donate_lvl1') :
+                    finalAmount >= 50 ? t('donate_lvl2') :
+                      finalAmount >= 25 ? t('donate_lvl3') :
+                        t('donate_lvl4')}.
                 </p>
               </div>
             )}
 
             {/*  Donor Information  */}
             <div className="space-y-4 mb-6">
-              <h3 className="font-display font-bold text-forest text-lg">Your Details</h3>
+              <h3 className="font-display font-bold text-forest text-lg">{t('donate_detailTitle')}</h3>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="form-label" htmlFor="donor-name">Full Name *</label>
+                  <label className="form-label" htmlFor="donor-name">{t('donate_fname')}</label>
                   <input
                     id="donor-name"
                     type="text"
                     name="donorName"
                     value={formData.donorName}
                     onChange={handleFormChange}
-                    placeholder="John Smith"
                     className="form-input"
                     required
                   />
                 </div>
                 <div>
-                  <label className="form-label" htmlFor="donor-phone">Phone</label>
+                  <label className="form-label" htmlFor="donor-phone">{t('donate_phone')}</label>
                   <input
                     id="donor-phone"
                     type="tel"
                     name="donorPhone"
                     value={formData.donorPhone}
                     onChange={handleFormChange}
-                    placeholder="+94 70 000 0000"
                     className="form-input"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="form-label" htmlFor="donor-email">Email Address *</label>
+                <label className="form-label" htmlFor="donor-email">{t('donate_email')}</label>
                 <input
                   id="donor-email"
                   type="email"
                   name="donorEmail"
                   value={formData.donorEmail}
                   onChange={handleFormChange}
-                  placeholder="example@example.com"
                   className="form-input"
                   required
                 />
               </div>
 
               <div>
-                <label className="form-label" htmlFor="donor-message">Message (optional)</label>
+                <label className="form-label" htmlFor="donor-message">{t('donate_msgLabel')}</label>
                 <textarea
                   id="donor-message"
                   name="message"
                   value={formData.message}
                   onChange={handleFormChange}
                   rows={3}
-                  placeholder="Share why you're donating..."
+                  placeholder={t('donate_msgPh')}
                   className="form-input resize-none"
                 />
               </div>
@@ -361,7 +361,7 @@ const Donate = () => {
                   className="w-4 h-4 rounded border-gray-300 text-lime focus:ring-lime cursor-pointer"
                 />
                 <span className="text-sm text-gray-600 group-hover:text-forest transition-colors">
-                  Donate anonymously
+                  {t('donate_anon')}
                 </span>
               </label>
             </div>
@@ -383,21 +383,21 @@ const Donate = () => {
               {isSubmitting ? (
                 <span className="flex items-center justify-center gap-2">
                   <span className="w-4 h-4 border-2 border-forest border-t-transparent rounded-full animate-spin" />
-                  Processing...
+                  {t('donate_processing')}
                 </span>
               ) : (
-                `Donate $${finalAmount || 0} ${frequency === "monthly" ? "/ Month" : "Now"} ↗`
+                `${t('donate_submit1')}${finalAmount || 0}${frequency === "monthly" ? t('donate_submit2_month') : t('donate_submit2_now')}`
               )}
             </button>
 
             <p className="text-center text-gray-400 text-xs mt-4">
-              🔒 Secure, encrypted transaction. Your data is protected.
+              {t('donate_secureTxt')}
             </p>
           </form>
 
           {/*  Payment Methods Note  */}
           <div className="mt-6 text-center">
-            <p className="text-gray-400 text-sm mb-3">Coming soon: Online payment options</p>
+            <p className="text-gray-400 text-sm mb-3">{t('donate_comingSoon')}</p>
             <div className="flex justify-center items-center gap-4 opacity-50">
               <span className="font-bold text-gray-500 text-sm">VISA</span>
               <span className="font-bold text-yellow-500 text-sm">Mastercard</span>

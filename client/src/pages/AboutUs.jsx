@@ -5,6 +5,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SEO from "../components/SEO";
+import { useTranslation } from "react-i18next";
 import axiosInstance from "../api/axiosInstance";
 
 const TEAM = [
@@ -22,6 +23,7 @@ const VALUES = [
 ];
 
 const AboutUs = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [statusMsg, setStatusMsg] = useState({ text: "", type: "" });
@@ -43,7 +45,7 @@ const AboutUs = () => {
     setLoading(true);
     try {
       await axiosInstance.post("/messages", formData);
-      setStatusMsg({ text: "Message sent successfully! We will get back to you soon.", type: "success" });
+      setStatusMsg({ text: t('about_msgSuccess'), type: "success" });
       setFormData({
         type: "Volunteer inquiry",
         firstName: "",
@@ -56,7 +58,7 @@ const AboutUs = () => {
       setTimeout(() => setStatusMsg({ text: "", type: "" }), 5000);
     } catch (error) {
       setStatusMsg({
-        text: error.response?.data?.message || "Failed to send message. Please try again.",
+        text: error.response?.data?.message || t('about_msgError'),
         type: "error"
       });
     } finally {
@@ -91,13 +93,12 @@ const AboutUs = () => {
         </div>
 
         <div className="section-wrapper relative z-10 text-center">
-          <span className="badge-lime mb-5 inline-block animate-fade-in">Our Story</span>
+          <span className="badge-lime mb-5 inline-block animate-fade-in">{t('about_badge')}</span>
           <h1 className="font-display font-black text-white text-4xl sm:text-6xl mb-6 animate-slide-up leading-tight">
-            About <span className="text-gradient-lime">Togetherwise</span>
+            {t('about_hero1')}<span className="text-gradient-lime">{t('about_hero2')}</span>
           </h1>
           <p className="text-white/65 text-xl max-w-2xl mx-auto leading-relaxed animate-slide-up delay-200">
-            Founded in 2026, Togetherwise bridges the gap between global resources and local needs,
-            creating lasting change in communities across the world.
+            {t('about_heroDesc')}
           </p>
         </div>
       </section>
@@ -113,22 +114,20 @@ const AboutUs = () => {
         <div className="section-wrapper relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <span className="badge-forest mb-4 inline-block">Our Mission</span>
-              <h2 className="section-title mb-5">Empowering Communities From Village to Global</h2>
+              <span className="badge-forest mb-4 inline-block">{t('about_missionBadge')}</span>
+              <h2 className="section-title mb-5">{t('about_missionTitle')}</h2>
               <p className="text-gray-600 leading-relaxed mb-5">
-                Village to Global is dedicated to supporting organizations and local initiatives that uplift
-                communities. We focus on empowering people through sustainable development, access to essential
-                resources, and community-driven programs that create lasting positive change.
+                {t('about_missionDesc1')}
               </p>
               <p className="text-gray-600 leading-relaxed mb-8">
-                Since our founding, we've impacted over <strong className="text-forest">0 families</strong>,
-                completed more than <strong className="text-forest">0 projects</strong>, and built a
-                global network of <strong className="text-forest">0+ volunteers</strong> committed to
-                building a better world.
+                {t('about_missionDesc2_1')}<strong className="text-forest">0 {t('about_missionDesc2_2')}</strong>
+                {t('about_missionDesc2_3')}<strong className="text-forest">0 {t('about_missionDesc2_4')}</strong>
+                {t('about_missionDesc2_5')}<strong className="text-forest">0+ {t('about_missionDesc2_6')}</strong>
+                {t('about_missionDesc2_7')}
               </p>
 
               {/* Feature list */}
-              {["Sustainable community development", "100% financial transparency", "Local leader partnerships"].map((item, i) => (
+              {[t('about_feature1'), t('about_feature2'), t('about_feature3')].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 mb-3">
                   <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)" }}>
                     <span className="text-forest text-xs font-black">✓</span>
@@ -138,7 +137,7 @@ const AboutUs = () => {
               ))}
 
               <button onClick={() => navigate("/donate")} className="btn-primary mt-6">
-                Support Our Work
+                {t('about_supportBtn')}
               </button>
             </div>
 
@@ -155,7 +154,7 @@ const AboutUs = () => {
               {/* Floating year card */}
               <div className="absolute -bottom-8 -left-8 rounded-2xl p-6 shadow-lime animate-float" style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)" }}>
                 <p className="font-display font-black text-forest text-3xl">2026</p>
-                <p className="text-forest/70 text-sm font-medium">Founded</p>
+                <p className="text-forest/70 text-sm font-medium">{t('about_founded')}</p>
               </div>
 
               {/* Corner decorative ring */}
@@ -181,8 +180,8 @@ const AboutUs = () => {
 
         <div className="section-wrapper relative z-10">
           <div className="text-center mb-14">
-            <span className="badge-lime mb-4 inline-block">What We Stand For</span>
-            <h2 className="section-title">Our Core Values</h2>
+            <span className="badge-lime mb-4 inline-block">{t('about_valuesBadge')}</span>
+            <h2 className="section-title">{t('about_valuesTitle')}</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -195,9 +194,9 @@ const AboutUs = () => {
                   <span className="text-2xl">{v.icon}</span>
                 </div>
                 <h3 className="font-display font-bold text-forest text-lg mb-3 group-hover:text-lime-dark transition-colors">
-                  {v.title}
+                  {t(`about_val${i+1}_title`)}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{v.desc}</p>
+                <p className="text-gray-500 text-sm leading-relaxed">{t(`about_val${i+1}_desc`)}</p>
               </div>
             ))}
           </div>
@@ -214,8 +213,8 @@ const AboutUs = () => {
 
         <div className="section-wrapper relative z-10">
           <div className="text-center mb-14">
-            <span className="badge-forest mb-4 inline-block">The People Behind It</span>
-            <h2 className="section-title">Our Leadership Team</h2>
+            <span className="badge-forest mb-4 inline-block">{t('about_teamBadge')}</span>
+            <h2 className="section-title">{t('about_teamTitle')}</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -234,7 +233,7 @@ const AboutUs = () => {
                   <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: "0 0 20px rgba(156,252,92,0.4)" }} />
                 </div>
                 <h3 className="font-display font-bold text-forest text-base mb-1">{member.name}</h3>
-                <p className="text-gray-400 text-sm">{member.role}</p>
+                <p className="text-gray-400 text-sm">{t(`about_role${i+1}`)}</p>
               </div>
             ))}
           </div>
@@ -250,13 +249,13 @@ const AboutUs = () => {
         <div className="section-wrapper relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             <div>
-              <span className="badge-lime mb-4 inline-block">Contact Us</span>
-              <h2 className="section-title mb-3">How can we help?</h2>
+              <span className="badge-lime mb-4 inline-block">{t('about_contactBadge')}</span>
+              <h2 className="section-title mb-3">{t('about_contactTitle')}</h2>
               <p className="text-gray-500 mb-8 leading-relaxed">
-                Togetherwise is the most guaranteed estimated and most believed of community benefits shared up.
+                {t('about_contactDesc')}
               </p>
               <div className="space-y-4 mb-8">
-                {["Volunteer Opportunities", "Donate & Support", "Raise a request", "Join our Community"].map((item, i) => (
+                {[t('about_cfeature1'), t('about_cfeature2'), t('about_cfeature3'), t('about_cfeature4')].map((item, i) => (
                   <div key={i} className="flex items-center gap-3 group">
                     <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110" style={{ background: "linear-gradient(135deg,#9CFC5C,#7DD940)", boxShadow: "0 2px 8px rgba(156,252,92,0.3)" }}>
                       <span className="text-forest text-xs font-black">✓</span>
@@ -268,8 +267,8 @@ const AboutUs = () => {
 
               {/* Visual accent */}
               <div className="rounded-2xl p-5 mt-4" style={{ background: "linear-gradient(135deg,rgba(27,48,34,0.04),rgba(156,252,92,0.06))", border: "1px solid rgba(156,252,92,0.15)" }}>
-                <p className="text-forest font-semibold text-sm">💬 Quick response guaranteed</p>
-                <p className="text-gray-500 text-xs mt-1">We typically respond within 24 hours on business days</p>
+                <p className="text-forest font-semibold text-sm">{t('about_contactGuar1')}</p>
+                <p className="text-gray-500 text-xs mt-1">{t('about_contactGuar2')}</p>
               </div>
             </div>
 
@@ -277,7 +276,7 @@ const AboutUs = () => {
               {/* Form header accent */}
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-1 h-8 rounded-full" style={{ background: "linear-gradient(to bottom,#9CFC5C,#7DD940)" }} />
-                <h3 className="font-display font-bold text-forest text-lg">Send a Message</h3>
+                <h3 className="font-display font-bold text-forest text-lg">{t('about_formTitle')}</h3>
               </div>
 
               <select
@@ -287,21 +286,21 @@ const AboutUs = () => {
                 className="form-input mb-4"
                 required
               >
-                <option>Join as a member</option>
-                <option>Make a donation inquiry</option>
-                <option>Volunteer inquiry</option>
-                <option>Partnership inquiry</option>
-                <option>Other</option>
+                <option value="Join as a member">{t('about_opt1')}</option>
+                <option value="Make a donation inquiry">{t('about_opt2')}</option>
+                <option value="Volunteer inquiry">{t('about_opt3')}</option>
+                <option value="Partnership inquiry">{t('about_opt4')}</option>
+                <option value="Other">{t('about_opt5')}</option>
               </select>
               <div className="grid grid-cols-2 gap-4 mb-4">
-                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" className="form-input" required />
-                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" className="form-input" required />
+                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder={t('about_fname')} className="form-input" required />
+                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder={t('about_lname')} className="form-input" required />
               </div>
               <div className="grid grid-cols-2 gap-4 mb-4">
-                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" className="form-input" required />
-                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone" className="form-input" required />
+                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={t('about_email')} className="form-input" required />
+                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder={t('about_phone')} className="form-input" required />
               </div>
-              <textarea name="message" value={formData.message} onChange={handleChange} rows={3} placeholder="Your request" className="form-input resize-none mb-4" required />
+              <textarea name="message" value={formData.message} onChange={handleChange} rows={3} placeholder={t('about_request')} className="form-input resize-none mb-4" required />
 
               {statusMsg.text && (
                 <div className={`p-3 rounded-xl text-sm mb-4 border ${statusMsg.type === "success"
@@ -313,7 +312,7 @@ const AboutUs = () => {
               )}
 
               <button type="submit" disabled={loading} className="btn-primary w-full py-4 uppercase tracking-wide font-bold">
-                {loading ? "Sending..." : "Send Message ↗"}
+                {loading ? t('about_sending') : t('about_sendMsg')}
               </button>
             </form>
           </div>

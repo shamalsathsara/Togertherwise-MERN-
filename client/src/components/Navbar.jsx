@@ -5,24 +5,14 @@
 
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import logoImg from "../image/logo.png";
-
-const translations = {
-  en: {
-    home: "Home", campaigns: "Our Campaigns", successStories: "Success Stories",
-    aboutUs: "About Page", donateNow: "Donate Now", transparency: "Transparency", join: "Join Us",
-  },
-  sn: {
-    home: "මුල් පිටුව", campaigns: "ව්‍යාපාර", successStories: "සාර්ථක කථා",
-    aboutUs: "අප ගැන", donateNow: "දැන් පරිත්‍යාග කරන්න", transparency: "විනිවිදභාවය", join: "එකතු වන්න",
-  },
-};
 
 const Navbar = ({ lang, setLang }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const t = translations[lang];
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -31,11 +21,11 @@ const Navbar = ({ lang, setLang }) => {
   }, []);
 
   const navLinks = [
-    { to: "/", label: t.home },
-    { to: "/campaigns", label: t.campaigns },
-    { to: "/success-stories", label: t.successStories },
-    { to: "/transparency", label: t.transparency },
-    { to: "/about", label: t.aboutUs },
+    { to: "/", label: t('nav_home') },
+    { to: "/campaigns", label: t('nav_campaigns') },
+    { to: "/success-stories", label: t('nav_successStories') },
+    { to: "/transparency", label: t('nav_transparency') },
+    { to: "/about", label: t('nav_aboutUs') },
   ];
 
   return (
@@ -55,15 +45,15 @@ const Navbar = ({ lang, setLang }) => {
           <div className="flex items-center gap-4 text-white/60">
             <span className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
-              Welcome to the Charity &amp; Donation
+              {t('nav_welcome')}
             </span>
             <span className="hidden sm:flex items-center gap-1 text-white/40">
-              <span>📍</span> Hokandara, Sri Lanka
+              <span>📍</span> {t('nav_location')}
             </span>
           </div>
           {/* Right: social icons + language */}
           <div className="flex items-center gap-4">
-            <span className="text-white/40 hidden sm:block">Follow Us:</span>
+            <span className="text-white/40 hidden sm:block">{t('nav_followUs')}</span>
             {[
               { label: "Facebook", href: "https://facebook.com", icon: "f" },
               { label: "Twitter", href: "https://twitter.com", icon: "𝕏" },
@@ -143,7 +133,11 @@ const Navbar = ({ lang, setLang }) => {
           <div className="flex items-center gap-2">
             {/* Language toggle */}
             <button
-              onClick={() => setLang(lang === "en" ? "sn" : "en")}
+              onClick={() => {
+                const newLang = lang === "en" ? "sn" : "en";
+                setLang(newLang);
+                i18n.changeLanguage(newLang === "sn" ? "si" : "en");
+              }}
               className="hidden sm:flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-gray-500 hover:text-forest transition-all duration-200 hover:bg-forest/5"
               style={{ border: "1px solid rgba(27,48,34,0.12)" }}
               aria-label="Toggle language"
@@ -166,7 +160,7 @@ const Navbar = ({ lang, setLang }) => {
               onMouseLeave={e => e.currentTarget.style.boxShadow = "0 4px 16px rgba(156,252,92,0.4)"}
             >
               <span className="w-6 h-6 rounded-full bg-forest/15 flex items-center justify-center text-xs">↗</span>
-              {t.donateNow}
+              {t('nav_donateNow')}
             </button>
 
             {/* Mobile hamburger */}
@@ -204,11 +198,13 @@ const Navbar = ({ lang, setLang }) => {
             ))}
             {/* Language toggle mobile */}
             <div className="flex gap-2 pt-2">
-              <button onClick={() => setLang("en")}
+              <button 
+                onClick={() => { setLang("en"); i18n.changeLanguage("en"); }}
                 className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all ${lang === "en" ? "bg-forest text-white" : "bg-gray-100 text-gray-500"}`}>
                 English
               </button>
-              <button onClick={() => setLang("sn")}
+              <button 
+                onClick={() => { setLang("sn"); i18n.changeLanguage("si"); }}
                 className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all ${lang === "sn" ? "bg-forest text-white" : "bg-gray-100 text-gray-500"}`}>
                 සිංහල
               </button>
