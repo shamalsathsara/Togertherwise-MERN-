@@ -120,7 +120,7 @@ const Donate = () => {
           <p className="text-gray-500 mb-2">
             {t('donate_thank1')}{frequency === 'monthly' ? t('donate_optMonthly') : t('donate_optOneTime')}
             {t('donate_thank2')}
-            <span className="text-forest font-bold">${finalAmount}</span>{" "}
+            <span className="text-forest font-bold">LKR{finalAmount}</span>{" "}
             {t('donate_thank3')}
           </p>
           <p className="text-gray-400 text-sm mb-8">
@@ -230,11 +230,10 @@ const Donate = () => {
                     key={amount}
                     type="button"
                     onClick={() => handleAmountSelect(amount)}
-                    className={`py-3 rounded-xl font-display font-bold text-sm transition-all duration-200 border-2 ${
-                      selectedAmount === amount
+                    className={`py-3 rounded-xl font-display font-bold text-sm transition-all duration-200 border-2 ${selectedAmount === amount
                         ? "border-transparent text-forest shadow-lime"
                         : "border-gray-200 text-gray-700 hover:border-lime/40 hover:text-forest"
-                    }`}
+                      }`}
                     style={selectedAmount === amount ? {
                       background: "linear-gradient(135deg,#9CFC5C,#7DD940)",
                       boxShadow: "0 4px 16px rgba(156,252,92,0.4)",
@@ -287,7 +286,7 @@ const Donate = () => {
                 borderColor: "rgba(156,252,92,0.25)"
               }}>
                 <p className="text-forest font-semibold text-sm">
-                  {t('donate_impact1')}<strong>${finalAmount} {frequency === "monthly" ? t('donate_optMonthly') : t('donate_optOneTime')}</strong>{t('donate_impact2')}
+                  {t('donate_impact1')}<strong>LKR{finalAmount} {frequency === "monthly" ? t('donate_optMonthly') : t('donate_optOneTime')}</strong>{t('donate_impact2')}
                   {finalAmount >= 100 ? t('donate_lvl1') :
                     finalAmount >= 50 ? t('donate_lvl2') :
                       finalAmount >= 25 ? t('donate_lvl3') :

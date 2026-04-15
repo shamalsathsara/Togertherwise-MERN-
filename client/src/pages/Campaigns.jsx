@@ -43,8 +43,8 @@ const Campaigns = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <SEO 
-        title="Active Campaigns" 
+      <SEO
+        title="Active Campaigns"
         description="Browse our active community projects and campaigns. Choose where your support goes and help us empower villages."
         path="/campaigns"
       />
@@ -106,22 +106,22 @@ const Campaigns = () => {
                 "Community Development": t('camp_dev')
               };
               return (
-              <button
-                key={cat}
-                onClick={() => setActiveFilter(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
-                  activeFilter === cat
-                    ? "text-forest shadow-lime"
-                    : "bg-white text-gray-600 border border-gray-200 hover:border-forest/30 hover:shadow-sm"
-                }`}
-                style={activeFilter === cat ? {
-                  background: "linear-gradient(135deg,#9CFC5C,#7DD940)",
-                  boxShadow: "0 4px 16px rgba(156,252,92,0.35)"
-                } : {}}
-              >
-                {catKeys[cat] || cat}
-              </button>
-            )})}
+                <button
+                  key={cat}
+                  onClick={() => setActiveFilter(cat)}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${activeFilter === cat
+                      ? "text-forest shadow-lime"
+                      : "bg-white text-gray-600 border border-gray-200 hover:border-forest/30 hover:shadow-sm"
+                    }`}
+                  style={activeFilter === cat ? {
+                    background: "linear-gradient(135deg,#9CFC5C,#7DD940)",
+                    boxShadow: "0 4px 16px rgba(156,252,92,0.35)"
+                  } : {}}
+                >
+                  {catKeys[cat] || cat}
+                </button>
+              )
+            })}
           </div>
         </div>
 
@@ -152,8 +152,8 @@ const Campaigns = () => {
                   <p className="text-gray-500 text-sm mb-4 line-clamp-2">{campaign.description}</p>
                   <div className="mb-4">
                     <div className="flex justify-between text-xs font-medium mb-2">
-                      <span className="text-gray-500">${(campaign.currentFunds || 0).toLocaleString()}{t('camp_raised')}</span>
-                      <span className="font-bold" style={{ color: "#7DD940" }}>{t('camp_of')}${(campaign.goal || 0).toLocaleString()}</span>
+                      <span className="text-gray-500">LKR{(campaign.currentFunds || 0).toLocaleString()}{t('camp_raised')}</span>
+                      <span className="font-bold" style={{ color: "#7DD940" }}>{t('camp_of')}LKR{(campaign.goal || 0).toLocaleString()}</span>
                     </div>
                     <div className="progress-bar">
                       <div className="progress-fill" style={{ width: `${percent}%` }} />
