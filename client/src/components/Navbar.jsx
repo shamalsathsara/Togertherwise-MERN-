@@ -105,7 +105,7 @@ const Navbar = ({ lang, setLang }) => {
             </div>
             <div>
               <span className="font-display font-black text-forest text-lg leading-none block">
-                Together<span style={{ color: "#7DD940" }}>wise</span>
+                TogetherWE<span style={{ color: "#7DD940" }}>rise</span>
               </span>
               <span className="text-[9px] text-gray-400 tracking-widest uppercase leading-none">
                 Empowering Communities
@@ -195,8 +195,7 @@ const Navbar = ({ lang, setLang }) => {
                 end={to === "/"}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={({ isActive }) =>
-                  `block py-2.5 px-4 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                    isActive ? "bg-forest text-white" : "text-gray-700 hover:bg-forest/5 hover:text-forest"
+                  `block py-2.5 px-4 rounded-xl text-sm font-semibold transition-all duration-200 ${isActive ? "bg-forest text-white" : "text-gray-700 hover:bg-forest/5 hover:text-forest"
                   }`
                 }
               >
