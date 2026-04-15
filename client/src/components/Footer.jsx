@@ -164,7 +164,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <span className="font-display font-bold text-white text-xl leading-none block">
-                    Together<span className="text-lime">wise</span>
+                    TogetherWE<span className="text-lime">rise</span>
                   </span>
                   <span className="text-xs text-white/40 tracking-wide uppercase">
                     Empowering Communities
