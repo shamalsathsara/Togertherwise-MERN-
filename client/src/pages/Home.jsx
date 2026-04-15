@@ -157,10 +157,10 @@ const Home = ({ lang }) => {
             {/* Main Heading */}
             <h1 className="font-display font-black text-white leading-[1.05] mb-6 animate-slide-up"
               style={{ fontSize: "clamp(2.2rem, 4.5vw, 4rem)" }}>
-              Lend A Helping{" "}
-              <span style={{ color: "#9CFC5C" }}>Hand</span> To{" "}
+              Kindness is{" "}
+              <span style={{ color: "#9CFC5C" }}>Free</span>, but its{" "}
               <br className="hidden sm:block" />
-              Those Who Need It
+              Value is Priceless
             </h1>
 
             <p className="text-white/65 text-lg leading-relaxed mb-6 xl:mb-10 max-w-lg animate-slide-up delay-200">
