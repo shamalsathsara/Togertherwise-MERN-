@@ -101,7 +101,7 @@ const AdminLayout = () => {
             </div>
             {isSidebarOpen && (
               <div className="overflow-hidden">
-                <p className="font-display font-bold text-white text-[15px] leading-none tracking-tight">Togetherwise</p>
+                <p className="font-display font-bold text-white text-[15px] leading-none tracking-tight">TogetherWErise</p>
                 <p className="text-white/30 text-[10px] mt-1 font-medium tracking-widest uppercase">Admin Portal</p>
               </div>
             )}
