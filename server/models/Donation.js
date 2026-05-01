@@ -28,6 +28,7 @@ const donationSchema = new mongoose.Schema(
       required: [true, "Donor email is required"],
       lowercase: true,
       trim: true,
+      match: [/\S+@\S+\.\S+/, "Please enter a valid email address"],
     },
 
     donorPhone: {

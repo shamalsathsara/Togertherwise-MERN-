@@ -20,7 +20,8 @@ const axiosInstance = axios.create({
 
   headers: {
     "Content-Type": "application/json",
-    "Bypass-Tunnel-Reminder": "true",
+    // Only sent in development when using untun tunnel — not needed in production
+    ...(import.meta.env.DEV ? { "Bypass-Tunnel-Reminder": "true" } : {}),
   },
 });
 

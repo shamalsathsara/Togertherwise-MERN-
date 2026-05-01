@@ -30,6 +30,12 @@ const createStudent = asyncHandler(async (req, res) => {
     throw new Error("Name, House/Village, and Date of Birth are all required.");
   }
 
+  // Server-side guard: DOB cannot be in the future
+  if (new Date(dob) > new Date()) {
+    res.status(400);
+    throw new Error("Date of Birth cannot be in the future.");
+  }
+
   const student = await Student.create({ name, house, dob });
 
   res.status(201).json({

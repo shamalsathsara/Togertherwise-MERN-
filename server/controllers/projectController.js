@@ -14,14 +14,21 @@ const Project = require("../models/Project");
  * e.g., /api/projects?status=active&category=Water Projects
  */
 const getAllProjects = asyncHandler(async (req, res) => {
-  // Build the filter object from query parameters
+  // Whitelist allowed filter values — prevents NoSQL injection via query params
+  const VALID_STATUSES = ["active", "completed", "paused"];
+  const VALID_CATEGORIES = ["Education", "Water Projects", "Healthcare", "Infrastructure", "Environment", "Other"];
+
   const filter = {};
-  if (req.query.status) filter.status = req.query.status;
-  if (req.query.category) filter.category = req.query.category;
+  if (req.query.status && VALID_STATUSES.includes(req.query.status)) {
+    filter.status = req.query.status;
+  }
+  if (req.query.category && VALID_CATEGORIES.includes(req.query.category)) {
+    filter.category = req.query.category;
+  }
 
   const projects = await Project.find(filter)
-    .sort({ createdAt: -1 }) // Newest first
-    .populate("createdBy", "name email"); // Include creator info
+    .sort({ createdAt: -1 })
+    .populate("createdBy", "name email");
 
   res.json({ success: true, count: projects.length, projects });
 });
