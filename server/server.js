@@ -40,6 +40,7 @@ const successStoryRoutes = require("./routes/successStoryRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const subscriberRoutes = require("./routes/subscriberRoutes");
 const newsRoutes = require("./routes/newsRoutes");
+const studentRoutes = require("./routes/studentRoutes");
 
 // ─── Initialize Express App ───────────────────────────────────────────────────
 const app = express();
@@ -76,7 +77,7 @@ app.use(
  * Prevents password brute-force and OTP farming.
  */
 const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 1 * 60 * 1000, // 15 minutes
   max: 10,
   standardHeaders: true,
   legacyHeaders: false,
@@ -147,6 +148,7 @@ app.use("/api/success-stories", successStoryRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/subscribers", subscriberRoutes);
 app.use("/api/news", newsRoutes);
+app.use("/api/students", studentRoutes);
 
 // ─── Health Check Route ──────────────────────────────────────────────────────
 app.get("/api/health", (req, res) => {

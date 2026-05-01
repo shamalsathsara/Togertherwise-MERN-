@@ -70,8 +70,10 @@ const ActivityList = ({ title, icon, items }) => (
 const Dashboard = () => {
   const [stats, setStats] = useState({ active: 0, completed: 0, featured: 0, total: 0 });
   const [recentProjects, setRecentProjects] = useState([]);
+  const [examAlerts, setExamAlerts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isConnected, setIsConnected] = useState(true);
+  const currentYear = new Date().getFullYear();
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -89,6 +91,11 @@ const Dashboard = () => {
             status: p.status,
           })));
         }
+        // Fetch exam alerts
+        try {
+          const alertsRes = await axiosInstance.get("/students/exam-alerts");
+          if (alertsRes.data.success) setExamAlerts(alertsRes.data.alerts);
+        } catch { /* Gracefully ignore if no students yet */ }
         setIsConnected(true);
       } catch {
         setIsConnected(false);
@@ -141,6 +148,43 @@ const Dashboard = () => {
           { title: "Volunteer Applications", subtitle: "Review and approve pending applicants", status: "View →" },
         ]} />
       </div>
+
+      {/* ── Exam Alerts Widget ──────────────────────────────────────────── */}
+      {examAlerts.length > 0 && (
+        <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl overflow-hidden">
+          <div className="px-5 py-4 border-b border-amber-100 flex items-center gap-3">
+            <div className="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center text-amber-600 flex-shrink-0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            </div>
+            <div className="flex-1">
+              <h3 className="font-semibold text-amber-900 text-sm">📣 Exam Milestone Alerts — {currentYear}</h3>
+              <p className="text-amber-600 text-[11px] mt-0.5">Students scheduled for national exams this year</p>
+            </div>
+            <span className="px-3 py-1 bg-amber-200 text-amber-800 text-xs font-bold rounded-full animate-pulse">
+              {examAlerts.length} student{examAlerts.length !== 1 ? "s" : ""}
+            </span>
+          </div>
+          <div className="divide-y divide-amber-100">
+            {examAlerts.map((s) => (
+              <div key={s._id} className="px-5 py-3 flex items-center justify-between hover:bg-amber-50/60 transition-colors">
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-amber-100 text-amber-700 text-xs font-bold flex items-center justify-center flex-shrink-0">
+                    {s.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <p className="text-[13px] font-semibold text-gray-700">{s.name}</p>
+                    <p className="text-[11px] text-gray-400">{s.house} · Age {s.age}</p>
+                  </div>
+                </div>
+                <span className="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-amber-100 text-amber-700 whitespace-nowrap">{s.upcomingExam}</span>
+              </div>
+            ))}
+          </div>
+          <div className="px-5 py-3 border-t border-amber-100">
+            <a href="/admin/students" className="text-[12px] font-semibold text-amber-700 hover:text-amber-900 transition-colors">View all students →</a>
+          </div>
+        </div>
+      )}
 
       {/* ── Connection Status ──────────────────────────────────────── */}
       {!isConnected && (

@@ -29,6 +29,8 @@ const Icons = {
   menu: (p) => <Icon d="M3 12h18 M3 6h18 M3 18h18" {...p} />,
   site: (p) => <Icon d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6 M15 3h6v6 M10 14L21 3" {...p} />,
   news: (p) => <Icon d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2zM12 12H8M16 8H8M16 16H8" {...p} />,
+  students: (p) => <Icon d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M9 11a4 4 0 100-8 4 4 0 000 8z M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75" {...p} />,
+  addUser: (p) => <Icon d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M12.5 7a4 4 0 11-8 0 4 4 0 018 0zM20 8v6M23 11h-6" {...p} />,
 };
 
 const NAV_SECTIONS = [
@@ -56,6 +58,13 @@ const NAV_SECTIONS = [
       { to: "/admin/subscribers", label: "Subscribers", icon: Icons.subscribers },
     ],
   },
+  {
+    label: "Community",
+    items: [
+      { to: "/admin/students", label: "Students", icon: Icons.students },
+      { to: "/admin/students/new", label: "Register Student", icon: Icons.addUser },
+    ],
+  },
 ];
 
 /* ── Page title helper ────────────────────────────────────────────────────── */
@@ -71,6 +80,8 @@ const PAGE_TITLES = {
   "/admin/messages": "Messages",
   "/admin/volunteers": "Volunteers",
   "/admin/subscribers": "Subscribers",
+  "/admin/students": "Students",
+  "/admin/students/new": "Register Student",
 };
 
 const AdminLayout = () => {

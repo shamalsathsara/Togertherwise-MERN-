@@ -37,6 +37,8 @@ import VolunteersList from "./pages/admin/VolunteersList";
 import SubscribersList from "./pages/admin/SubscribersList";
 import NewsUpdatesList from "./pages/admin/NewsUpdatesList";
 import NewsUpdateForm from "./pages/admin/NewsUpdateForm";
+import StudentsList from "./pages/admin/StudentsList";
+import StudentForm from "./pages/admin/StudentForm";
 
 /**
  * ProtectedAdminRoute — Wraps admin routes.
@@ -158,6 +160,8 @@ const AppRoutes = () => {
         <Route path="messages" element={<MessagesList />} />
         <Route path="volunteers" element={<VolunteersList />} />
         <Route path="subscribers" element={<SubscribersList />} />
+        <Route path="students" element={<StudentsList />} />
+        <Route path="students/new" element={<StudentForm />} />
       </Route>
 
       {/* ── 404 → Home  */}
