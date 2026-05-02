@@ -154,18 +154,20 @@ const Footer = () => {
             {/* ── Brand Column ─────────────────────────────────────────── */}
             <div className="lg:col-span-2">
               {/* Logo */}
-              <Link to="/" className="flex items-center gap-3 mb-5 group w-fit">
-                <div className="w-12 h-12 rounded-xl overflow-hidden"
-                  style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                  {/* Replace this src with your actual logo path, e.g., src="/logo.png" */}
+              <Link to="/" className="flex items-center gap-3.5 mb-5 group w-fit">
+                {/* White backing so logo is visible on dark footer */}
+                <div
+                  className="flex-shrink-0 rounded-2xl p-1.5 transition-transform duration-300 group-hover:scale-105"
+                  style={{ background: "#ffffff" }}
+                >
                   <img
                     src={logoImg}
-                    alt="Togertherwerise Logo"
-                    className="w-full h-full object-contain pt-1 transition-transform duration-300 group-hover:scale-110"
+                    alt="TogetherWErise Logo"
+                    className="w-24 h-24 object-contain"
                   />
                 </div>
                 <div>
-                  <span className="font-display font-bold text-white text-xl leading-none block">
+                  <span className="font-display font-bold text-white text-2xl leading-none block">
                     TogetherWE<span className="text-lime">rise</span>
                   </span>
                   <span className="text-xs text-white/40 tracking-wide uppercase">

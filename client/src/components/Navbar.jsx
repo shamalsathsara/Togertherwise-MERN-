@@ -88,13 +88,14 @@ const Navbar = ({ lang, setLang }) => {
         <div className="section-wrapper flex items-center justify-between">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group flex-shrink-0">
-            <div className="relative">
-              <img src={logoImg} alt="Togertherwerise Logo"
-                className="w-9 h-9 object-contain transition-transform duration-300 group-hover:scale-110" />
-            </div>
+          <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
+            <img
+              src={logoImg}
+              alt="TogetherWErise Logo"
+              className="w-20 h-20 object-contain transition-transform duration-300 group-hover:scale-105"
+            />
             <div>
-              <span className="font-display font-black text-forest text-lg leading-none block">
+              <span className="font-display font-black text-forest text-xl leading-none block">
                 TogetherWE<span style={{ color: "#7DD940" }}>rise</span>
               </span>
               <span className="text-[9px] text-gray-400 tracking-widest uppercase leading-none">
